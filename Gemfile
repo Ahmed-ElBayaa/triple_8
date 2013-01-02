@@ -10,6 +10,7 @@ gem 'mysql2'
 gem 'ancestry'
 gem "paperclip", "~> 3.0"
 gem 'devise'
+gem "nested_form"
 
 # Gems used only for assets and not required
 # in production environments by default.

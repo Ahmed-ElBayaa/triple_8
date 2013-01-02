@@ -13,7 +13,7 @@ class ClassifiedsController < ApplicationController
   # GET /classifieds/1
   # GET /classifieds/1.json
   def show
-    @classified = Classified.find(params[:id])
+    @classified = Classified.find_by_identifier(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +25,7 @@ class ClassifiedsController < ApplicationController
   # GET /classifieds/new.json
   def new
     @classified = Classified.new
-
+    3.times {@classified.attachments.build}
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @classified }
@@ -34,7 +34,7 @@ class ClassifiedsController < ApplicationController
 
   # GET /classifieds/1/edit
   def edit
-    @classified = Classified.find(params[:id])
+    @classified = Classified.find_by_identifier(params[:id])
   end
 
   # POST /classifieds
@@ -56,7 +56,7 @@ class ClassifiedsController < ApplicationController
   # PUT /classifieds/1
   # PUT /classifieds/1.json
   def update
-    @classified = Classified.find(params[:id])
+    @classified = Classified.find_by_identifier(params[:id])
 
     respond_to do |format|
       if @classified.update_attributes(params[:classified])
@@ -72,7 +72,7 @@ class ClassifiedsController < ApplicationController
   # DELETE /classifieds/1
   # DELETE /classifieds/1.json
   def destroy
-    @classified = Classified.find(params[:id])
+    @classified = Classified.find_by_identifier(params[:id])
     @classified.destroy
 
     respond_to do |format|

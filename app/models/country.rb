@@ -5,6 +5,8 @@ class Country < ActiveRecord::Base
 
 	before_save :set_identifier
 
+	validates :name, uniqueness: :true
+
 	def to_param
 		identifier
 	end

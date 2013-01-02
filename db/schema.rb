@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130102115342) do
+ActiveRecord::Schema.define(:version => 20130102144216) do
+
+  create_table "attachments", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.integer  "classified_id"
+  end
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -28,10 +38,11 @@ ActiveRecord::Schema.define(:version => 20130102115342) do
     t.string   "kind"
     t.string   "title"
     t.text     "description"
-    t.decimal  "price",       :precision => 10, :scale => 0
+    t.decimal  "price",       :precision => 8, :scale => 2
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "identifier"
   end
 
   create_table "countries", :force => true do |t|

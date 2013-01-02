@@ -12,8 +12,9 @@
   <dd><%= @classified.description %></dd>
   <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
   <dd><%= @classified.price %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @classified.user_id %></dd>
+  <% @classified.attachments.each do |photo|%>
+    <%= link_to 'See attachment', photo.file.url(:original), target: "_blank" %>
+  <% end %>
 </dl>
 
 <div class="form-actions">
