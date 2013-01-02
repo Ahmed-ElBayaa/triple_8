@@ -1,5 +1,7 @@
 Triple8::Application.routes.draw do
 
+  resources :classifieds
+
   devise_for :users,
     :controllers => {
       sessions: "sessions",
