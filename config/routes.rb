@@ -1,4 +1,6 @@
 Triple8::Application.routes.draw do
+  resources :countries
+
   resources :categories
 
   # The priority is based upon order of creation:
