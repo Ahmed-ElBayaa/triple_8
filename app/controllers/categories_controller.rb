@@ -25,7 +25,7 @@ class CategoriesController < ApplicationController
   # GET /categories/new.json
   def new
     @category = Category.new
-
+    @main_categories = Category.roots
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @category }
@@ -35,6 +35,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1/edit
   def edit
     @category = Category.find(params[:id])
+    @main_categories = Category.roots
   end
 
   # POST /categories
@@ -47,6 +48,7 @@ class CategoriesController < ApplicationController
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
         format.json { render json: @category, status: :created, location: @category }
       else
+        @main_categories = Category.roots
         format.html { render action: "new" }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
