@@ -1,7 +1,16 @@
 Triple8::Application.routes.draw do
+
+  devise_for :users,
+    :controllers => {
+      sessions: "sessions",
+      registrations: "registrations"
+    }
+
   resources :countries
 
   resources :categories
+
+  root to: 'categories#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
