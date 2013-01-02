@@ -41,7 +41,7 @@ class ClassifiedsController < ApplicationController
   # POST /classifieds.json
   def create
     @classified = Classified.new(params[:classified])
-
+    @classified.user_id = current_user.id
     respond_to do |format|
       if @classified.save
         format.html { redirect_to @classified, notice: 'Classified was successfully created.' }
