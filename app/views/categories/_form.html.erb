@@ -6,16 +6,12 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :ancestry, :class => 'control-label' %>
+    <%= f.label :main_category, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :ancestry, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :identifier, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :identifier, :class => 'text_field' %>
-    </div>
+      <%= f.select :parent_id, 
+        options_from_collection_for_select(@main_categories,"id","name"),
+        prompt: 'it is a main category' %>
+     </div>
   </div>
 
   <div class="form-actions">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130102081512) do
+ActiveRecord::Schema.define(:version => 20130102081838) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -30,6 +30,10 @@ ActiveRecord::Schema.define(:version => 20130102081512) do
     t.string   "identifier"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "flag_file_name"
+    t.string   "flag_content_type"
+    t.integer  "flag_file_size"
+    t.datetime "flag_updated_at"
   end
 
 end
