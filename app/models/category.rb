@@ -1,6 +1,8 @@
 class Category < ActiveRecord::Base
 	
 	has_ancestry
+	has_and_belongs_to_many :classifieds
+
 	before_save :set_identifier
 
 	validates :name, uniqueness: :true

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :classifieds
+  has_many :classifieds, dependent: :destroy
   
   # Setup accessible (or protected) attributes for your model
   attr_accessible :first_name, :last_name, :country_id,

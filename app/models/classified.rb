@@ -1,7 +1,7 @@
 class Classified < ActiveRecord::Base
 
 	has_many :attachments, dependent: :destroy
-
+	has_and_belongs_to_many :categories
 	belongs_to :user
 
 	accepts_nested_attributes_for :attachments, allow_destroy: true,

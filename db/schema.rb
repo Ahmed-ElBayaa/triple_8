@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130102144216) do
+ActiveRecord::Schema.define(:version => 20130102155029) do
 
   create_table "attachments", :force => true do |t|
     t.datetime "created_at"
@@ -33,6 +33,13 @@ ActiveRecord::Schema.define(:version => 20130102144216) do
 
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
   add_index "categories", ["identifier"], :name => "index_categories_on_identifier"
+
+  create_table "categories_classifieds", :id => false, :force => true do |t|
+    t.integer "category_id"
+    t.integer "classified_id"
+  end
+
+  add_index "categories_classifieds", ["category_id", "classified_id"], :name => "index_categories_classifieds_on_category_id_and_classified_id"
 
   create_table "classifieds", :force => true do |t|
     t.string   "kind"
