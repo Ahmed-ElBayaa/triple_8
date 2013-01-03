@@ -1,4 +1,6 @@
 class ClassifiedsController < ApplicationController
+  before_filter :authorize, only: [:new, :create]
+  before_filter :must_be_owned, only: [:edit, :update, :destroy]
   # GET /classifieds
   # GET /classifieds.json
   def index
