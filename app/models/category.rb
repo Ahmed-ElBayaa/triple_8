@@ -7,7 +7,7 @@ class Category < ActiveRecord::Base
 
 	before_save :set_identifier
 
-	validates :name, uniqueness: :true
+	validates :name, uniqueness: :true, presence: true
 
 	def to_param
 		identifier
@@ -18,14 +18,14 @@ class Category < ActiveRecord::Base
 	end
 
 	def main_category?
-		self.parent == nil
+		self.ancestry?
 	end
 
 	def classifieds
-		if self.main_category?
-			classifieds = self.classifieds_main
+		if self.main_category?s
+			self.classifieds_main
 		else
-			classifieds = self.classifieds_sub
+			self.classifieds_sub
 		end
 	end
 end
