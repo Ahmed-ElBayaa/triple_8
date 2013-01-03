@@ -16,4 +16,16 @@ class Category < ActiveRecord::Base
 	def set_identifier
 		self.identifier = self.name.parameterize
 	end
+
+	def main_category?
+		self.parent == nil
+	end
+
+	def classifieds
+		if self.main_category?
+			classifieds = self.classifieds_main
+		else
+			classifieds = self.classifieds_sub
+		end
+	end
 end
