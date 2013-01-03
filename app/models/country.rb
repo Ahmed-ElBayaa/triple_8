@@ -6,6 +6,8 @@ class Country < ActiveRecord::Base
 	before_save :set_identifier
 
 	validates :name, uniqueness: :true
+	validates_attachment_content_type :flag,  content_type: /image/
+	validates_attachment_size :flag, less_than: 2.megabytes
 
 	def to_param
 		identifier
