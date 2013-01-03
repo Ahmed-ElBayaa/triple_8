@@ -1,14 +1,17 @@
 class Classified < ActiveRecord::Base
 
 	has_many :attachments, dependent: :destroy
-	has_and_belongs_to_many :categories
+	
+	belongs_to :main_category, class_name: 'Category'
+	belongs_to :sub_category, class_name: 'Category'
+	
 	belongs_to :user
 
 	accepts_nested_attributes_for :attachments, allow_destroy: true,
 						 reject_if: lambda { |a| a.nil? }
 
 	attr_accessible :attachments_attributes, :kind, :title, :description,
-				:price
+				:price, :main_category_id, :sub_category_id
 	
 	before_save :set_identifier
 

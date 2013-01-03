@@ -7,6 +7,22 @@
     </div>
   </div>
   <div class="control-group">
+    <%= f.label :main_category, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :main_category_id,
+        options_from_collection_for_select(get_main_categories,"id","name"),
+         prompt: 'Select main category', :class => 'select' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :sub_category, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :sub_category_id,
+        options_from_collection_for_select(get_sub_categories,"id","name"),
+         prompt: 'Select sub-category', :class => 'select' %>
+    </div>
+  </div>
+  <div class="control-group">
     <%= f.label :title, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :title, :class => 'text_field' %>
