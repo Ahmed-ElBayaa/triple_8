@@ -12,6 +12,8 @@
   <dd><%= @category.identifier %></dd>
 </dl>
 
+<%= render('list_categories', categories: @sub_categories) %>
+
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               categories_path, :class => 'btn'  %>

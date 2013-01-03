@@ -46,7 +46,7 @@ class Classified < ActiveRecord::Base
 
 	def categories_validations
 		if self.main_category.main_category?
-			unless self.main_category.children.include? self.sub_category
+			unless self.main_category.include_sub_category? self.sub_category
 				errors.add(:base,"invalid sub category")	
 			end
 		else

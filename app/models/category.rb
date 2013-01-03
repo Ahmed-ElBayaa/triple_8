@@ -1,7 +1,7 @@
 class Category < ActiveRecord::Base
 	
 	has_ancestry
-
+	
 	has_many :classifieds_sub, class_name:'Classified', foreign_key: 'sub_category_id'
 	has_many :classifieds_main, class_name:'Classified', foreign_key: 'main_category_id'
 
@@ -18,7 +18,12 @@ class Category < ActiveRecord::Base
 	end
 
 	def main_category?
-		self.ancestry?
+		self.is_root?
+	end
+
+	def include_sub_category? sub_category
+		sub_category ||= Category.new
+		self.child_ids.include?sub_category.id
 	end
 
 	def classifieds
