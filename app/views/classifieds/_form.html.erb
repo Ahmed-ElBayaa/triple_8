@@ -1,4 +1,20 @@
 <%= form_for @classified, :html => { :class => 'form-horizontal' } do |f| %>
+
+  <% if @classified.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@classified.errors.count, "error") %>
+        prohibited this classified from being saved:
+      </h2>
+
+      <ul>
+      <% @classified.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="control-group">
     <%= f.label :kind, :class => 'control-label' %>
     <div class="controls">
@@ -56,3 +72,4 @@
                 classifieds_path, :class => 'btn' %>
   </div>
 <% end %>
+

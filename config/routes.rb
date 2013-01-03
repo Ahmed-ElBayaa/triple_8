@@ -12,7 +12,7 @@ Triple8::Application.routes.draw do
 
   resources :categories
 
-  root to: 'categories#index'
+  root to: 'classifieds#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
