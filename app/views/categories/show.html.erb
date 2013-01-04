@@ -6,10 +6,10 @@
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @category.name %></dd>
-  <%unless @category.children.empty?%>
-  <dt><strong>sub categories</strong></dt> <br/>
-  <dd><%= render('list_categories', categories: @sub_categories) %></dd>
-  <%end%>
+  <% unless @category.children.empty? %>
+    <dt> <strong> sub categories </strong> </dt> <br/>
+      <dd> <%= render('list_categories', categories: @sub_categories) %> </dd>
+  <% end %>
 </dl>
 
 <div class="form-actions">

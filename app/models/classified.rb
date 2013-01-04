@@ -1,6 +1,7 @@
 class Classified < ActiveRecord::Base
 
 	KINDS = ["Wanted", "For Sale"]
+	MAX_ATTACHMENTS_NO = 3
 
 	has_many :attachments, dependent: :destroy
 	
@@ -9,8 +10,7 @@ class Classified < ActiveRecord::Base
 	
 	belongs_to :user
 
-	accepts_nested_attributes_for :attachments, allow_destroy: true,
-						 reject_if: lambda { |a| a.nil? }
+	accepts_nested_attributes_for :attachments, allow_destroy: true
 
 	attr_accessible :attachments_attributes, :kind, :title, :description,
 				:price, :main_category_id, :sub_category_id
@@ -18,7 +18,7 @@ class Classified < ActiveRecord::Base
 	before_save :set_identifier
 
 	validates :title, :kind, :user_id, :main_category_id,
-								 :sub_category_id, :price, presence: true
+				:sub_category_id, :price, presence: true
 	validates :title, uniqueness: :true
 	validates :kind, inclusion: KINDS
 	validates :price, numericality: {greater_than_or_equal_to: 0.01}
@@ -45,7 +45,7 @@ class Classified < ActiveRecord::Base
 	end
 
 	def categories_validations
-		if self.main_category.main_category?
+		if self.main_category and self.main_category.main_category?
 			unless self.main_category.include_sub_category? self.sub_category
 				errors.add(:base,"invalid sub category")	
 			end
@@ -53,5 +53,10 @@ class Classified < ActiveRecord::Base
 			errors.add(:base,"invalid main category")	
 		end
 	end
+
+	def complete_attachments_number
+    i = MAX_ATTACHMENTS_NO - self.attachments.count
+    i.times {self.attachments.build}
+  end
 
 end

@@ -1,7 +1,7 @@
 class ClassifiedsController < ApplicationController
   skip_before_filter :must_be_admin
   before_filter :authorize, only: [:new, :create]
-  before_filter :must_be_owned, only: [:edit, :update, :destroy]
+
   # GET /classifieds
   # GET /classifieds.json
   def index
@@ -39,6 +39,7 @@ class ClassifiedsController < ApplicationController
   def edit
     @classified = Classified.find_by_identifier(params[:id])
     must_be_owned
+    @classified.complete_attachments_number
   end
 
   # POST /classifieds
@@ -51,6 +52,7 @@ class ClassifiedsController < ApplicationController
         format.html { redirect_to @classified, notice: 'Classified was successfully created.' }
         format.json { render json: @classified, status: :created, location: @classified }
       else
+        @classified.complete_attachments_number        
         format.html { render action: "new" }
         format.json { render json: @classified.errors, status: :unprocessable_entity }
       end
@@ -67,6 +69,7 @@ class ClassifiedsController < ApplicationController
         format.html { redirect_to @classified, notice: 'Classified was successfully updated.' }
         format.json { head :ok }
       else
+        @classified.complete_attachments_number
         format.html { render action: "edit" }
         format.json { render json: @classified.errors, status: :unprocessable_entity }
       end
@@ -94,4 +97,5 @@ class ClassifiedsController < ApplicationController
         "you don't have sufficient permissions to access this page"
     end
   end
+
 end
