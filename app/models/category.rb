@@ -8,6 +8,7 @@ class Category < ActiveRecord::Base
 	before_save :set_identifier
 
 	validates :name, uniqueness: :true, presence: true
+	validate :parent_must_be_main_category
 
 	def to_param
 		identifier
@@ -31,6 +32,12 @@ class Category < ActiveRecord::Base
 			self.classifieds_main
 		else
 			self.classifieds_sub
+		end
+	end
+
+	def parent_must_be_main_category
+		unless self.is_root? or self.parent.is_root?
+			errors.add(:base,"invalid main category")	
 		end
 	end
 end
