@@ -39,8 +39,9 @@ class ClassifiedsController < ApplicationController
   def edit
     @classified = Classified.find_by_identifier(params[:id])
     must_be_owned
-    @sub_categories = Category.find(@classified.main_category_id).children
     @classified.complete_attachments_number
+    main_category = Category.find_by_id(@classified.main_category_id)
+    @sub_categories = main_category.nil? ? [] : main_category.children    
   end
 
   # POST /classifieds
@@ -50,13 +51,19 @@ class ClassifiedsController < ApplicationController
     @classified.user_id = current_user.id
     respond_to do |format|
       if @classified.save
-        format.html { redirect_to @classified,
-         notice: I18n.t('application.messages.successfully_created', model: 'classified') }
-        format.json { render json: @classified, status: :created, location: @classified }
+        format.html { 
+          redirect_to @classified,
+            notice: I18n.t('application.messages.successfully_created',
+              model: 'classified') 
+        }
+        format.json { 
+          render json: @classified, status: :created,
+            location: @classified 
+        }
       else
         @classified.complete_attachments_number
         main_category = Category.find_by_id(params[:classified][:main_category_id])
-        @sub_categories = main_category.nil? ? nil : main_category.children       
+        @sub_categories = main_category.nil? ? [] : main_category.children
         format.html { render action: "new" }
         format.json { render json: @classified.errors, status: :unprocessable_entity }
       end
@@ -70,14 +77,21 @@ class ClassifiedsController < ApplicationController
     must_be_owned
     respond_to do |format|
       if @classified.update_attributes(params[:classified])
-        format.html { redirect_to @classified,
-          notice: I18n.t('application.messages.successfully_updated', model: 'classified') }
+        format.html { 
+          redirect_to @classified,
+            notice: I18n.t('application.messages.successfully_updated',
+             model: 'classified') 
+        }
         format.json { head :ok }
       else
         @classified.complete_attachments_number
-        @sub_categories = Category.find(@classified.main_category_id).children
+        main_category = Category.find_by_id(@classified.main_category_id)
+        @sub_categories = main_category.nil? ? [] : main_category.children
         format.html { render action: "edit" }
-        format.json { render json: @classified.errors, status: :unprocessable_entity }
+        format.json { 
+          render json: @classified.errors,
+           status: :unprocessable_entity 
+        }
       end
     end
   end
@@ -96,8 +110,8 @@ class ClassifiedsController < ApplicationController
   end
 
   def change_sub_categories
-    main_category = Category.find(params[:main_category]);
-    sub_categories = main_category.children
+    main_category = Category.find_by_id(params[:main_category]);
+    sub_categories = main_category.nil? ? [] : main_category.children
     respond_to do |format|
       format.js { @sub_categories = sub_categories }
     end
