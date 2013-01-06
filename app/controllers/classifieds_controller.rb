@@ -50,7 +50,8 @@ class ClassifiedsController < ApplicationController
     @classified.user_id = current_user.id
     respond_to do |format|
       if @classified.save
-        format.html { redirect_to @classified, notice: 'Classified was successfully created.' }
+        format.html { redirect_to @classified,
+         notice: I18n.t('application.messages.successfully_created', model: 'classified') }
         format.json { render json: @classified, status: :created, location: @classified }
       else
         @classified.complete_attachments_number
@@ -69,7 +70,8 @@ class ClassifiedsController < ApplicationController
     must_be_owned
     respond_to do |format|
       if @classified.update_attributes(params[:classified])
-        format.html { redirect_to @classified, notice: 'Classified was successfully updated.' }
+        format.html { redirect_to @classified,
+          notice: I18n.t('application.messages.successfully_updated', model: 'classified') }
         format.json { head :ok }
       else
         @classified.complete_attachments_number
@@ -105,8 +107,7 @@ class ClassifiedsController < ApplicationController
 
   def must_be_owned
     unless @classified.user = current_user
-      redirect_to_back
-        "you don't have sufficient permissions to access this page"
+      redirect_to_back I18n.t("application.messages.insufficient_privilage")
     end
   end
 

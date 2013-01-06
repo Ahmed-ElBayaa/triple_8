@@ -3,3 +3,18 @@
 
 en:
   hello: "Hello world"
+  models:
+    classified:
+      wanted: "Wanted"
+      for_sale: "For Sale"
+      errors:
+        invalid_main_category: "invalid main category"
+        invalid_sub_category: "invalid sub category"
+        max_attachments_no_exceeds: "Only %{MAX_ATTACHMENTS_NO} images are allowed"
+
+  application:
+    messages:
+      sign_in: "Please sign in"
+      insufficient_privilage: you don't have sufficient permissions to access this page
+      successfully_created: "%{model} was successfully created."
+      successfully_updated: "%{model} was successfully updated."

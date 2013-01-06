@@ -1,6 +1,7 @@
 class Classified < ActiveRecord::Base
 
-	KINDS = ["Wanted", "For Sale"]
+	KINDS = [ I18n.t('models.classified.wanted'),
+			 I18n.t('models.classified.for_sale') ]
 	MAX_ATTACHMENTS_NO = 3
 
 	has_many :attachments, dependent: :destroy
@@ -35,22 +36,25 @@ class Classified < ActiveRecord::Base
 
 	def attachments_validations
 		if self.attachments.count > MAX_ATTACHMENTS_NO
-			self.errors.add(:base,"Only #{MAX_ATTACHMENTS_NO} images are allowed")
+			self.errors.add(:base, I18n.t(
+				"models.classified.errors.max_attachments_no_exceeds"))
 		end
 	end
 
 	def categories_validations
 		if self.main_category and self.main_category.main_category?
 			unless self.main_category.include_sub_category? self.sub_category
-				errors.add(:base,"invalid sub category")	
+				errors.add(:base, I18n.t(
+						"models.classified.errors.invalid_sub_category"))
 			end
 		else
-			errors.add(:base,"invalid main category")	
+			errors.add(:base, I18n.t(
+				"models.classified.errors.invalid_main_category"))
 		end
 	end
 
 	def complete_attachments_number
-      i = MAX_ATTACHMENTS_NO - self.attachments.size
+      i = MAX_ATTACHMENTS_NO - self.attachments.count
       i.times {self.attachments.build}
     end
 

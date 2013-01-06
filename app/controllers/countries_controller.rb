@@ -44,7 +44,8 @@ class CountriesController < ApplicationController
 
     respond_to do |format|
       if @country.save
-        format.html { redirect_to @country, notice: 'Country was successfully created.' }
+        format.html { redirect_to @country, 
+          notice: I18n.t('application.messages.successfully_created', model: 'country') }
         format.json { render json: @country, status: :created, location: @country }
       else
         format.html { render action: "new" }
@@ -60,7 +61,8 @@ class CountriesController < ApplicationController
 
     respond_to do |format|
       if @country.update_attributes(params[:country])
-        format.html { redirect_to @country, notice: 'Country was successfully updated.' }
+        format.html { redirect_to @country, 
+          notice: I18n.t('application.messages.successfully_updated', model: 'country') }
         format.json { head :ok }
       else
         format.html { render action: "edit" }

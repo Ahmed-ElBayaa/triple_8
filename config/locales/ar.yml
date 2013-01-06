@@ -15,6 +15,7 @@ ar:
       messages:
         blank: 'ﻻ يمكن ترك هذا الحقل فارغ'
         not_a_number: "يجب أن يحتوى هذا الحقل على أرقام فقط"
+        less_than: "أقل من"
       template:
         body: 'هناك أخطاء فى الحقول الآتية'
         header:
@@ -24,14 +25,35 @@ ar:
       classified: "إعلان"
     attributes:
       classified:
-            kind: "نوع الإعلان"
-            title: "العنوان: "
-            price: "السعر: "
-            main_category_id: "التصنيف الرئيسى"
-            sub_category_id: "التصنيف الفرعى"
-            description: "الوصف"
+        kind: "نوع الإعلان"
+        title: "العنوان: "
+        price: "السعر: "
+        main_category_id: "التصنيف الرئيسى"
+        sub_category_id: "التصنيف الفرعى"
+        description: "الوصف"
   helpers:
     submit:
       create: "إنشاء %{model}"
       update: "تحديث %{model}"
-    new: "جديد"
+  models:
+    classified:
+      wanted: "مطلوب"
+      for_sale: "للبيع"
+      errors:
+        invalid_main_category: "التصنيف الرئيسى خاطئ"
+        invalid_sub_category: "التصنيف الفرعى خاطئ"
+        max_attachments_no_exceeds: "يسمح بتحمل %{MAX_ATTACHMENTS_NO} صور فقط"
+
+  number:
+    human:
+      storage_units:
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+        format: "%n %u"
+
+  application:
+    messages:
+      sign_in: "من فضلك قم بتسجيل الدخول"
+      insufficient_privilage: "ﻻ تملك الصلاحية الكاملة للدخول على هذه الصفحة"

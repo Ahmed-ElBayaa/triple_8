@@ -37,7 +37,8 @@ class Category < ActiveRecord::Base
 
 	def parent_must_be_main_category
 		unless self.is_root? or self.parent.is_root?
-			errors.add(:base,"invalid main category")	
+			errors.add(:base, I18n.t(
+				"models.category.errors.invalid_main_category"))	
 		end
 	end
 end
