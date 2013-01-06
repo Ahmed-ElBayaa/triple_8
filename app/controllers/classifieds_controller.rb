@@ -39,6 +39,7 @@ class ClassifiedsController < ApplicationController
   def edit
     @classified = Classified.find_by_identifier(params[:id])
     must_be_owned
+    @sub_categories = Category.find(@classified.main_category_id).children
     @classified.complete_attachments_number
   end
 
@@ -52,7 +53,8 @@ class ClassifiedsController < ApplicationController
         format.html { redirect_to @classified, notice: 'Classified was successfully created.' }
         format.json { render json: @classified, status: :created, location: @classified }
       else
-        @classified.complete_attachments_number        
+        @classified.complete_attachments_number
+        @sub_categories = Category.find(params[:classified][:main_category_id]).children       
         format.html { render action: "new" }
         format.json { render json: @classified.errors, status: :unprocessable_entity }
       end
@@ -70,6 +72,7 @@ class ClassifiedsController < ApplicationController
         format.json { head :ok }
       else
         @classified.complete_attachments_number
+        @sub_categories = Category.find(@classified.main_category_id).children
         format.html { render action: "edit" }
         format.json { render json: @classified.errors, status: :unprocessable_entity }
       end
@@ -86,6 +89,14 @@ class ClassifiedsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to classifieds_url }
       format.json { head :ok }
+    end
+  end
+
+  def change_sub_categories
+    main_category = Category.find(params[:main_category]);
+    sub_categories = main_category.children
+    respond_to do |format|
+      format.js { @sub_categories = sub_categories }
     end
   end
 

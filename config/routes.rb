@@ -1,6 +1,8 @@
 Triple8::Application.routes.draw do
 
-  resources :classifieds
+  resources :classifieds do
+    get :change_sub_categories, on: :collection 
+  end 
 
   devise_for :users,
     :controllers => {
