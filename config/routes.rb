@@ -1,20 +1,23 @@
 Triple8::Application.routes.draw do
 
-  resources :classifieds do
-    get :change_sub_categories, on: :collection 
-  end 
+  scope '(:locale)' do
+    resources :classifieds do
+      get :change_sub_categories, on: :collection 
+    end 
 
-  devise_for :users,
-    :controllers => {
-      sessions: "sessions",
-      registrations: "registrations"
-    }
+    devise_for :users,
+      :controllers => {
+        sessions: "sessions",
+        registrations: "registrations"
+      }
 
-  resources :countries
+    resources :countries
 
-  resources :categories
+    resources :categories
 
-  root to: 'classifieds#index'
+    root to: 'classifieds#index'  
+  end
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
