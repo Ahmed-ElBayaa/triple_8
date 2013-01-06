@@ -35,15 +35,7 @@ class Classified < ActiveRecord::Base
 
 	def attachments_validations
 		if self.attachments.count > MAX_ATTACHMENTS_NO
-			errors.add(:base,"Only #{MAX_ATTACHMENTS_NO} images are allowed")
-		end
-		self.attachments.each do |photo|			
-			unless photo.file_content_type.match /image/
-				errors.add(:base,"you may attach images only")	
-			end
-			if photo.file_file_size > 2.megabytes
-				errors.add(:base,"At most 2mb images allowed")	
-			end
+			self.errors.add(:base,"Only #{MAX_ATTACHMENTS_NO} images are allowed")
 		end
 	end
 
@@ -58,8 +50,8 @@ class Classified < ActiveRecord::Base
 	end
 
 	def complete_attachments_number
-    i = MAX_ATTACHMENTS_NO - self.attachments.count
-    i.times {self.attachments.build}
-  end
+      i = MAX_ATTACHMENTS_NO - self.attachments.size
+      i.times {self.attachments.build}
+    end
 
 end

@@ -53,6 +53,10 @@ class ClassifiedsController < ApplicationController
         format.html { redirect_to @classified, notice: 'Classified was successfully created.' }
         format.json { render json: @classified, status: :created, location: @classified }
       else
+        puts "*"*70
+        puts @classified.attachments.count
+        puts @classified.attachments.inspect
+        puts "*"*70
         @classified.complete_attachments_number
         @sub_categories = Category.find(params[:classified][:main_category_id]).children       
         format.html { render action: "new" }
