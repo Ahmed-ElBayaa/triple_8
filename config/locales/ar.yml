@@ -56,4 +56,4 @@ ar:
   application:
     messages:
       sign_in: "من فضلك قم بتسجيل الدخول"
-      insufficient_privilage: "ﻻ تملك الصلاحية الكاملة للدخول على هذه الصفحة"
+      insufficient_privilage: "ليس لديك الصلاحية الكافية للدخول على هذه الصفحة"

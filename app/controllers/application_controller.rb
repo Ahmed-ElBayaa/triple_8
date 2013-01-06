@@ -33,8 +33,8 @@ class ApplicationController < ActionController::Base
   def must_be_admin
   	if current_user
   		unless current_user.type == 'Admin'
-  			redirect_to_back 
-          I18n.t("application.messages.insufficient_privilage")
+  			redirect_to_back(
+          I18n.t("application.messages.insufficient_privilage"))
   		end
   	else
 			redirect_to new_user_session_path, 

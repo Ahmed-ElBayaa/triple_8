@@ -67,6 +67,7 @@ class CategoriesController < ApplicationController
            model:'category') }
         format.json { head :ok }
       else
+        @main_categories = Category.roots
         format.html { render action: "edit" }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
