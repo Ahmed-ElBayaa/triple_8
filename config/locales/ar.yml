@@ -3,6 +3,7 @@
 
 ar:
   hello: "Hello world"
+  New: جديد
   date:
     formats:
       default: "%Y-%m-%d"
@@ -11,7 +12,26 @@ ar:
       default: "%a, %d %b %Y %H:%M:%S %z"
   activerecord:
     errors:
+      messages:
+        blank: 'ﻻ يمكن ترك هذا الحقل فارغ'
+        not_a_number: "يجب أن يحتوى هذا الحقل على أرقام فقط"
       template:
-        body: 'هناك خطأ فى الحقول الآتية'
+        body: 'هناك أخطاء فى الحقول الآتية'
         header:
-          one: "هناك خطأ منع حفظ البيانات"
+          one: "هناك خطأ منع هذا ال%{model} من الحفظ"
+          other: "%{count} أخطاء منعت هذا ال%{model} من الحفظ"
+    models:
+      classified: "إعلان"
+    attributes:
+      classified:
+            kind: "نوع الإعلان"
+            title: "العنوان: "
+            price: "السعر: "
+            main_category_id: "التصنيف الرئيسى"
+            sub_category_id: "التصنيف الفرعى"
+            description: "الوصف"
+  helpers:
+    submit:
+      create: "إنشاء %{model}"
+      update: "تحديث %{model}"
+    new: "جديد"

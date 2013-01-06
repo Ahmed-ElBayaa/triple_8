@@ -1,22 +1,8 @@
 <%= form_for @classified, :html => { :class => 'form-horizontal' } do |f| %>
 
   <% @sub_categories ||= [] %>
+  
   <%= f.error_messages %>
-
-  <% if @classified.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@classified.errors.count, "error") %>
-        prohibited this classified from being saved:
-      </h2>
-
-      <ul>
-      <% @classified.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div class="control-group">
       <%= f.label :kind, :class => 'control-label' %>
@@ -28,7 +14,7 @@
       </div>
   </div>
   <div class="control-group">
-    <%= f.label :main_category, :class => 'control-label' %>
+    <%= f.label :main_category_id, :class => 'control-label' %>
     <div class="controls">
       <%= f.select :main_category_id,
         options_from_collection_for_select(get_main_categories,"id","name"),
@@ -36,7 +22,7 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :sub_category, :class => 'control-label' %>
+    <%= f.label :sub_category_id, :class => 'control-label' %>
     <div class="controls">
       <%= render('sub_category_select', sub_categories: @sub_categories,
        selected_category: @classified.sub_category_id) %>      

@@ -54,7 +54,8 @@ class ClassifiedsController < ApplicationController
         format.json { render json: @classified, status: :created, location: @classified }
       else
         @classified.complete_attachments_number
-        @sub_categories = Category.find(params[:classified][:main_category_id]).children       
+        main_category = Category.find_by_id(params[:classified][:main_category_id])
+        @sub_categories = main_category.nil? ? nil : main_category.children       
         format.html { render action: "new" }
         format.json { render json: @classified.errors, status: :unprocessable_entity }
       end
