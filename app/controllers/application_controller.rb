@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def set_i18n_locale_from_params
     if params[:locale]
       if I18n.available_locales.include?(params[:locale].to_sym)
-      I18n.locale = params[:locale]
+        I18n.locale = params[:locale]
       else
         flash.now[:notice] =
         "#{params[:locale]} translation not available"
@@ -33,16 +33,19 @@ class ApplicationController < ActionController::Base
   def must_be_admin
   	if current_user
   		unless current_user.type == 'Admin'
-  			redirect_to_back I18n.t("application.messages.insufficient_privilage")
+  			redirect_to_back 
+          I18n.t("application.messages.insufficient_privilage")
   		end
   	else
-			redirect_to new_user_session_path,  notice: I18n.t("application.messages.sign_in")
+			redirect_to new_user_session_path, 
+        notice: I18n.t("application.messages.sign_in")
 		end
   end
 
   def authorize
     unless current_user
-      redirect_to new_user_session_path, notice: I18n.t("application.messages.sign_in")
+      redirect_to new_user_session_path,
+        notice: I18n.t("application.messages.sign_in")
     end
   end
 
