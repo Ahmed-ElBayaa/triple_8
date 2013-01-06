@@ -16,11 +16,13 @@
   <% end %>
 
   <div class="control-group">
-    <%= f.label :kind, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.select :kind, Classified::KINDS, prompt: 'Select classified kind',
-        :class => 'select' %>
-    </div>
+      <%= f.label :kind, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.radio_button :kind, Classified::KINDS[0], checked: true%>
+        <%= f.label :kind, Classified::KINDS[0], :class => 'inline' %>
+        <%= f.radio_button :kind, Classified::KINDS[1]%>
+        <%= f.label :kind, Classified::KINDS[1], :class => 'inline' %>
+      </div>
   </div>
   <div class="control-group">
     <%= f.label :main_category, :class => 'control-label' %>
