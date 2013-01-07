@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
 	
-	has_ancestry
+	has_many :sub_categories, class_name: 'Category', foreign_key: 'parent_id'
 	
 	has_many :classifieds_sub, class_name:'Classified',
 		foreign_key: 'sub_category_id'
@@ -12,6 +12,10 @@ class Category < ActiveRecord::Base
 	validates :name, uniqueness: :true, presence: true
 	validate :parent_must_be_main_category
 
+	def self.roots
+		Category.where(parent_id: nil)
+	end
+	
 	def to_param
 		identifier
 	end
@@ -21,16 +25,24 @@ class Category < ActiveRecord::Base
 	end
 
 	def main_category?
-		self.is_root?
+		self.parent_id == nil
 	end
 
 	def include_sub_category? sub_category
 		sub_category ||= Category.new
-		self.child_ids.include? sub_category.id
+		sub_category.parent_id == self.id
+	end
+
+	def children
+		self.sub_categories
+	end
+
+	def parent
+		Category.find_by_id(self.parent_id)
 	end
 
 	def classifieds
-		if self.main_category?s
+		if self.main_category?
 			self.classifieds_main
 		else
 			self.classifieds_sub
@@ -38,7 +50,7 @@ class Category < ActiveRecord::Base
 	end
 
 	def parent_must_be_main_category
-		unless self.is_root? or self.parent.is_root?
+		unless self.main_category? or self.parent.main_category?
 			errors.add(:base, I18n.t(
 				"models.category.errors.invalid_main_category"))	
 		end

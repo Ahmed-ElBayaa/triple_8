@@ -38,10 +38,11 @@ class ClassifiedsController < ApplicationController
   # GET /classifieds/1/edit
   def edit
     @classified = Classified.find_by_identifier(params[:id])
-    must_be_owned
-    @classified.complete_attachments_number
-    main_category = Category.find_by_id(@classified.main_category_id)
-    @sub_categories = main_category.nil? ? [] : main_category.children    
+    if must_be_owned?
+      @classified.complete_attachments_number
+      main_category = Category.find_by_id(@classified.main_category_id)
+      @sub_categories = main_category.nil? ? [] : main_category.children    
+    end    
   end
 
   # POST /classifieds
@@ -74,38 +75,40 @@ class ClassifiedsController < ApplicationController
   # PUT /classifieds/1.json
   def update
     @classified = Classified.find_by_identifier(params[:id])
-    must_be_owned
-    respond_to do |format|
-      if @classified.update_attributes(params[:classified])
-        format.html { 
-          redirect_to @classified,
-            notice: I18n.t('application.messages.successfully_updated',
-             model: 'classified') 
-        }
-        format.json { head :ok }
-      else
-        @classified.complete_attachments_number
-        main_category = Category.find_by_id(@classified.main_category_id)
-        @sub_categories = main_category.nil? ? [] : main_category.children
-        format.html { render action: "edit" }
-        format.json { 
-          render json: @classified.errors,
-           status: :unprocessable_entity 
-        }
-      end
-    end
+    if must_be_owned?
+      respond_to do |format|
+        if @classified.update_attributes(params[:classified])
+          format.html { 
+            redirect_to @classified,
+              notice: I18n.t('application.messages.successfully_updated',
+               model: 'classified') 
+          }
+          format.json { head :ok }
+        else
+          @classified.complete_attachments_number
+          main_category = Category.find_by_id(@classified.main_category_id)
+          @sub_categories = main_category.nil? ? [] : main_category.children
+          format.html { render action: "edit" }
+          format.json { 
+            render json: @classified.errors,
+             status: :unprocessable_entity 
+          }
+        end
+      end  
+    end    
   end
 
   # DELETE /classifieds/1
   # DELETE /classifieds/1.json
   def destroy
     @classified = Classified.find_by_identifier(params[:id])
-    must_be_owned
-    @classified.destroy
+    if must_be_owned?
+      @classified.destroy
 
-    respond_to do |format|
-      format.html { redirect_to classifieds_url }
-      format.json { head :ok }
+      respond_to do |format|
+        format.html { redirect_to classifieds_url }
+        format.json { head :ok }
+      end
     end
   end
 
@@ -116,10 +119,12 @@ class ClassifiedsController < ApplicationController
 
   private
 
-  def must_be_owned
-    unless @classified.user = current_user
+  def must_be_owned?
+    unless @classified.user == current_user
       redirect_to_back I18n.t("application.messages.insufficient_privilage")
+      return false
     end
+    return true
   end
 
 end
