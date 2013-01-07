@@ -6,7 +6,7 @@ class ClassifiedsController < ApplicationController
   # GET /classifieds.json
   def index
     @classifieds = Classified.all
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @classifieds }
@@ -110,11 +110,8 @@ class ClassifiedsController < ApplicationController
   end
 
   def change_sub_categories
-    main_category = Category.find_by_id(params[:main_category]);
-    sub_categories = main_category.nil? ? [] : main_category.children
-    respond_to do |format|
-      format.js { @sub_categories = sub_categories }
-    end
+    main_category = Category.find_by_id(params[:main_category])
+    @sub_categories = main_category.nil? ? [] : main_category.children
   end
 
   private

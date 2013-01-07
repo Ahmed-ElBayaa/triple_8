@@ -1,6 +1,4 @@
-- selected_category ||= nil
-- unless selected_category
-	- selected_category = params[:classified] ? params[:classified][:sub_category_id] : 0
+- selected_category ||= params[:classified] ? params[:classified][:sub_category_id] : 0
 
 = select_tag '',                                                                       |
   options_from_collection_for_select(sub_categories,"id","name", selected_category),   |
