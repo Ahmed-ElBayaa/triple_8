@@ -1,4 +1,4 @@
-= form_for @category, :html => { :class => 'form-horizontal' } do |f|
+= nested_form_for @category, :html => { :class => 'form-horizontal' } do |f|
   = f.error_messages
   .control-group
     = f.label :name, :class => 'control-label'
@@ -9,8 +9,16 @@
     .controls
       = f.select :parent_id,                                              |
         options_from_collection_for_select(@main_categories,"id","name"), |
-        prompt: 'it is a main category'                                   |
+        prompt: 'it is a main category'                                   
+
+    = f.fields_for :sub_categories do |b|
+      .control-group
+        = b.label :name, :class => 'control-label'
+        .controls
+          = b.text_field :name, :class => 'text_field'
+          = b.link_to_remove "Remove this sub-category"
+    = f.link_to_add "add sub-category", :sub_categories
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), |
-      categories_path, :class => 'btn'                             |
+      categories_path, :class => 'btn'                             

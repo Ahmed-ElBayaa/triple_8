@@ -1,6 +1,8 @@
 class Category < ActiveRecord::Base
 	
 	has_many :sub_categories, class_name: 'Category', foreign_key: 'parent_id'
+
+	accepts_nested_attributes_for :sub_categories
 	
 	has_many :classifieds_sub, class_name:'Classified',
 		foreign_key: 'sub_category_id'
@@ -15,7 +17,7 @@ class Category < ActiveRecord::Base
 	def self.roots
 		Category.where(parent_id: nil)
 	end
-	
+
 	def to_param
 		identifier
 	end
@@ -29,8 +31,11 @@ class Category < ActiveRecord::Base
 	end
 
 	def include_sub_category? sub_category
-		sub_category ||= Category.new
-		sub_category.parent_id == self.id
+		sub_category.try(:get_parent_id) == self.id
+	end
+
+	def get_parent_id
+		self.parent_id
 	end
 
 	def children
