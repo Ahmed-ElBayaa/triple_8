@@ -13,6 +13,7 @@ gem 'devise'
 gem "nested_form"
 gem "dynamic_form"
 gem "haml-rails"
+gem "meta_search"
 
 # Gems used only for assets and not required
 # in production environments by default.

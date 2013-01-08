@@ -8,7 +8,7 @@ class Classified < ActiveRecord::Base
 	
 	belongs_to :main_category, class_name: 'Category'
 	belongs_to :sub_category, class_name: 'Category'
-	
+	belongs_to :country, foreign_key: 'location_id'
 	belongs_to :user
 
 	accepts_nested_attributes_for :attachments, allow_destroy: true

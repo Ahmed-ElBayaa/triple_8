@@ -10,7 +10,10 @@
 //= require twitter/bootstrap
 //= require_tree .
 
-$(document).ready(function(){	
+$(document).ready(function(){
+	
+	$(".date").datepicker({ dateFormat: 'dd-mm-yy' });
+
 	$('#classified_main_category_id').change(function(){
 		$.ajax({
 			url: "/classifieds/change_sub_categories",

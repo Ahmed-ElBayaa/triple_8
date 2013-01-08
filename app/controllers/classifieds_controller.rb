@@ -5,7 +5,8 @@ class ClassifiedsController < ApplicationController
   # GET /classifieds
   # GET /classifieds.json
   def index
-    @classifieds = Classified.all
+    @search = Classified.search(params[:search])
+    @classifieds = @search.all
     
     respond_to do |format|
       format.html # index.html.erb

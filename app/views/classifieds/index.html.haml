@@ -1,6 +1,51 @@
 - model_class = Classified
 .page-header
   %h1= t '.title', :default => model_class.model_name.human.pluralize
+
+= form_for @search, :url => classifieds_path, :html => {method: :get,            |
+  :class => 'form-horizontal'} do |s|
+  = s.label :kind_eq
+  = s.select :kind_eq, options_for_select(Classified::KINDS), include_blank: true 
+  %br
+  = s.label :creator_name
+  = s.text_field :user_first_name_contains
+  = s.text_field :user_last_name_contains
+  %br  
+  %table
+    %tr
+      %td  
+        = s.label :title_contains
+        = s.text_field :title_contains
+      %td
+        = s.label :description_contains
+        = s.text_field :description_contains
+    %tr
+      %td  
+        = s.label :main_category_contains
+        = s.text_field :main_category_name_contains
+      %td
+        = s.label :sub_category_contains
+        = s.text_field :sub_category_name_contains
+    %tr
+      %td
+        = s.label :location_like
+        = s.text_field :country_name_like
+  = s.label :price_range
+  = s.multiparameter_field :price_between,                                    |
+    {field_type: :text_field}, {field_type: :text_field}, size: 5
+  %br
+  = s.label :created_or_updated_during
+  = s.multiparameter_field :created_at_or_updated_at_between,                 |
+    {field_type: :text_field, class: 'date'}, {field_type: :text_field, class: 'date'}
+  %br  
+  = s.label :tags_contains
+  = s.text_field :tags_contains
+  %br
+  = s.submit
+
+
+
+
 %table.table.table-striped
   %thead
     %tr
