@@ -7,7 +7,6 @@
   = s.label :kind_eq
   = s.select :kind_eq, options_for_select(Classified::KINDS, @search.kind_eq),   |
      include_blank: true 
-
   %br
   = s.label :creator_name
   = s.text_field :user_first_name_contains
@@ -33,8 +32,8 @@
         = s.label :location_like
         = s.text_field :country_name_like
   = s.label :price_range
-  = s.multiparameter_field :price_between,                                    |
-    {field_type: :text_field}, {field_type: :text_field}, size: 5
+  = s.text_field :price_gte
+  = s.text_field :price_lte
   %br
   = s.label :created_or_updated_during
   = s.multiparameter_field :created_at_or_updated_at_between,                 |
@@ -45,35 +44,4 @@
   %br
   = s.submit
 
-%table.table.table-striped
-  %thead
-    %tr
-      %th= model_class.human_attribute_name(:id)
-      %th= model_class.human_attribute_name(:kind)
-      %th= model_class.human_attribute_name(:title)
-      %th= model_class.human_attribute_name(:description)
-      %th= model_class.human_attribute_name(:price)
-      %th= model_class.human_attribute_name(:user_id)
-      %th= model_class.human_attribute_name(:created_at)
-      %th= t '.actions', :default => t("helpers.actions")
-  %tbody
-    - @classifieds.each do |classified|
-      %tr
-        %td= link_to classified.id, classified_path(classified)
-        %td= classified.kind
-        %td= classified.title
-        %td= classified.description
-        %td= classified.price
-        %td= classified.user_id
-        %td= l classified.created_at
-        %td
-          = link_to t('.edit', :default => t("helpers.links.edit")),   |
-            edit_classified_path(classified), :class => 'btn btn-mini' 
-
-          = link_to t('.destroy', :default => t("helpers.links.destroy")),   |
-            classified_path(classified), :method => :delete,                 |
-            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm",  |
-            :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
-
-= link_to t('.new', :default => t("helpers.links.new")), |
-  new_classified_path, :class => 'btn btn-primary'
+= render('list_classifieds', model_class: model_class)

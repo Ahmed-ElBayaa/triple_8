@@ -2,7 +2,8 @@ Triple8::Application.routes.draw do
 
   scope '(:locale)' do
     resources :classifieds do
-      get :change_sub_categories, on: :collection 
+      get :change_sub_categories, on: :collection
+      get :owned, on: :collection 
     end 
 
     devise_for :users,

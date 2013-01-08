@@ -1,6 +1,6 @@
 class ClassifiedsController < ApplicationController
   skip_before_filter :must_be_admin
-  before_filter :authorize, only: [:new, :create]
+  before_filter :authorize, only: [:new, :create, :owned_classifieds]
 
   # GET /classifieds
   # GET /classifieds.json
@@ -8,6 +8,16 @@ class ClassifiedsController < ApplicationController
     @search = Classified.search(params[:search])
     @classifieds = @search.all
     
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @classifieds }
+    end
+  end
+
+  def owned
+    @search = current_user.classifieds.search(params[:search])
+    @classifieds = @search.all
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @classifieds }

@@ -12,7 +12,7 @@
       %strong sub categories
     %br/
     %dd
-      = render('list_categories', categories: @sub_categories)
+      = render('list_categories', categories: @sub_categories, model_class: model_class)
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), |
     categories_path, :class => 'btn'                         |
