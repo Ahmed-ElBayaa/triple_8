@@ -13,8 +13,7 @@ class Classified < ActiveRecord::Base
 
 	accepts_nested_attributes_for :attachments, allow_destroy: true
 
-	attr_accessible :attachments_attributes, :kind, :title, :description,
-				:price, :main_category_id, :sub_category_id
+	attr_protected :user_id
 	
 	before_save :set_identifier
 
