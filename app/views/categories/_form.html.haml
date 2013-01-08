@@ -7,9 +7,8 @@
   .control-group
     = f.label :main_category, :class => 'control-label'
     .controls
-      = f.select :parent_id,                                              |
-        options_from_collection_for_select(@main_categories,"id","name"), |
-        prompt: 'it is a main category'                                   
+      = select_field(f, @category, :parent_id, @main_categories, "id",    |
+        "name", 'it is a main category', 'select')                       
 
     = f.fields_for :sub_categories do |b|
       .control-group

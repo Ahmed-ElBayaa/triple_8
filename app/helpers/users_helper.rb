@@ -1,5 +1,5 @@
 module UsersHelper
-	def get_countries
+	def countries
 		Country.select( [:id,:name])
 	end
 end

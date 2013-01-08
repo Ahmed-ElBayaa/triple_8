@@ -5,7 +5,9 @@
 = form_for @search, :url => classifieds_path, :html => {method: :get,            |
   :class => 'form-horizontal'} do |s|
   = s.label :kind_eq
-  = s.select :kind_eq, options_for_select(Classified::KINDS), include_blank: true 
+  = s.select :kind_eq, options_for_select(Classified::KINDS, @search.kind_eq),   |
+     include_blank: true 
+
   %br
   = s.label :creator_name
   = s.text_field :user_first_name_contains
@@ -42,9 +44,6 @@
   = s.text_field :tags_contains
   %br
   = s.submit
-
-
-
 
 %table.table.table-striped
   %thead

@@ -13,9 +13,8 @@
   %div
     = f.label :country
     %br/
-    = f.select :country_id,                                          |
-      options_from_collection_for_select(get_countries,"id","name"), |
-      prompt: 'select your country'                                  |
+    = select_field(f, resource, :country_id, countries, "id",    |
+        "name", 'select your country', 'select')
   %div
     = f.label :email
     %br/

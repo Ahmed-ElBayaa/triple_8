@@ -11,10 +11,8 @@
   .control-group
     = f.label :main_category_id, :class => 'control-label'
     .controls
-      = f.select :main_category_id,                                          |
-        options_from_collection_for_select(main_categories,"id","name",      |
-         :main_category_id),                                                 |
-        prompt: 'Select main category', :class => 'select'
+      = select_field(f, @classified, :main_category_id, main_categories, "id",    |
+        "name", 'Select main category', 'select')
   .control-group
     = f.label :sub_category_id, :class => 'control-label'
     .controls
@@ -35,10 +33,8 @@
   .control-group
     = f.label :location_id, :class => 'control-label'
     .controls
-      = f.select :location_id,                                          |
-        options_from_collection_for_select(locations,"id","name",       |
-         :location_id),                                                 |
-        prompt: 'Select main category', :class => 'select'
+      = select_field(f, @classified, :location_id, locations, "id",    |
+        "name", 'Select location', 'select')
   .control-group
     = f.label :tags, :class => 'control-label'
     .controls
