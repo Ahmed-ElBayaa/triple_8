@@ -46,7 +46,7 @@
         %td= classified.description
         %td= number_to_currency classified.price
         %td= "#{classified.user.first_name} #{classified.user.last_name}"
-        %td= classified.user.try(:phone)
+        %td= classified.user.phone
         %td= classified.user.email
         %td= l classified.created_at
         
