@@ -1,6 +1,7 @@
 Triple8::Application.routes.draw do
 
-  scope '(:locale)' do
+  scope '(:locale)' do    
+
     resources :classifieds do
       get :change_sub_categories, on: :collection
       get :owned, on: :collection 
@@ -16,7 +17,7 @@ Triple8::Application.routes.draw do
 
     resources :categories
 
-    root to: 'classifieds#index'  
+    root to: 'store#index', as: 'store'
   end
   
 

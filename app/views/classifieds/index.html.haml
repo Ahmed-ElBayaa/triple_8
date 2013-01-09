@@ -36,8 +36,8 @@
   = s.text_field :price_lte
   %br
   = s.label :created_or_updated_during
-  = s.multiparameter_field :created_at_or_updated_at_between,                 |
-    {field_type: :text_field, class: 'date'}, {field_type: :text_field, class: 'date'}
+  = s.text_field :created_at_gte, :class => date
+  = s.text_field :updated_at_lte, :class => date
   %br  
   = s.label :tags_contains
   = s.text_field :tags_contains

@@ -1,0 +1,49 @@
+- model_class = Classified
+%fieldset
+  %legend= t'.Search'
+  = form_for @search, :url => owned_classifieds_path, :html => {method: :get,            |
+    :class => 'form-horizontal'} do |s|
+    = s.text_field :title_contains, placeholder: 'title' 
+    %br
+    = s.text_field :country_name_contains, placeholder: 'location'
+    = s.label :kind_eq, 'Kind'
+    = s.select :kind_eq, options_for_select(Classified::KINDS, @search.kind_eq),   |
+      include_blank: true
+    %br    
+    %strong Refine Search
+    %br
+    = s.text_field :main_category_name_contains, placeholder: 'main category'
+    = s.text_field :sub_category_name_contains, placeholder: 'sub category'
+    %br
+    = s.text_field :price_gte, placeholder: 'Min. price' 
+    = s.text_field :price_lte, placeholder: 'Max. price'
+    %br
+    = s.text_field :created_at_or_updated_at_gte, :class => 'date',             |
+      placeholder: 'posted on or after'
+    %br   
+    = s.submit
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:kind)
+      %th= model_class.human_attribute_name(:title)
+      %th= model_class.human_attribute_name(:main_category)
+      %th= model_class.human_attribute_name(:sub_category)
+      %th= model_class.human_attribute_name(:description)
+      %th= model_class.human_attribute_name(:price)
+      %th= model_class.human_attribute_name(:creator)
+      %th= model_class.human_attribute_name(:created_at)
+  %tbody
+    - @classifieds.each do |classified|
+      %tr
+        %td= link_to classified.id, classified_path(classified)
+        %td= classified.kind
+        %td= classified.title
+        %td= classified.main_category.name
+        %td= classified.sub_category.name
+        %td= classified.description
+        %td= number_to_currency classified.price
+        %td= "#{classified.user.first_name} #{classified.user.last_name}"
+        %td= l classified.created_at
+        

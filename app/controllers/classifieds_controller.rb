@@ -9,7 +9,7 @@ class ClassifiedsController < ApplicationController
     @classifieds = @search.all
     
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @classifieds }
     end
   end

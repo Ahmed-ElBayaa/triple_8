@@ -1,5 +1,7 @@
 class Classified < ActiveRecord::Base
 
+	default_scope order:'updated_at DESC'
+	
 	KINDS = [ I18n.t('models.classified.wanted'),
 			 I18n.t('models.classified.for_sale') ]
 	MAX_ATTACHMENTS_NO = 3
