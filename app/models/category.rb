@@ -11,7 +11,7 @@ class Category < ActiveRecord::Base
 
 	before_save :set_identifier
 
-	validates :name, uniqueness: :true, presence: true
+	validates :name, presence: true, :uniqueness => {scope: :parent_id}
 	validate :parent_must_be_main_category
 
 	def self.roots
