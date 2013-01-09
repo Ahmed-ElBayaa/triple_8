@@ -6,23 +6,23 @@
   %legend= t'.Search'
   = form_for @search, :url => owned_classifieds_path, :html => {method: :get,            |
     :class => 'form-horizontal'} do |s|
-    = s.text_field :title_contains, placeholder: 'title' 
+    = s.text_field :title_contains, placeholder: (t 'const.title')
     %br
-    = s.text_field :country_name_contains, placeholder: 'location'
-    = s.label :kind_eq, 'Kind'
+    = s.text_field :country_name_contains, placeholder: (t 'const.location')
+    = s.label :kind_eq, (t 'const.Kind')
     = s.select :kind_eq, options_for_select(Classified::KINDS, @search.kind_eq),   |
       include_blank: true
     %br    
     %strong Refine Search
     %br
-    = s.text_field :main_category_name_contains, placeholder: 'main category'
-    = s.text_field :sub_category_name_contains, placeholder: 'sub category'
+    = s.text_field :main_category_name_contains, placeholder: (t 'const.main_category')
+    = s.text_field :sub_category_name_contains, placeholder: (t 'const.sub_category')
     %br
-    = s.text_field :price_gte, placeholder: 'Min. price' 
-    = s.text_field :price_lte, placeholder: 'Max. price'
+    = s.text_field :price_gte, placeholder: (t 'const.min_price')
+    = s.text_field :price_lte, placeholder: (t 'const.max_price')
     %br
     = s.text_field :created_at_or_updated_at_gte, :class => 'date',             |
-      placeholder: 'posted on or after'
+      placeholder: (t 'const.posted_on_or_after')
     %br   
     = s.submit
 

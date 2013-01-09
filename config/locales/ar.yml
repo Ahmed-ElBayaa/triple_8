@@ -57,3 +57,19 @@ ar:
     messages:
       sign_in: "من فضلك قم بتسجيل الدخول"
       insufficient_privilage: "ليس لديك الصلاحية الكافية للدخول على هذه الصفحة"
+
+  const:
+    title: العنوان
+    kind: النوع
+    description: الوصف
+    main_category: التصنيف الرئيسى
+    sub_category: التصنيف الفرعى
+    location: الموقع
+    min_price: أقل سعر
+    max_price: أعلى سعر
+    posted_after: أُنشئ بعد
+    posted_before: أُنشئ قبل
+    tags: tags
+    posted_on_or_after: أنشئ بعد
+    fname: الأسم الأول
+    lname: الأسم الأخير

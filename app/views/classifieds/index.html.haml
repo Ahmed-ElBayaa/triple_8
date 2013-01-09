@@ -8,39 +8,31 @@
   = s.select :kind_eq, options_for_select(Classified::KINDS, @search.kind_eq),   |
      include_blank: true 
   %br
-  = s.label :creator_name
-  = s.text_field :user_first_name_contains
-  = s.text_field :user_last_name_contains
+  = s.text_field :user_first_name_contains, placeholder: (t 'const.fname')
+  = s.text_field :user_last_name_contains, placeholder: (t 'const.lname')
   %br  
   %table
     %tr
       %td  
-        = s.label :title_contains
-        = s.text_field :title_contains
+        = s.text_field :title_contains, placeholder: (t 'const.title')
       %td
-        = s.label :description_contains
-        = s.text_field :description_contains
+        = s.text_field :description_contains, placeholder: (t 'const.description') 
     %tr
       %td  
-        = s.label :main_category_contains
-        = s.text_field :main_category_name_contains
+        = s.text_field :main_category_name_contains, placeholder:(t 'const.main_category')
       %td
-        = s.label :sub_category_contains
-        = s.text_field :sub_category_name_contains
+        = s.text_field :sub_category_name_contains, placeholder: (t 'const.sub_category')
     %tr
       %td
-        = s.label :location_like
-        = s.text_field :country_name_like
-  = s.label :price_range
-  = s.text_field :price_gte
-  = s.text_field :price_lte
+        = s.text_field :country_name_like, placeholder: (t 'const.location')
   %br
-  = s.label :created_or_updated_during
-  = s.text_field :created_at_gte, :class => date
-  = s.text_field :updated_at_lte, :class => date
+  = s.text_field :price_gte, placeholder: (t 'const.min_price')
+  = s.text_field :price_lte, placeholder: (t 'const.max_price')
+  %br
+  = s.text_field :created_at_gte, placeholder: (t 'const.posted_after'), :class => 'date'
+  = s.text_field :updated_at_lte, placeholder: (t 'const.posted_before'),:class => 'date'
   %br  
-  = s.label :tags_contains
-  = s.text_field :tags_contains
+  = s.text_field :tags_contains, placeholder: (t 'const.tags')
   %br
   = s.submit
 

@@ -18,3 +18,19 @@ en:
       insufficient_privilage: you don't have sufficient permissions to access this page
       successfully_created: "%{model} was successfully created."
       successfully_updated: "%{model} was successfully updated."
+
+  const:
+    title: title
+    kind: kind
+    description: description
+    main_category: main_category
+    sub_category: sub_category
+    location: location
+    min_price: min_price
+    max_price: max_price
+    posted_after: posted_after
+    posted_before: posted_before
+    tags: tags
+    posted_on_or_after: posted on or after
+    fname: first name
+    lname: last name
