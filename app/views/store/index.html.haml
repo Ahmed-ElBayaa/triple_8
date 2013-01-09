@@ -33,11 +33,12 @@
       %th= model_class.human_attribute_name(:description)
       %th= model_class.human_attribute_name(:price)
       %th= model_class.human_attribute_name(:creator)
+      %th= model_class.human_attribute_name(:phone_number)
+      %th= model_class.human_attribute_name(:email)
       %th= model_class.human_attribute_name(:created_at)
   %tbody
     - @classifieds.each do |classified|
       %tr
-        %td= link_to classified.id, classified_path(classified)
         %td= classified.kind
         %td= classified.title
         %td= classified.main_category.name
@@ -45,5 +46,7 @@
         %td= classified.description
         %td= number_to_currency classified.price
         %td= "#{classified.user.first_name} #{classified.user.last_name}"
+        %td= classified.user.try(:phone)
+        %td= classified.user.email
         %td= l classified.created_at
         
