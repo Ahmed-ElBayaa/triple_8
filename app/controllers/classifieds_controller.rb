@@ -1,6 +1,6 @@
 class ClassifiedsController < ApplicationController
-  skip_before_filter :must_be_admin
-  before_filter :authorize, only: [:new, :create, :owned_classifieds]
+  skip_before_filter :must_be_admin, except: [:index]
+  before_filter :authorize, only: [:new, :create, :owned]
 
   # GET /classifieds
   # GET /classifieds.json
@@ -28,11 +28,12 @@ class ClassifiedsController < ApplicationController
   # GET /classifieds/1.json
   def show
     @classified = Classified.find_by_identifier(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @classified }
-    end
+    if must_be_owned?
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @classified }
+      end
+    end  
   end
 
   # GET /classifieds/new
@@ -131,7 +132,7 @@ class ClassifiedsController < ApplicationController
   private
 
   def must_be_owned?
-    unless @classified.user == current_user
+    if @classified.user != current_user
       redirect_to_back I18n.t("application.messages.insufficient_privilage")
       return false
     end
