@@ -36,7 +36,7 @@
           %a.brand{:href => "#"} Triple8
           .container.nav-collapse
             %ul.nav
-              %li= link_to "users", "/path3"
+              %li= link_to "users", users_path
               %li= link_to "classifieds", classifieds_path
               %li= link_to "categories", categories_path
               %li= link_to "countries", countries_path
@@ -52,11 +52,12 @@
             %h3 Sidebar
             %ul.nav.nav-list
               %li.nav-header Sidebar
-              %li= link_to "users", "/path3"
-              %li= link_to "Sign up", new_user_registration_path
-              %li= link_to "Sign in", new_user_session_path
-              %li= link_to "Sign out", destroy_user_session_path, |
-                  method: :delete                                |
+              - if current_user
+                %li= link_to "Edit account", edit_user_registration_path
+                %li= link_to "Sign out", destroy_user_session_path, method: :delete
+              -else  
+                %li= link_to "Sign up", new_user_registration_path
+                %li= link_to "Sign in", new_user_session_path              
           / /.well
         / /span
       / /row

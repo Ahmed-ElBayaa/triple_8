@@ -1,5 +1,8 @@
 Triple8::Application.routes.draw do
 
+  get "users/destroy"
+
+  resources :users, except: [:new, :create]
   scope '(:locale)' do    
 
     resources :classifieds do

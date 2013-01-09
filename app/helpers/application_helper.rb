@@ -8,4 +8,9 @@ module ApplicationHelper
         	prompt: prompt, :class => klass
 
 	end
+
+	def locations
+		Country.all
+	end
+	
 end

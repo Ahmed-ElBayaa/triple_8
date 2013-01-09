@@ -3,6 +3,7 @@ class Country < ActiveRecord::Base
 	has_attached_file :flag, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
 	has_many :classifieds, foreign_key: 'location_id'
+	has_many :users
 	before_save :set_identifier
 
 	validates :name, uniqueness: :true

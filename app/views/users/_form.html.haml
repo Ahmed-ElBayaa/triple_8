@@ -1,0 +1,60 @@
+= form_for(@user, url: user_path(@user), as: :user,           |
+  :html => { :class => 'form-horizontal' }) do |f|
+  = f.error_messages
+  .control-group
+    = f.label :first_name, :class => 'control-label'
+    .controls
+      = f.text_field :first_name, :class => 'text_field'
+  .control-group
+    = f.label :last_name, :class => 'control-label'
+    .controls
+      = f.text_field :last_name, :class => 'text_field'
+  .control-group
+    = f.label :email, :class => 'control-label'
+    .controls
+      = f.email_field :email, :class => 'email_field'
+  .control-group
+    = f.label :type, :class => 'control-label'
+    .controls
+      = f.text_field :type, :class => 'text_field'
+  .control-group
+    = f.label :phone, :class => 'control-label'
+    .controls
+      = f.text_field :phone, :class => 'text_field'
+  .control-group
+    = f.label :country, :class => 'control-label'
+    .controls
+      = select_field(f, @user, :country_id, countries, 'id', 'name','select country',   |
+       'select')
+  .control-group
+    = f.label :sign_in_count, :class => 'control-label'
+    .controls
+      = f.number_field :sign_in_count, :class => 'number_field'
+  .control-group
+    = f.label :current_sign_in_at, :class => 'control-label'
+    .controls
+      = f.text_field :current_sign_in_at, :class => 'date'
+  .control-group
+    = f.label :current_sign_in_ip, :class => 'control-label'
+    .controls
+      = f.text_field :current_sign_in_ip, :class => 'text_field'
+  .control-group
+    = f.label :last_sign_in_at, :class => 'control-label'
+    .controls
+      = f.text_field :last_sign_in_at, :class => 'date'
+  .control-group
+    = f.label :last_sign_in_ip, :class => 'control-label'
+    .controls
+      = f.text_field :last_sign_in_ip, :class => 'text_field'
+  .control-group
+    = f.label :updated_at, :class => 'control-label'
+    .controls
+      = f.text_field :updated_at, :class => 'date'
+  .control-group
+    = f.label :created_at, :class => 'control-label'
+    .controls
+      = f.text_field :created_at, :class => 'date'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), |
+      users_path, :class => 'btn'                              |

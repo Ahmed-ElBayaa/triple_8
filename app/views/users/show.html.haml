@@ -1,0 +1,63 @@
+- model_class = User
+.page-header
+  %h1= t '.title', :default => model_class.model_name.human.pluralize
+%table.table.table-hover.center
+  %tr
+    %td
+      %strong Name
+    %td
+      %strong= "#{@user.first_name} #{@user.last_name}"
+  %tr
+    %td
+      %strong Country
+    %td= "#{@user.country.name}"
+  %tr
+    %td
+      %strong Email
+    %td= "#{@user.email}"
+  %tr
+    %td
+      %strong Phone
+    %td= "#{@user.phone}"
+  %tr
+    %td
+      %strong Type
+    %td= "#{@user.type}"
+  %tr
+    %td
+      %strong logging in times
+    %td= "#{@user.sign_in_count}"
+  %tr
+    %td
+      %strong member since
+    %td= l @user.created_at
+  %tr
+    %td
+      %strong information updayed lastly at
+    %td= l @user.updated_at
+  %tr
+    %td
+      %strong current sign in at
+    %td= "#{@user.current_sign_in_at}"
+  %tr
+    %td
+      %strong current sign in from
+    %td= "#{@user.current_sign_in_ip}"
+  %tr
+    %td
+      %strong last sign in at
+    %td= "#{@user.last_sign_in_at}"
+  %tr
+    %td
+      %strong last sign in from
+    %td= "#{@user.last_sign_in_ip}"
+  %tr
+    %td
+      = link_to t('.edit', :default => t("helpers.links.edit")), |
+        edit_user_path(@user), :class => 'btn btn-mini'
+
+      = link_to t('.destroy', :default => t("helpers.links.destroy")),      |
+        user_path(@user), :method => :delete,                          |
+        :data => { :confirm => t('.confirm',                                |
+        :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, |
+        :class => 'btn btn-mini btn-danger'
