@@ -1,5 +1,5 @@
 class ClassifiedsController < ApplicationController
-  before_filter :must_be_admin, only: [:index]
+  before_filter :index_for_admin_or_normal, only: [:index]
   before_filter :authorize, only: [:new, :create, :owned]
 
   # GET /classifieds
@@ -140,6 +140,15 @@ class ClassifiedsController < ApplicationController
       return false
     end
     return true
+  end
+
+  def index_for_admin_or_normal
+    if current_user      
+        redirect_to(owned_classifieds_path) unless current_user.type == 'Admin'
+    else
+      redirect_to new_user_session_path, 
+        notice: I18n.t("application.messages.sign_in")
+    end
   end
 
 end

@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-	skip_before_filter :must_be_admin
+	# skip_before_filter :must_be_admin
 	# def new
 	# 	@countries = Country.select( [:id,:name])
 	# 	super

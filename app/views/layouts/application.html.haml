@@ -43,10 +43,9 @@
                   %li= link_to t("const.classifieds"), classifieds_path
                   %li= link_to t("const.countries"), countries_path
                   %li= link_to t("const.users"), users_path
-                - else
-                  %li= link_to t("const.classifieds"), owned_classifieds_path
+                %li= link_to t("const.my_classifieds"), owned_classifieds_path
               - if notice
-                %strong= notice              
+                %li= link_to notice           
               
               
           / /.nav-collapse
@@ -57,7 +56,7 @@
         .span2
           .well.sidebar-nav
             %ul.nav.nav-list
-              %li.nav-header= current_user.nil? ? "Sidebar" : current_user.first_name+" "+current_user.last_name
+              %li.nav-header= current_user.nil? ? "guest" : current_user.first_name+" "+current_user.last_name
               - if current_user
                 %li= link_to t("const.edit_account"), edit_user_registration_path
                 %li= link_to t("const.sign_out"), destroy_user_session_path,     |
