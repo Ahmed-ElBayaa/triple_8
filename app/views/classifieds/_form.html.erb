@@ -17,7 +17,7 @@
     <%= f.label :main_category_id, :class => 'control-label' %>
     <div class="controls">
       <%= f.select :main_category_id,
-        options_from_collection_for_select(get_main_categories,"id","name"),
+        options_from_collection_for_select(get_main_categories,"id","name",@classified.main_category_id),
          prompt: 'Select main category', :class => 'select' %>
     </div>
   </div>

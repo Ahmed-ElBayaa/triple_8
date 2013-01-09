@@ -12,7 +12,7 @@
     <%= f.label :main_category, :class => 'control-label' %>
     <div class="controls">
       <%= f.select :parent_id, 
-        options_from_collection_for_select(@main_categories,"id","name"),
+        options_from_collection_for_select(@main_categories,"id","name", @category.parent_id),
         prompt: 'it is a main category' %>
      </div>
   </div>

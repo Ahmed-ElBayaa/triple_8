@@ -11,7 +11,7 @@
 
   <div><%= f.label :country %><br />
   <%= f.select :country_id, 
-        options_from_collection_for_select(get_countries,"id","name"),
+        options_from_collection_for_select(get_countries,"id","name",:country_id),
         prompt: 'select your country' %></div>
 
   <div><%= f.label :email %><br />

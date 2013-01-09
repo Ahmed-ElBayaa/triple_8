@@ -3,9 +3,9 @@ class Category < ActiveRecord::Base
 	has_ancestry
 	
 	has_many :classifieds_sub, class_name:'Classified',
-		foreign_key: 'sub_category_id'
+		foreign_key: 'sub_category_id', dependent: :nullify
 	has_many :classifieds_main, class_name:'Classified',
-		foreign_key: 'main_category_id'
+		foreign_key: 'main_category_id', dependent: :nullify
 
 	before_save :set_identifier
 
