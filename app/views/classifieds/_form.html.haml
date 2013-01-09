@@ -31,6 +31,14 @@
     .controls
       = f.number_field :price, :class => 'number_field', step: 0.01
   .control-group
+    = f.label :phone, :class => 'control-label'
+    .controls
+      = f.text_field :phone, :class => 'text_field'
+  .control-group
+    = f.label :email, :class => 'control-label'
+    .controls
+      = f.text_field :email, :class => 'text_field'
+  .control-group
     = f.label :location_id, :class => 'control-label'
     .controls
       = select_field(f, @classified, :location_id, locations, "id",    |

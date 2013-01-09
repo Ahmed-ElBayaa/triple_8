@@ -1,7 +1,7 @@
 - model_class = Classified
 %fieldset
   %legend= t'.Search'
-  = form_for @search, :url => owned_classifieds_path, :html => {method: :get,            |
+  = form_for @search, :url => store_path, :html => {method: :get,            |
     :class => 'form-horizontal'} do |s|
     = s.text_field :title_contains, placeholder: (t 'const.title')
     %br
@@ -33,6 +33,7 @@
       %th= model_class.human_attribute_name(:description)
       %th= model_class.human_attribute_name(:price)
       %th= model_class.human_attribute_name(:creator)
+      %th= model_class.human_attribute_name(:location)
       %th= model_class.human_attribute_name(:phone_number)
       %th= model_class.human_attribute_name(:email)
       %th= model_class.human_attribute_name(:created_at)
@@ -44,9 +45,10 @@
         %td= classified.main_category.name
         %td= classified.sub_category.name
         %td= classified.description
-        %td= number_to_currency classified.price
+        %td= number_to_currency classified.price        
         %td= "#{classified.user.first_name} #{classified.user.last_name}"
-        %td= classified.user.phone
-        %td= classified.user.email
+        %td= classified.country.name
+        %td= classified.phone
+        %td= classified.email
         %td= l classified.created_at
         

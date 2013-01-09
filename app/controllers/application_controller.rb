@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_i18n_locale_from_params
-  before_filter :must_be_admin
 
   def redirect_to_back msg=""
   	if !request.env["HTTP_REFERER"].blank? and

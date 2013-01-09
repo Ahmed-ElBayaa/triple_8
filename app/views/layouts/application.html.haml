@@ -36,28 +36,35 @@
           %a.brand{:href => "#"} Triple8
           .container.nav-collapse
             %ul.nav
-              %li= link_to "users", users_path
-              %li= link_to "classifieds", classifieds_path
-              %li= link_to "categories", categories_path
-              %li= link_to "countries", countries_path
+              %li= link_to t("const.home"), store_path
+              - if current_user
+                - if current_user.admin?
+                  %li= link_to t("const.categories"), categories_path
+                  %li= link_to t("const.classifieds"), classifieds_path
+                  %li= link_to t("const.countries"), countries_path
+                  %li= link_to t("const.users"), users_path
+                - else
+                  %li= link_to t("const.classifieds"), owned_classifieds_path
+              - if notice
+                %strong= notice              
+              
+              
           / /.nav-collapse
     .container
       .row
-        .span9
-          - if notice
-            %p#notice= notice
+        .span10
           = yield
-        .span3
+        .span2
           .well.sidebar-nav
-            %h3 Sidebar
             %ul.nav.nav-list
-              %li.nav-header Sidebar
+              %li.nav-header= current_user.nil? ? "Sidebar" : current_user.first_name+" "+current_user.last_name
               - if current_user
-                %li= link_to "Edit account", edit_user_registration_path
-                %li= link_to "Sign out", destroy_user_session_path, method: :delete
-              -else  
-                %li= link_to "Sign up", new_user_registration_path
-                %li= link_to "Sign in", new_user_session_path              
+                %li= link_to t("const.edit_account"), edit_user_registration_path
+                %li= link_to t("const.sign_out"), destroy_user_session_path,     |
+                      method: :delete
+              - else  
+                %li= link_to t("const.sign_up"), new_user_registration_path
+                %li= link_to t("const.sign_in"), new_user_session_path              
           / /.well
         / /span
       / /row

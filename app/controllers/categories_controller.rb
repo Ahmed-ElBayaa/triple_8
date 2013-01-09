@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_filter :must_be_admin
   # GET /categories
   # GET /categories.json
   def index

@@ -1,4 +1,5 @@
 class CountriesController < ApplicationController
+  before_filter :must_be_admin
   # GET /countries
   # GET /countries.json
   def index

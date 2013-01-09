@@ -34,3 +34,12 @@ en:
     posted_on_or_after: posted on or after
     fname: first name
     lname: last name
+    home: Home
+    categories: Categories
+    classifieds: Classifieds
+    countries: Countries
+    users: Users
+    edit_account: Edit Account
+    sign_in: Sign in
+    sign_out: Sign out
+    sign_up: Sign up

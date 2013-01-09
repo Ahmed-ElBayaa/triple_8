@@ -1,5 +1,5 @@
 class ClassifiedsController < ApplicationController
-  skip_before_filter :must_be_admin, except: [:index]
+  before_filter :must_be_admin, only: [:index]
   before_filter :authorize, only: [:new, :create, :owned]
 
   # GET /classifieds
@@ -40,6 +40,9 @@ class ClassifiedsController < ApplicationController
   # GET /classifieds/new.json
   def new
     @classified = Classified.new
+    @classified.phone = current_user.phone
+    @classified.email = current_user.email
+    @classified.country = current_user.country
     3.times {@classified.attachments.build}
     respond_to do |format|
       format.html # new.html.erb

@@ -73,3 +73,12 @@ ar:
     posted_on_or_after: أنشئ بعد
     fname: الأسم الأول
     lname: الأسم الأخير
+    home: الرئيسية
+    categories: المصنفات
+    classifieds: الإعلانات
+    countries: البلاد
+    users: المستخدمين
+    edit_account: تعديل بيانات
+    sign_in: تسجيل الدخول
+    sign_out: خروج
+    sign_up: حساب جديد

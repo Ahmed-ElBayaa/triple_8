@@ -32,7 +32,7 @@ class Classified < ActiveRecord::Base
 	end
 
 	def set_identifier
-		self.identifier = self.title.parameterize
+		self.identifier = self.title.parameterize+"#{self.id}#{Random.rand(999)}"
 	end
 
 	def attachments_validations

@@ -11,6 +11,10 @@
     %br/
     = f.text_field :last_name
   %div
+    = f.label :phone_number
+    %br/
+    = f.text_field :phone
+  %div
     = f.label :country
     %br/
     = select_field(f, resource, :country_id, countries, "id",    |
