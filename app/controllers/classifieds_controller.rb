@@ -135,6 +135,7 @@ class ClassifiedsController < ApplicationController
   private
 
   def must_be_owned?
+    return true if current_user.try(:admin?)
     if @classified.user != current_user
       redirect_to_back I18n.t("application.messages.insufficient_privilage")
       return false

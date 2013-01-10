@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     @user.type = params[:user][:type]
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, 
+        format.html { redirect_to user_path(@user), 
           notice: I18n.t('application.messages.successfully_updated', model: 'user') }
         format.json { head :ok }
       else

@@ -11,12 +11,12 @@
     %strong
       = model_class.human_attribute_name(:main_category_id)
       \:
-  %dd= @classified.main_category_id
+  %dd= @classified.main_category.name
   %dt
     %strong
       = model_class.human_attribute_name(:sub_category_id)
       \:
-  %dd= @classified.sub_category_id
+  %dd= @classified.sub_category.name
   %dt
     %strong
       = model_class.human_attribute_name(:title)
@@ -36,14 +36,14 @@
     %strong
       = model_class.human_attribute_name(:location_id)
       \:
-  %dd= @classified.location_id
+  %dd= @classified.country.name
   %dt
     %strong
       = model_class.human_attribute_name(:tags)
       \:
   %dd= @classified.tags
   - @classified.attachments.each do |photo|
-    = link_to 'See attachment', photo.file.url(:original), target: "_blank"
+    %dt= link_to 'See attachment', photo.file.url(:original), target: "_blank"
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), |
     classifieds_path, :class => 'btn'                        |
