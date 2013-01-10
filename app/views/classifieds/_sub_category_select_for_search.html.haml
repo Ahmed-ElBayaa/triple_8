@@ -1,0 +1,6 @@
+- selected_category ||= params[:search] ? params[:search][:sub_category_name_contains] : 0
+
+= select_tag '', options_for_select(sub_categories),   |
+  prompt: 'Select sub-category', :class => 'select',   |
+  id: 'search_sub_category_name_contains', |
+  name:'search[sub_category_name_contains]'

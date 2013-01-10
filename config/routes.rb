@@ -6,6 +6,7 @@ Triple8::Application.routes.draw do
 
     resources :classifieds do
       get :change_sub_categories, on: :collection
+      get :change_sub_categories_for_search, on: :collection
       get :owned, on: :collection 
     end 
 
@@ -15,7 +16,6 @@ Triple8::Application.routes.draw do
 
 
     resources :users, except: [:new, :create]
-
     root to: 'store#index', as: 'store'
   end
 

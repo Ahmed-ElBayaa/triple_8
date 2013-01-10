@@ -14,8 +14,13 @@
     %br    
     %strong Refine Search
     %br
-    = s.text_field :main_category_name_contains, placeholder: (t 'const.main_category')
-    = s.text_field :sub_category_name_contains, placeholder: (t 'const.sub_category')
+    = s.select(:main_category_name_contains, options_for_select(       |
+      main_categories_names, @search.main_category_name_contains),     |
+      include_blank: (t 'const.choose_main_category'))
+    = s.select(:sub_category_name_contains, options_for_select(       |
+      sub_categories_names(@search.main_category_name_contains),      |
+       @search.sub_category_name_contains),    |
+      include_blank: (t 'const.choose_sub_category'))
     %br
     = s.text_field :price_gte, placeholder: (t 'const.min_price')
     = s.text_field :price_lte, placeholder: (t 'const.max_price')
@@ -49,7 +54,7 @@
         %td= classified.description
         %td= number_to_currency classified.price        
         %td= "#{classified.user.first_name} #{classified.user.last_name}"
-        %td= classified.country.name
+        %td= classified.country.try :name
         %td= classified.phone
         %td= classified.email
         %td= l classified.created_at

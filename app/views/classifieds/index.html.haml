@@ -20,9 +20,14 @@
         = s.text_field :description_contains, placeholder: (t 'const.description') 
     %tr
       %td  
-        = s.text_field :main_category_name_contains, placeholder:(t 'const.main_category')
+        = s.select(:main_category_name_contains, options_for_select(       |
+          main_categories_names, @search.main_category_name_contains),     |
+          include_blank: (t 'const.choose_main_category'))
       %td
-        = s.text_field :sub_category_name_contains, placeholder: (t 'const.sub_category')
+        = s.select(:sub_category_name_contains, options_for_select(       |
+          sub_categories_names(@search.main_category_name_contains),      |
+          @search.sub_category_name_contains),                            |
+          include_blank: (t 'const.choose_sub_category'))
     %tr
       %td
         = s.text_field :country_name_like, placeholder: (t 'const.location')

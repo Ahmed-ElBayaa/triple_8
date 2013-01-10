@@ -20,4 +20,11 @@ $(document).ready(function(){
 			data: {main_category: $(this).val()}
 		});
 	});
+
+	$('#search_main_category_name_contains').change(function(){
+		$.ajax({
+			url: "/classifieds/change_sub_categories_for_search",
+			data: {main_category: $(this).val()}
+		});
+	});
 });

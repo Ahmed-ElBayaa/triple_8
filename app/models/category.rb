@@ -42,6 +42,12 @@ class Category < ActiveRecord::Base
 		self.sub_categories
 	end
 
+	def children_names
+		names = []
+		self.sub_categories.each {|child| names << child.name}
+		names
+	end
+
 	def parent
 		Category.find_by_id(self.parent_id)
 	end
