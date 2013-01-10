@@ -37,6 +37,10 @@
     %i (we need your current password to confirm your changes)
     %br/
     = f.password_field :current_password
+  %div
+    = f.label :avatar, "choose your avatar"
+    %br/
+    = f.file_field :avatar, :class => 'file_field'
   %div= f.submit "Update"
 %h3 Cancel my account
 %p

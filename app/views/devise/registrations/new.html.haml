@@ -30,5 +30,9 @@
     = f.label :password_confirmation
     %br/
     = f.password_field :password_confirmation
+  %div
+    = f.label :avatar, "choose your avatar"
+    %br/
+    = f.file_field :avatar, :class => 'file_field'
   %div= f.submit "Sign up"
 = render "devise/shared/links"

@@ -1,6 +1,7 @@
 - model_class = User
 .page-header
   %h1= t '.title', :default => model_class.model_name.human.pluralize
+= image_tag @user.avatar.url(:medium)
 %table.table.table-hover.center
   %tr
     %td
