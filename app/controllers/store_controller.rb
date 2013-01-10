@@ -1,6 +1,6 @@
 class StoreController < ApplicationController
 
-  # skip_before_filter :must_be_admin
+  skip_before_filter :authenticate_user!
   	
   def index
   	@search = Classified.search(params[:search])

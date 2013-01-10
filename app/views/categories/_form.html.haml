@@ -9,14 +9,14 @@
     .controls
       = select_field(f, @category, :parent_id, @main_categories, "id",    |
         "name", 'it is a main category', 'select')                       
-
-    = f.fields_for :sub_categories do |b|
-      .control-group
-        = b.label :name, :class => 'control-label'
-        .controls
-          = b.text_field :name, :class => 'text_field'
-          = b.link_to_remove "Remove this sub-category"
-    = f.link_to_add "add sub-category", :sub_categories
+  .control-group
+    = f.label :sub_categories, :class => 'control-label'
+    %br
+    .controls
+      = f.fields_for :sub_categories do |b|         
+        = b.text_field :name, :class => 'text_field'
+        = b.link_to_remove "Remove this sub-category"
+      = f.link_to_add "add sub-category", :sub_categories
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), |

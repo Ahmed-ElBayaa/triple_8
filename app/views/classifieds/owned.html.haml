@@ -7,11 +7,13 @@
   = form_for @search, :url => owned_classifieds_path, :html => {method: :get,            |
     :class => 'form-horizontal'} do |s|
     = s.text_field :title_contains, placeholder: (t 'const.title')
+    %br    
+    = s.radio_button :kind_eq, Classified::KINDS[0], checked: true
+    = s.label :kind, Classified::KINDS[0], :class => 'inline-label'
+    = s.radio_button :kind_eq, Classified::KINDS[1]
+    = s.label :kind, Classified::KINDS[1], :class => 'inline-label'
     %br
     = s.text_field :country_name_contains, placeholder: (t 'const.location')
-    = s.label :kind_eq, (t 'const.Kind')
-    = s.select :kind_eq, options_for_select(Classified::KINDS, @search.kind_eq),   |
-      include_blank: true
     %br    
     %strong Refine Search
     %br

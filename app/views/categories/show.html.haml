@@ -1,18 +1,8 @@
 - model_class = Category
-.page-header
-  %h1= t '.title', :default => model_class.model_name.human
-%dl.dl-horizontal
-  %dt
-    %strong
-      = model_class.human_attribute_name(:name)
-      \:
-  %dd= @category.name
-  - unless @category.children.empty?
-    %dt
-      %strong sub categories
-    %br/
-    %dd
-      = render('list_categories', categories: @sub_categories, model_class: model_class)
+
+%h1= @category.name
+%legend sub categories
+= render('list_categories', categories: @sub_categories, model_class: model_class)
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), |
     categories_path, :class => 'btn'                         |

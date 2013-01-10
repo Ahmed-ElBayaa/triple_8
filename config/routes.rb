@@ -1,27 +1,24 @@
 Triple8::Application.routes.draw do
-
-  get "users/destroy"
-
-  resources :users, except: [:new, :create]
+  
   scope '(:locale)' do    
+
+    devise_for :users
 
     resources :classifieds do
       get :change_sub_categories, on: :collection
       get :owned, on: :collection 
     end 
 
-    devise_for :users,
-      :controllers => {
-        sessions: "sessions",
-        registrations: "registrations"
-      }
-
     resources :countries
 
     resources :categories
 
+
+    resources :users, except: [:new, :create]
+
     root to: 'store#index', as: 'store'
   end
+
   
 
   # The priority is based upon order of creation:

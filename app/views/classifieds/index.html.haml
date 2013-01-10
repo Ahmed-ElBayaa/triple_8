@@ -4,9 +4,10 @@
 
 = form_for @search, :url => classifieds_path, :html => {method: :get,            |
   :class => 'form-horizontal'} do |s|
-  = s.label :kind_eq
-  = s.select :kind_eq, options_for_select(Classified::KINDS, @search.kind_eq),   |
-     include_blank: true 
+  = s.radio_button :kind_eq, Classified::KINDS[0], checked: true
+  = s.label :kind, Classified::KINDS[0], :class => 'inline-label'
+  = s.radio_button :kind_eq, Classified::KINDS[1]
+  = s.label :kind, Classified::KINDS[1], :class => 'inline-label'  
   %br
   = s.text_field :user_first_name_contains, placeholder: (t 'const.fname')
   = s.text_field :user_last_name_contains, placeholder: (t 'const.lname')

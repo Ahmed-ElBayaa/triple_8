@@ -1,6 +1,5 @@
 class ClassifiedsController < ApplicationController
   before_filter :index_for_admin_or_normal, only: [:index]
-  before_filter :authorize, only: [:new, :create, :owned]
 
   # GET /classifieds
   # GET /classifieds.json
@@ -44,6 +43,7 @@ class ClassifiedsController < ApplicationController
     @classified.email = current_user.email
     @classified.country = current_user.country
     3.times {@classified.attachments.build}
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @classified }
@@ -53,6 +53,7 @@ class ClassifiedsController < ApplicationController
   # GET /classifieds/1/edit
   def edit
     @classified = Classified.find_by_identifier(params[:id])
+
     if must_be_owned?
       @classified.complete_attachments_number
       main_category = Category.find_by_id(@classified.main_category_id)
@@ -65,6 +66,7 @@ class ClassifiedsController < ApplicationController
   def create
     @classified = Classified.new(params[:classified])
     @classified.user_id = current_user.id
+
     respond_to do |format|
       if @classified.save
         format.html { 
@@ -135,7 +137,7 @@ class ClassifiedsController < ApplicationController
   private
 
   def must_be_owned?
-    return true if current_user.try(:admin?)
+    return true if current_user.admin?
     if @classified.user != current_user
       redirect_to_back I18n.t("application.messages.insufficient_privilage")
       return false
@@ -144,12 +146,7 @@ class ClassifiedsController < ApplicationController
   end
 
   def index_for_admin_or_normal
-    if current_user      
-        redirect_to(owned_classifieds_path) unless current_user.type == 'Admin'
-    else
-      redirect_to new_user_session_path, 
-        notice: I18n.t("application.messages.sign_in")
-    end
+    redirect_to(owned_classifieds_path) unless current_user.type == 'Admin'    
   end
 
 end

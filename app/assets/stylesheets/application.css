@@ -9,3 +9,8 @@
 .flag{
 	border : 2px solid ;
 }
+
+.inline-label {
+	display: inline;
+	clear: right;
+}

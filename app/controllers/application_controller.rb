@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_i18n_locale_from_params
-  # before_filter :authenticate_user!
+  before_filter :authenticate_user!
 
   def redirect_to_back msg=""
   	if !request.env["HTTP_REFERER"].blank? and
@@ -31,22 +31,11 @@ class ApplicationController < ActionController::Base
   end
 
   def must_be_admin
-  	if current_user
-  		unless current_user.type == 'Admin'
-  			redirect_to_back(
-          I18n.t("application.messages.insufficient_privilage"))
-  		end
-  	else
-			redirect_to new_user_session_path, 
-        notice: I18n.t("application.messages.sign_in")
+    puts "*"*50
+		unless current_user.type == 'Admin'
+			redirect_to_back(
+        I18n.t("application.messages.insufficient_privilage"))
 		end
-  end
-
-  def authorize
-    unless current_user
-      redirect_to new_user_session_path,
-        notice: I18n.t("application.messages.sign_in")
-    end
   end
 
 end
