@@ -4,7 +4,8 @@ class StoreController < ApplicationController
   	
   def index
   	@search = Classified.search(params[:search])
-    @classifieds = @search.all
+    @classifieds = @search.paginate per_page: 10, page: params[:page],
+          order: "created_at DESC"
 
     respond_to do |format|
       format.html # index.html.haml
