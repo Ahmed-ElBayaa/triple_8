@@ -30,7 +30,16 @@ ar:
         price: "السعر: "
         main_category_id: "التصنيف الرئيسى"
         sub_category_id: "التصنيف الفرعى"
+        main_category: "التصنيف الرئيسى"
+        sub_category: "التصنيف الفرعى"
         description: "الوصف"
+        creator: "صاحب الإعلان"
+        created_at: "أعلن فى"
+        location: "المكان"
+        phone: "رقم الهاتف"
+        phone_number: "رقم الهاتف"
+        email: "البريد الإلكترونى"
+        image: "صورة"
   helpers:
     submit:
       create: "إنشاء %{model}"
@@ -76,7 +85,7 @@ ar:
     home: الرئيسية
     categories: المصنفات
     classifieds: الإعلانات
-    my_classifieds: إلاناتى
+    my_classifieds: إعلاناتى
     countries: البلاد
     users: المستخدمين
     edit_account: تعديل بيانات
