@@ -32,7 +32,11 @@ function remove_currency (i){
 
 $(document).ready(function(){
 	
-	$(".date").datepicker({ dateFormat: 'dd-mm-yy' });
+	$(".date").datepicker({ 
+		dateFormat: 'dd-mm-yy',
+		changeMonth : true,
+        changeYear : true
+	});
 
 	$('#classified_main_category_id').change(function(){
 		$.ajax({
