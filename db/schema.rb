@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130112080650) do
+ActiveRecord::Schema.define(:version => 20130112123754) do
 
   create_table "attachments", :force => true do |t|
     t.datetime "created_at"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20130112080650) do
     t.float    "ratio"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "country_id"
   end
 
   create_table "users", :force => true do |t|

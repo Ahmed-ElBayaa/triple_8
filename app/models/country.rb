@@ -4,6 +4,7 @@ class Country < ActiveRecord::Base
 
 	has_many :classifieds, foreign_key: 'location_id'
 	has_many :users
+	has_many :currencies
 	before_save :set_identifier
 
 	validates :name, uniqueness: :true
