@@ -1,17 +1,16 @@
 = form_tag(currencies_path, method: :post, |
   html: { :class => 'form-horizontal'}) do
   %table.table.table-striped 
-    - i = 0
     - @currencies.each do |currency|  
       %tr
         %td
           = label_tag 'Name'
-          = text_field_tag "#{currency.id or i-=1}[unit]", currency.unit
+          = text_field_tag "currency[#{currency.id}[unit]]", currency.unit
         %td
           = label_tag 'Ratio to dollar'
-          = number_field_tag "#{currency.id or i}[ratio]", currency.ratio,    |
+          = number_field_tag "currency[#{currency.id}[ratio]]", currency.ratio,    |
             step: 0.001
-
+  = link_to_function "add new currency", "add_currency()", :class => 'new_currency'
   .form-actions
     = submit_tag 'Edit', :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")),        |

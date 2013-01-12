@@ -10,6 +10,20 @@
 //= require twitter/bootstrap
 //= require_tree .
 
+function add_currency (){
+	i = Math.floor(Math.random()*100);
+	$('.new_currency').siblings('table').append('<tr><td><label for="Name">Name</label>'+
+		'<input id="new_'+i+'_unit" name="new['+i+'[unit]]" type="text"></td>'+
+		'<td><label for="Ratio_to_dollar">Ratio to dollar</label>'+
+		'<input id="new_'+i+'_ratio" name="new['+i+'[ratio]]" step="0.001" type="number">'+
+		'</td><td><a href="#" onclick="remove_currency('+i+'); return false;">remove</a></td></tr>'
+		);        
+}
+
+function remove_currency (i){
+	$('#new_'+i+'_unit').parents('tr').remove();
+}
+
 $(document).ready(function(){
 	
 	$(".date").datepicker({ dateFormat: 'dd-mm-yy' });

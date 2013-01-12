@@ -11,22 +11,19 @@ class CurrenciesController < ApplicationController
 
   def edit
     @currencies = Currency.all
-    @currencies << Currency.new
-    @currencies << Currency.new
   end
 
   def update
 
   	success = true
-  	params.each do |k,v|
+  	params[:currency].each do |k,v|
   	  id = k.to_i
-  	  if id > 0
-  	  	currency = Currency.find(id)
-  	  	success &&= currency.update_attributes(v)
-  	  elsif id < 0
-  	  	currency = Currency.new(v)
-  	  	success &&= currency.save
-  	  end
+	  	currency = Currency.find(id)
+	  	success &&= currency.update_attributes(v)
+	  end
+    params[:new].each do |k,v|
+	  	currency = Currency.new(v)
+	  	success &&= currency.save
   	end	
     respond_to do |format|
       if success
