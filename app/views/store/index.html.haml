@@ -54,7 +54,7 @@
         %td= classified.main_category.name
         %td= classified.sub_category.name
         %td= classified.description
-        %td= number_to_currency classified.price        
+        %td= number_to_currency classified.price, unit: classified.currency.unit
         %td= "#{classified.user.first_name} #{classified.user.last_name}"
         %td= classified.country.try :name
         %td= classified.phone

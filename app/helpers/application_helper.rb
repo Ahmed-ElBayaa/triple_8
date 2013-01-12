@@ -17,6 +17,10 @@ module ApplicationHelper
 		Country.select( [:id,:name])
 	end
 
+	def currencies
+		Currency.select( [:id,:unit])
+	end
+
 	def main_categories
 		Category.roots
 	end

@@ -30,6 +30,8 @@
     = f.label :price, :class => 'control-label'
     .controls
       = f.number_field :price, :class => 'number_field', step: 0.01
+      = select_field(f, @classified, :unit_id, currencies, "id",    |
+        "unit", 'unit', 'select')
   .control-group
     = f.label :phone, :class => 'control-label'
     .controls
