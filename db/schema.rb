@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130110084711) do
+ActiveRecord::Schema.define(:version => 20130112080650) do
 
   create_table "attachments", :force => true do |t|
     t.datetime "created_at"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20130110084711) do
     t.string   "tags"
     t.string   "phone"
     t.string   "email"
+    t.integer  "unit_id"
   end
 
   create_table "countries", :force => true do |t|
@@ -62,6 +63,13 @@ ActiveRecord::Schema.define(:version => 20130110084711) do
     t.string   "flag_content_type"
     t.integer  "flag_file_size"
     t.datetime "flag_updated_at"
+  end
+
+  create_table "currencies", :force => true do |t|
+    t.string   "unit"
+    t.float    "ratio"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

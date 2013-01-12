@@ -28,11 +28,8 @@ module ApplicationHelper
 	end
 
 	def sub_categories_names main_category_name
-		unless main_category_name.nil?
-			main_category = Category.find_by_name(main_category_name)
-			names = main_category.try(:children_names)
-		end
-		names ||= []
+		main_category = Category.find_by_name(main_category_name)
+		names = main_category.try(:children_names) || []
 	end
 	
 end

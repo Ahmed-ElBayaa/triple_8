@@ -1,6 +1,6 @@
 Triple8::Application.routes.draw do
   
-  scope '(:locale)' do    
+    scope '(:locale)' do    
 
     devise_for :users
 
@@ -16,6 +16,12 @@ Triple8::Application.routes.draw do
 
 
     resources :users, except: [:new, :create]
+    
+    get 'currencies' =>'currencies#index'
+    get 'currencies/edit' => 'currencies#edit'
+    post 'currencies' =>'currencies#update'
+    delete 'currencies/:id' => 'currencies#destroy', as: 'delete_currency'
+
     root to: 'store#index', as: 'store'
   end
 
