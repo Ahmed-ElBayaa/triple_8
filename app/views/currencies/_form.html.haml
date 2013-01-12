@@ -10,7 +10,12 @@
           = label_tag 'Ratio to dollar'
           = number_field_tag "currency[#{currency.id}[ratio]]", currency.ratio,    |
             step: 0.001
-  = link_to_function "add new currency", "add_currency()", :class => 'new_currency'
+        %td
+          = label_tag "Country"
+          = select_tag "currency[#{currency.id}[country_id]]", options_from_collection_for_select(   |
+            @countries,"id","name", currency.country.id), prompt: 'Select country',                   |
+            :class => 'select'
+  = link_to_function "add new currency", "add_currency(#{@countries_array})", :class => 'new_currency'
   .form-actions
     = submit_tag 'Edit', :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")),        |

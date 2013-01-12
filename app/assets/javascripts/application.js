@@ -10,13 +10,19 @@
 //= require twitter/bootstrap
 //= require_tree .
 
-function add_currency (){
-	i = Math.floor(Math.random()*100);
+function add_currency (countries){
+	options = ""
+	for(var i =1; i < countries.length ; i++){
+		options += '<option value="'+countries[i][0]+'">'+countries[i][1]+'</option>';
+	}
+	var i = Math.floor(Math.random()*100);
 	$('.new_currency').siblings('table').append('<tr><td><label for="Name">Name</label>'+
 		'<input id="new_'+i+'_unit" name="new['+i+'[unit]]" type="text"></td>'+
 		'<td><label for="Ratio_to_dollar">Ratio to dollar</label>'+
-		'<input id="new_'+i+'_ratio" name="new['+i+'[ratio]]" step="0.001" type="number">'+
-		'</td><td><a href="#" onclick="remove_currency('+i+'); return false;">remove</a></td></tr>'
+		'<input id="new_'+i+'_ratio" name="new['+i+'[ratio]]" step="0.001" type="number"></td>'+
+		'<td><label for="Country">Country</label><select class="select" name="new['+i+
+		'[country_id]]"><option value="">Select country</option>'+ options +
+		'</td><td><a href="#" onclick="remove_currency('+i+'); return false;">remove</a></td><tr>'
 		);        
 }
 
