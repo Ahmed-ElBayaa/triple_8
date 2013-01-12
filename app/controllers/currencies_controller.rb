@@ -1,5 +1,5 @@
 class CurrenciesController < ApplicationController
-  
+  before_filter :must_be_admin
   def index
     @currencies = Currency.all
 
