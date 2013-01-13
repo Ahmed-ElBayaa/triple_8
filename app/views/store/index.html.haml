@@ -25,8 +25,9 @@
     = s.text_field :price_gte, placeholder: (t 'const.min_price')
     = s.text_field :price_lte, placeholder: (t 'const.max_price')
     %br
-    = s.text_field :created_at_or_updated_at_gte, :class => 'date',             |
-      placeholder: (t 'const.posted_on_or_after')
+    = s.text_field :created_at_or_updated_at_gte,                   |
+      value: @search.created_at_or_updated_at_gte.try(:to_date), |
+      :class => 'date', placeholder: (t 'const.posted_on_or_after')
     %br   
     = s.submit
 
@@ -34,31 +35,32 @@
   %thead
     %tr
       %th= model_class.human_attribute_name(:image)
-      %th= model_class.human_attribute_name(:kind)
       %th= model_class.human_attribute_name(:title)
-      %th= model_class.human_attribute_name(:main_category)
-      %th= model_class.human_attribute_name(:sub_category)
-      %th= model_class.human_attribute_name(:description)
-      %th= model_class.human_attribute_name(:price)
-      %th= model_class.human_attribute_name(:creator)
-      %th= model_class.human_attribute_name(:location)
-      %th= model_class.human_attribute_name(:phone_number)
-      %th= model_class.human_attribute_name(:email)
-      %th= model_class.human_attribute_name(:created_at)
+      %th= model_class.human_attribute_name(:category)
+      %th= model_class.human_attribute_name(:kind)
+      -if params[:order_by] == 'price DESC'
+        %th= link_to model_class.human_attribute_name(:price),      |
+          store_path(order_by: 'price')
+      -else
+        %th= link_to model_class.human_attribute_name(:price),      |
+          store_path(order_by: 'price DESC')
+      -if params[:order_by] == 'created_at DESC'
+        %th= link_to model_class.human_attribute_name(:created_at),  |
+          store_path(order_by: 'created_at')
+      -else
+        %th= link_to model_class.human_attribute_name(:created_at),  |
+          store_path(order_by: 'created_at DESC')
   %tbody
     - @classifieds.each do |classified|
       %tr
         %td= image_tag classified.attachments.first.try(:file).try(:url,:thumb)
-        %td= classified.kind
         %td= classified.title
-        %td= classified.main_category.name
-        %td= classified.sub_category.name
-        %td= classified.description
+        %td
+          = classified.main_category.name
+          %br
+          = classified.sub_category.name
+        %td= classified.kind
         %td= number_to_currency classified.price, unit: classified.currency.unit
-        %td= "#{classified.user.first_name} #{classified.user.last_name}"
-        %td= classified.country.try :name
-        %td= classified.phone
-        %td= classified.email
         %td= l classified.created_at
 = will_paginate(@classifieds)
         

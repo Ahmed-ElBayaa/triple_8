@@ -56,14 +56,15 @@
         .span2
           .well.sidebar-nav
             %ul.nav.nav-list
-              %li.nav-header= current_user.nil? ? "guest" : current_user.first_name+" "+current_user.last_name
+              %li.nav-header= current_user.nil? ? "guest" : "#{current_user.first_name} #{current_user.last_name}"
               - if current_user
                 %li= link_to t("const.edit_account"), edit_user_registration_path
                 %li= link_to t("const.sign_out"), destroy_user_session_path,     |
                       method: :delete
               - else  
                 %li= link_to t("const.sign_up"), new_user_registration_path
-                %li= link_to t("const.sign_in"), new_user_session_path              
+                %li= link_to t("const.sign_in"), new_user_session_path  
+                %li= link_to t("const.sign_in_fb"), user_omniauth_authorize_path(:facebook)            
           / /.well
         / /span
       / /row

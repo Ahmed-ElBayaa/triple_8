@@ -1,6 +1,6 @@
 class Classified < ActiveRecord::Base
 
-	default_scope order:'created_at DESC'
+	# default_scope order:'created_at DESC'
 	
 	KINDS = [ I18n.t('models.classified.wanted'),
 			 I18n.t('models.classified.for_sale') ]

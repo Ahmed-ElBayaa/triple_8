@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   	 request.env["HTTP_REFERER"] != request.env["REQUEST_URI"]
       redirect_to :back, notice: msg
     else
-      redirect_to root_url, notice: msg
+      redirect_to root_path, notice: msg
     end
   end
 

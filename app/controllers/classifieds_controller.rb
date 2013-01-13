@@ -4,9 +4,10 @@ class ClassifiedsController < ApplicationController
   # GET /classifieds
   # GET /classifieds.json
   def index
+    params[:order_by] ||= 'created_at DESC'
     @search = Classified.search(params[:search])
     @classifieds = @search.paginate per_page: 10, page: params[:page],
-          order: "created_at DESC"
+          order: params[:order_by]
     
     respond_to do |format|
       format.html # index.html.haml
@@ -15,9 +16,10 @@ class ClassifiedsController < ApplicationController
   end
 
   def owned
+    params[:order_by] ||= 'created_at DESC'
     @search = current_user.classifieds.search(params[:search])
     @classifieds = @search.paginate per_page: 10, page: params[:page],
-          order: "created_at DESC"
+          order: params[:order_by]
 
     respond_to do |format|
       format.html # index.html.erb
