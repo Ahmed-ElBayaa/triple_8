@@ -41,20 +41,28 @@ toyota = Category.create(name: 'toyota', parent_id: cars.id)
 samsung = Category.create(name: 'samsung', parent_id: phones.id)
 blackberry = Category.create(name: 'BlackBerry', parent_id: phones.id)
 
-
-Classified.create(title: 'samsung phone needed', kind:'Wanted', 
-	user_id: admin.id, country_id: qatar.id, price: 1025.32,
+c1=Classified.new(title: 'samsung phone needed', kind:'Wanted', 
+	location_id: qatar.id, price: 1025.32,
 	unit_id: qar.id, main_category_id: phones.id,
 	sub_category_id: samsung.id)
-Classified.create(title: 'blackberry phone needed', kind:'Wanted', 
-	user_id: member.id, country_id: egypt.id, price: 1025.32,
+c2=Classified.new(title: 'blackberry phone needed', kind:'Wanted', 
+	location_id: egypt.id, price: 1025.32,
 	unit_id: egp.id, main_category_id: phones.id,
 	sub_category_id: blackberry.id)
-Classified.create(title: 'BMW car', kind:'For Sale', 
-	user_id: admin.id, country_id: ksa.id, price: 120000,
+c3=Classified.new(title: 'BMW car', kind:'For Sale', 
+	location_id: ksa.id, price: 120000,
 	unit_id: rial.id, main_category_id: cars.id,
 	sub_category_id: bmw.id)
-Classified.create(title: 'TOYOTA car needed', kind:'Wanted', 
-	user_id: member.id, country_id: egypt.id, price: 85000,
+c4=Classified.new(title: 'TOYOTA car needed', kind:'Wanted', 
+	location_id: egypt.id, price: 85000,
 	unit_id: egp.id, main_category_id: cars.id,
 	sub_category_id: toyota.id)
+
+c1.user = admin
+c3.user = admin
+c2.user = member
+c4.user = member
+c1.save
+c2.save
+c3.save
+c4.save

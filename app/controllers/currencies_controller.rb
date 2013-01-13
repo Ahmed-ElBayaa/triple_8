@@ -24,8 +24,7 @@ class CurrenciesController < ApplicationController
 
   	success = true
   	params[:currency].each do |k,v|
-  	  id = k.to_i
-	  	currency = Currency.find(id)
+	  	currency = Currency.find(k)
 	  	success &&= currency.update_attributes(v)
 	  end
     params[:new] ||= []

@@ -13,7 +13,7 @@
         %td
           = label_tag "Country"
           = select_tag "currency[#{currency.id}[country_id]]", options_from_collection_for_select(   |
-            @countries,"id","name", currency.country.id), prompt: 'Select country',                   |
+            @countries,"id","name", currency.country_id), prompt: 'Select country',                   |
             :class => 'select'
   = link_to_function "add new currency", "add_currency(#{@countries_array})", :class => 'new_currency'
   .form-actions

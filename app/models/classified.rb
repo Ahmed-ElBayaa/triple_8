@@ -21,8 +21,8 @@ class Classified < ActiveRecord::Base
 	
 	before_save :set_identifier
 
-	validates :title, :kind, :user, :country, :main_category,
-				:sub_category, :price, :currency, presence: true
+	validates :title, :kind, :user_id, :country, :main_category_id,
+				:sub_category_id, :price, :unit_id, presence: true
 	validates :title, uniqueness: :true
 	validates :kind, inclusion: KINDS
 	validates :price, numericality: {greater_than_or_equal_to: 0.01}
