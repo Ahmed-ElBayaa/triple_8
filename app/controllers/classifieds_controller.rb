@@ -139,7 +139,6 @@ class ClassifiedsController < ApplicationController
   end
 
   def change_sub_categories_for_search
-    puts "LJ"*40
     main_category = Category.find_by_name(params[:main_category])
     @sub_categories = main_category.nil? ? [] : main_category.children_names
   end

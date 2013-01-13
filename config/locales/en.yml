@@ -44,6 +44,9 @@ en:
     sign_in: Sign in
     sign_out: Sign out
     sign_up: Sign up
+    search: search
     choose_main_category: choose main category
     choose_sub_category: choose sub category
     sign_in_fb: Sign in with facebook
+    refine_search: Refine Search
+    currencies: currencies

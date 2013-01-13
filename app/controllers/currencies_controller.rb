@@ -32,7 +32,7 @@ class CurrenciesController < ApplicationController
     params[:new].each do |k,v|
 	  	currency = Currency.new(v)
 	  	success &&= currency.save
-  	end	
+  	end
     respond_to do |format|
       if success
         format.html { redirect_to currencies_path, 

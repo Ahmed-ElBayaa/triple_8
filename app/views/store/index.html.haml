@@ -1,6 +1,6 @@
 - model_class = Classified
 %fieldset
-  %legend= t'.Search'
+  %legend= t'const.search'
   = form_for @search, :url => store_path, :html => {method: :get,            |
     :class => 'form-horizontal'} do |s|
     = s.text_field :title_contains, placeholder: (t 'const.title')
@@ -12,7 +12,7 @@
     %br
     = s.text_field :country_name_contains, placeholder: (t 'const.location')
     %br    
-    %strong Refine Search
+    %strong= t('const.refine_search')
     %br
     = s.select(:main_category_name_contains, options_for_select(       |
       main_categories_names, @search.main_category_name_contains),     |
@@ -61,6 +61,6 @@
           = classified.sub_category.name
         %td= classified.kind
         %td= number_to_currency classified.price, unit: classified.currency.unit
-        %td= l classified.created_at
+        %td= l classified.created_at.to_date
 = will_paginate(@classifieds)
         
