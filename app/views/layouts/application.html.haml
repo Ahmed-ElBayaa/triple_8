@@ -36,7 +36,7 @@
           %a.brand{:href => "#"} Triple8
           .container.nav-collapse
             %ul.nav
-              %li= link_to t("const.home"), store_path
+              %li= link_to t("const.home"), home_path
               - if current_user
                 - if current_user.admin?
                   %li= link_to t("const.categories"), categories_path

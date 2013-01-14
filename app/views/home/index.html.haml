@@ -1,7 +1,7 @@
 - model_class = Classified
 %fieldset
   %legend= t'const.search'
-  = form_for @search, :url => store_path, :html => {method: :get,            |
+  = form_for @search, :url => home_path, :html => {method: :get,            |
     :class => 'form-horizontal'} do |s|
     = s.text_field :title_contains, placeholder: (t 'const.title')
     %br    
@@ -40,16 +40,16 @@
       %th= model_class.human_attribute_name(:kind)
       -if params[:order_by] == 'price DESC'
         %th= link_to model_class.human_attribute_name(:price),      |
-          store_path(order_by: 'price')
+          home_path(order_by: 'price')
       -else
         %th= link_to model_class.human_attribute_name(:price),      |
-          store_path(order_by: 'price DESC')
+          home_path(order_by: 'price DESC')
       -if params[:order_by] == 'created_at DESC'
         %th= link_to model_class.human_attribute_name(:created_at),  |
-          store_path(order_by: 'created_at')
+          home_path(order_by: 'created_at')
       -else
         %th= link_to model_class.human_attribute_name(:created_at),  |
-          store_path(order_by: 'created_at DESC')
+          home_path(order_by: 'created_at DESC')
   %tbody
     - @classifieds.each do |classified|
       %tr

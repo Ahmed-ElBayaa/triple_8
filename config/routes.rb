@@ -22,7 +22,7 @@ Triple8::Application.routes.draw do
 
     resources :users, except: [:new, :create]
     
-    root to: 'store#index', as: 'store'
+    root to: 'home#index', as: 'home'
   end
 
   
