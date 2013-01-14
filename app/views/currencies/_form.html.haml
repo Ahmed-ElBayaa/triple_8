@@ -1,10 +1,17 @@
-= form_for @currency do |f|
-  - if @currency.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@currency.errors.count, "error")} prohibited this currency from being saved:"
-      %ul
-        - @currency.errors.full_messages.each do |msg|
-          %li= msg
-
-  .actions
-    = f.submit 'Save'
+= form_for @currency, :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+    = f.label :name, :class => 'control-label'
+    .controls
+      = f.text_field :name, :class => 'text_field'
+  .control-group
+    = f.label :ratio, :class => 'control-label'
+    .controls
+      = f.text_field :ratio, :class => 'text_field'
+  .control-group
+    = f.label :country_id, :class => 'control-label'
+    .controls
+      = select_field(f, @currency, :country_id, countries,   |
+        'id', 'name','choose country', 'select')
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), currencies_path, :class => 'btn'

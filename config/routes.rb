@@ -1,26 +1,28 @@
 Triple8::Application.routes.draw do
   
-    scope '(:locale)' do    
+  scope '(:locale)' do    
 
-      devise_scope :user do
-        get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
-      end
-      
-      devise_for :users, :controllers => { omniauth_callbacks: "users/omniauth_callbacks" }
+    devise_scope :user do
+      get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
+    end
+    
+    devise_for :users, :controllers => { omniauth_callbacks: "users/omniauth_callbacks" }
 
-      resources :classifieds do
-        get :change_sub_categories, on: :collection
-        get :change_sub_categories_for_search, on: :collection
-        get :owned, on: :collection 
-      end 
+    resources :classifieds do
+      get :change_sub_categories, on: :collection
+      get :change_sub_categories_for_search, on: :collection
+      get :owned, on: :collection 
+    end 
 
-      resources :countries
+    resources :countries
 
-      resources :categories
+    resources :categories
 
-      resources :users, except: [:new, :create]
-      
-      root to: 'store#index', as: 'store'
+    resources :currencies
+
+    resources :users, except: [:new, :create]
+    
+    root to: 'store#index', as: 'store'
   end
 
   
