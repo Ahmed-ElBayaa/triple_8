@@ -38,18 +38,8 @@
       %th= model_class.human_attribute_name(:title)
       %th= model_class.human_attribute_name(:category)
       %th= model_class.human_attribute_name(:kind)
-      -if params[:order_by] == 'price DESC'
-        %th= link_to model_class.human_attribute_name(:price),      |
-          home_path(order_by: 'price')
-      -else
-        %th= link_to model_class.human_attribute_name(:price),      |
-          home_path(order_by: 'price DESC')
-      -if params[:order_by] == 'created_at DESC'
-        %th= link_to model_class.human_attribute_name(:created_at),  |
-          home_path(order_by: 'created_at')
-      -else
-        %th= link_to model_class.human_attribute_name(:created_at),  |
-          home_path(order_by: 'created_at DESC')
+      %th= sortable(Classified, model_class.human_attribute_name(:price))
+      %th= sortable(Classified, model_class.human_attribute_name(:created_at))
   %tbody
     - @classifieds.each do |classified|
       %tr

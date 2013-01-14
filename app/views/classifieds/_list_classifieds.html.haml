@@ -7,19 +7,9 @@
       %th= model_class.human_attribute_name(:main_category)
       %th= model_class.human_attribute_name(:sub_category)
       %th= model_class.human_attribute_name(:description)
-      -if params[:order_by] == 'price DESC'
-        %th= link_to model_class.human_attribute_name(:price),      |
-          {order_by: 'price'}
-      -else
-        %th= link_to model_class.human_attribute_name(:price),      |
-          {order_by: 'price DESC'}
+      %th= sortable(Classified, model_class.human_attribute_name(:price))
       %th= model_class.human_attribute_name(:creator)
-      -if params[:order_by] == 'created_at DESC'
-        %th= link_to model_class.human_attribute_name(:created_at),  |
-          {order_by: 'created_at'}
-      -else
-        %th= link_to model_class.human_attribute_name(:created_at),  |
-          {order_by: 'created_at DESC'}
+      %th= sortable(Classified, model_class.human_attribute_name(:created_at))
       %th= t '.actions', :default => t("helpers.actions")
   %tbody
     - @classifieds.each do |classified|

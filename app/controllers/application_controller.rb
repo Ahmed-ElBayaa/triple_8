@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  helper_method :sort_column, :sort_direction 
   protect_from_forgery
   before_filter :set_i18n_locale_from_params
   before_filter :authenticate_user!
@@ -36,6 +37,14 @@ class ApplicationController < ActionController::Base
 			redirect_to_back(
         I18n.t("application.messages.insufficient_privilage"))
 		end
+  end
+
+  def sort_column model
+    model.column_names.include?(params[:sort]) ? params[:sort] : 'id'
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'desc'
   end
 
 end

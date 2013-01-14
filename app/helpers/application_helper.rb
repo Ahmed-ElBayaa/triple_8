@@ -40,5 +40,16 @@ module ApplicationHelper
 		number_to_currency(classified.price,
 			unit: classified.currency.name)
 	end
+
+	def sortable(model,column, title = nil)
+		column = column.downcase.tr(' ', '_')
+	  title ||= column.titleize
+	  dir = column == sort_column(model) &&
+	   sort_direction == "asc" ? "desc" : "asc"
+	  dir_icon = dir == 'asc' ? 'icon-chevron-up' : 'icon-chevron-down'
+	  css_class = column == sort_column(model) ? "current #{dir} #{dir_icon}" : nil
+	  
+	  link_to title, {sort: column, direction: dir}, :class => css_class
+	end
 	
 end

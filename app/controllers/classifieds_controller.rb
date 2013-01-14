@@ -4,10 +4,9 @@ class ClassifiedsController < ApplicationController
   # GET /classifieds
   # GET /classifieds.json
   def index
-    params[:order_by] ||= 'created_at DESC'
     @search = Classified.search(params[:search])
-    @classifieds = @search.paginate per_page: 10, page: params[:page],
-          order: params[:order_by]
+    @classifieds = @search.paginate( per_page: 10, page: params[:page],
+          order: "#{sort_column(Classified)} #{sort_direction}")
     
     respond_to do |format|
       format.html # index.html.haml
