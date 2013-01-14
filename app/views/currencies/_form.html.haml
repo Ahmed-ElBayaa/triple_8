@@ -1,22 +1,10 @@
-= form_tag(currencies_path, method: :post, |
-  html: { :class => 'form-horizontal'}) do
-  %table.table.table-striped 
-    - @currencies.each do |currency|  
-      %tr
-        %td
-          = label_tag 'Name'
-          = text_field_tag "currency[#{currency.id}[unit]]", currency.unit
-        %td
-          = label_tag 'Ratio to dollar'
-          = number_field_tag "currency[#{currency.id}[ratio]]", currency.ratio,    |
-            step: 0.001
-        %td
-          = label_tag "Country"
-          = select_tag "currency[#{currency.id}[country_id]]", options_from_collection_for_select(   |
-            @countries,"id","name", currency.country_id), prompt: 'Select country',                   |
-            :class => 'select'
-  = link_to_function "add new currency", "add_currency(#{@countries_array})", :class => 'new_currency'
-  .form-actions
-    = submit_tag 'Edit', :class => 'btn btn-primary'
-    = link_to t('.cancel', :default => t("helpers.links.cancel")),        |
-      currencies_path, :class => 'btn'
+= form_for @currency do |f|
+  - if @currency.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@currency.errors.count, "error")} prohibited this currency from being saved:"
+      %ul
+        - @currency.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130113071415) do
+ActiveRecord::Schema.define(:version => 20130114093345) do
 
   create_table "attachments", :force => true do |t|
     t.datetime "created_at"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(:version => 20130113071415) do
   end
 
   create_table "currencies", :force => true do |t|
-    t.string   "unit"
+    t.string   "name"
     t.float    "ratio"
     t.datetime "created_at"
     t.datetime "updated_at"

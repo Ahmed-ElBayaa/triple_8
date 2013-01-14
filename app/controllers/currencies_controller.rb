@@ -1,56 +1,76 @@
 class CurrenciesController < ApplicationController
-  before_filter :must_be_admin
+  # GET /currencies
+  # GET /currencies.json
   def index
     @currencies = Currency.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @users }
+      format.json { render json: @currencies }
     end
   end
 
-  def edit
-    @currencies = Currency.all
-    @countries = Country.select([:id, :name])
-    @countries_array = "[[]"
-    @countries.each do |country|
-      @countries_array << ",['#{country.id}', '#{country.name}']"
-    end
-    @countries_array <<"]"
+  # GET /currencies/1
+  # GET /currencies/1.json
+  def show
+    @currency = Currency.find(params[:id])
 
-  end
-
-  def update
-
-  	success = true
-  	params[:currency].each do |k,v|
-	  	currency = Currency.find(k)
-	  	success &&= currency.update_attributes(v)
-	  end
-    params[:new] ||= []
-    params[:new].each do |k,v|
-	  	currency = Currency.new(v)
-	  	success &&= currency.save
-  	end
     respond_to do |format|
-      if success
-        format.html { redirect_to currencies_path, 
-          notice: I18n.t('application.messages.successfully_updated', model: 'currency') }
-        format.json { head :ok }
+      format.html # show.html.erb
+      format.json { render json: @currency }
+    end
+  end
+
+  # GET /currencies/new
+  # GET /currencies/new.json
+  def new
+    @currency = Currency.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @currency }
+    end
+  end
+
+  # GET /currencies/1/edit
+  def edit
+    @currency = Currency.find(params[:id])
+  end
+
+  # POST /currencies
+  # POST /currencies.json
+  def create
+    @currency = Currency.new(params[:currency])
+
+    respond_to do |format|
+      if @currency.save
+        format.html { redirect_to @currency, notice: 'Currency was successfully created.' }
+        format.json { render json: @currency, status: :created, location: @currency }
       else
-      	@currencies = Currency.all
-        @countries = Country.select([:id, :name])
-        @countries_array = "[[]"
-        @countries.each do |country|
-          @countries_array << ",['#{country.id}', '#{country.name}']"
-        end
-        @countries_array <<"]"
-        format.html { render action: "edit" }
-        format.json { render json: @currencies.errors, status: :unprocessable_entity }
+        format.html { render action: "new" }
+        format.json { render json: @currency.errors, status: :unprocessable_entity }
       end
     end
   end
 
+  # PUT /currencies/1
+  # PUT /currencies/1.json
+  def update
+    @currency = Currency.find(params[:id])
+
+    respond_to do |format|
+      if @currency.update_attributes(params[:currency])
+        format.html { redirect_to @currency, notice: 'Currency was successfully updated.' }
+        format.json { head :ok }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @currency.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /currencies/1
+  # DELETE /currencies/1.json
   def destroy
     @currency = Currency.find(params[:id])
     @currency.destroy
@@ -60,5 +80,4 @@ class CurrenciesController < ApplicationController
       format.json { head :ok }
     end
   end
-
 end
