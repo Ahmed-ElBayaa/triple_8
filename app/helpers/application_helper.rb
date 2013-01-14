@@ -18,7 +18,7 @@ module ApplicationHelper
 	end
 
 	def currencies
-		Currency.select( [:id,:unit])
+		Currency.select( [:id,:name])
 	end
 
 	def main_categories
@@ -34,6 +34,11 @@ module ApplicationHelper
 	def sub_categories_names main_category_name
 		main_category = Category.find_by_name(main_category_name)
 		names = main_category.try(:children_names) || []
+	end
+
+	def format_price classified
+		number_to_currency(classified.price,
+			unit: classified.currency.name)
 	end
 	
 end

@@ -60,7 +60,7 @@
           %br
           = classified.sub_category.name
         %td= classified.kind
-        %td= number_to_currency classified.price, unit: classified.currency.unit
+        %td= format_price classified
         %td= l classified.created_at.to_date
 = will_paginate(@classifieds)
         

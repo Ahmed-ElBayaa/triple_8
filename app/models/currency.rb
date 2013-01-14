@@ -3,5 +3,5 @@ class Currency < ActiveRecord::Base
 
 	belongs_to :country
 
-	validates :unit, :ratio, :country, presence: true
+	validates :name, :ratio, :country, presence: true
 end
