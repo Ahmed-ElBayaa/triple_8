@@ -15,10 +15,9 @@ class ClassifiedsController < ApplicationController
   end
 
   def owned
-    params[:order_by] ||= 'created_at DESC'
     @search = current_user.classifieds.search(params[:search])
     @classifieds = @search.paginate per_page: 10, page: params[:page],
-          order: params[:order_by]
+          order: "#{sort_column(Classified)} #{sort_direction}"
 
     respond_to do |format|
       format.html # index.html.erb
@@ -135,11 +134,9 @@ class ClassifiedsController < ApplicationController
   def change_sub_categories
     main_category = Category.find_by_id(params[:main_category])
     @sub_categories = main_category.nil? ? [] : main_category.children
-  end
+    @sub_categories_id = params[:sub_categories_id]
+    @name = params[:name]
 
-  def change_sub_categories_for_search
-    main_category = Category.find_by_name(params[:main_category])
-    @sub_categories = main_category.nil? ? [] : main_category.children_names
   end
 
   private

@@ -1,2 +1,1 @@
-$('#classified_sub_category_id').html(
-"#{j render 'sub_category_select', sub_categories: @sub_categories}");
+$("##{@sub_categories_id}").html("#{j render 'sub_category_select', sub_categories: @sub_categories, name: @name, element_id: @sub_categories_id}");

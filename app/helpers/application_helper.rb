@@ -1,12 +1,18 @@
 module ApplicationHelper
 
 	def select_field(builder, object, attribute, collection, value, name,
-			 prompt= '', klass= '')
-		builder.select attribute,
-			options_from_collection_for_select(collection, value, name,
-			 object.try(attribute)),
-        	prompt: prompt, :class => klass
-
+			 prompt= '', klass= 'select',include_blank=false)
+	  if include_blank
+	  	builder.select attribute,
+				options_from_collection_for_select(collection, value, name,
+			 		object.try(attribute)),
+			 		 include_blank: prompt,	:class => klass
+	  else	
+			builder.select attribute,
+				options_from_collection_for_select(collection, value, name,
+			 		object.try(attribute)),
+        		prompt: prompt, :class => klass
+  	end
 	end
 
 	def locations
@@ -31,9 +37,9 @@ module ApplicationHelper
 		names
 	end
 
-	def sub_categories_names main_category_name
-		main_category = Category.find_by_name(main_category_name)
-		names = main_category.try(:children_names) || []
+	def sub_categories main_category_id
+		main_category = Category.find_by_id(main_category_id)
+		main_category.try(:children) || []
 	end
 
 	def format_price classified
@@ -49,7 +55,7 @@ module ApplicationHelper
 	  dir_icon = dir == 'asc' ? 'icon-chevron-up' : 'icon-chevron-down'
 	  css_class = column == sort_column(model) ? "current #{dir} #{dir_icon}" : nil
 	  
-	  link_to title, {sort: column, direction: dir}, :class => css_class
+	  link_to title, params.merge(sort: column, direction: dir), :class => css_class
 	end
 	
 end

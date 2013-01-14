@@ -41,14 +41,22 @@ $(document).ready(function(){
 	$('#classified_main_category_id').change(function(){
 		$.ajax({
 			url: "/classifieds/change_sub_categories",
-			data: {main_category: $(this).val()}
+			data: {
+				main_category: $(this).val(),
+				sub_categories_id: 'classified_sub_category_id',
+				name: 'classified[sub_category_id]'
+			}
 		});
 	});
 
-	$('#search_main_category_name_contains').change(function(){
+	$('#search_main_category_id_eq').change(function(){
 		$.ajax({
-			url: "/classifieds/change_sub_categories_for_search",
-			data: {main_category: $(this).val()}
+			url: "/classifieds/change_sub_categories",
+			data: {
+				main_category: $(this).val(),
+				sub_categories_id: 'search_sub_category_id_eq',
+				name: 'search[sub_category_id_eq]'
+			}
 		});
 	});
 });

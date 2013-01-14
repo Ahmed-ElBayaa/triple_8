@@ -17,13 +17,9 @@
     %br    
     %strong Refine Search
     %br
-    = s.select(:main_category_name_contains, options_for_select(       |
-      main_categories_names, @search.main_category_name_contains),     |
-      include_blank: (t 'const.choose_main_category'))
-    = s.select(:sub_category_name_contains, options_for_select(       |
-      sub_categories_names(@search.main_category_name_contains),      |
-       @search.sub_category_name_contains),    |
-      include_blank: (t 'const.choose_sub_category'))
+    = select_field(s, @search, :main_category_id_eq, main_categories,   |
+      'id', 'name','main category', 'select', true)
+    = render('classifieds/sub_category_select', sub_categories: sub_categories(@search.main_category_id_eq), name: 'search[sub_category_id_eq]', selected_category: @search.sub_category_id_eq, element_id: 'search_sub_category_id_eq')
     %br
     = s.text_field :price_gte, placeholder: (t 'const.min_price')
     = s.text_field :price_lte, placeholder: (t 'const.max_price')

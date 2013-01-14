@@ -12,12 +12,13 @@
     = f.label :main_category_id, :class => 'control-label'
     .controls
       = select_field(f, @classified, :main_category_id, main_categories, "id",    |
-        "name", 'Select main category', 'select')
+        "name", 'main category', 'select')
   .control-group
     = f.label :sub_category_id, :class => 'control-label'
     .controls
       = render('sub_category_select', sub_categories: @sub_categories, |
-        selected_category: @classified.sub_category_id)                |
+        selected_category: @classified.sub_category_id,                |
+        name: 'classified[sub_category_id]', element_id: 'classified_sub_category_id')
   .control-group
     = f.label :title, :class => 'control-label'
     .controls
