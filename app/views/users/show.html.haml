@@ -11,23 +11,23 @@
   %tr
     %td
       %strong Country
-    %td= "#{@user.country.name}"
+    %td= @user.country.try :name
   %tr
     %td
       %strong Email
-    %td= "#{@user.email}"
+    %td= @user.email
   %tr
     %td
       %strong Phone
-    %td= "#{@user.phone}"
+    %td= @user.phone
   %tr
     %td
       %strong Type
-    %td= "#{@user.type}"
+    %td= @user.type}
   %tr
     %td
       %strong logging in times
-    %td= "#{@user.sign_in_count}"
+    %td= @user.sign_in_count
   %tr
     %td
       %strong member since
@@ -39,19 +39,19 @@
   %tr
     %td
       %strong current sign in at
-    %td= "#{@user.current_sign_in_at}"
+    %td= @user.current_sign_in_at
   %tr
     %td
       %strong current sign in from
-    %td= "#{@user.current_sign_in_ip}"
+    %td= @user.current_sign_in_ip
   %tr
     %td
       %strong last sign in at
-    %td= "#{@user.last_sign_in_at}"
+    %td= @user.last_sign_in_at
   %tr
     %td
       %strong last sign in from
-    %td= "#{@user.last_sign_in_ip}"
+    %td= @user.last_sign_in_ip
   %tr
     %td
       = link_to t('.edit', :default => t("helpers.links.edit")), |

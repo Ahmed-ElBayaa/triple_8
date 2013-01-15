@@ -20,7 +20,7 @@
         %td= link_to user.id, user_path(user)
         %td= user.first_name
         %td= user.last_name
-        %td= user.country.name
+        %td= user.country.try :name
         %td= user.email
         %td= user.phone
         %td= user.type

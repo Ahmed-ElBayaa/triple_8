@@ -32,7 +32,6 @@ class ApplicationController < ActionController::Base
   end
 
   def must_be_admin
-    puts "*"*50
 		unless current_user.type == 'Admin'
 			redirect_to_back(
         I18n.t("application.messages.insufficient_privilage"))

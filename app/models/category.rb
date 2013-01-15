@@ -23,7 +23,7 @@ class Category < ActiveRecord::Base
 	end
 
 	def set_identifier
-		self.identifier = self.name.parameterize+
+		self.identifier = self.name.parameterize +
 			"#{self.id}#{Random.new.rand(100..999)}"
 	end
 

@@ -36,7 +36,7 @@
     %strong
       = model_class.human_attribute_name(:location_id)
       \:
-  %dd= @classified.country.name
+  %dd= @classified.country.try :name
   %dt
     %strong
       = model_class.human_attribute_name(:tags)
