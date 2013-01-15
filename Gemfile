@@ -16,6 +16,7 @@ gem "meta_search"
 gem 'will_paginate', '~> 3.0.0'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -27,14 +27,25 @@ class User < ActiveRecord::Base
     self.type == "Admin"
   end
 
-  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+  def self.from_omniauth_facebook(auth)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
       user = User.create(first_name:auth.extra.raw_info.first_name,
         last_name:auth.extra.raw_info.last_name,
-        email:auth.extra.raw_info.email,
-       provider:auth.provider, uid:auth.uid,
-              email:auth.info.email, password:Devise.friendly_token[0,20] )
+        provider:auth.provider, uid:auth.uid,
+        email: auth.info.email,
+        password:Devise.friendly_token[0,20] )
+    end
+    user
+  end
+
+  def self.from_omniauth_twitter(auth)
+    user = User.where(:provider => auth.provider, :uid => auth.uid).first
+    unless user
+      user = User.create(first_name:auth.info.name,
+        provider:auth.provider, uid:auth.uid,
+        email: "#{auth.provider}#{auth.uid}@888.com",
+        password:Devise.friendly_token[0,20] )
     end
     user
   end
