@@ -8,6 +8,9 @@ Devise.setup do |config|
   require "omniauth-twitter"
   config.omniauth :twitter, 'vgP8SQwKzUoOQMLi4PLwMA', 'K4hrPom1fRY1a7RdXUqNxfJI4AraFpmrbf6LD4Oy4'
 
+  require "omniauth-linkedin"
+  config.omniauth :linkedin, 'puj7f913c3sn', '7IgcFQN1EtsjjTSD'
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.

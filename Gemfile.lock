@@ -103,6 +103,8 @@ GEM
       rack
     omniauth-facebook (1.4.1)
       omniauth-oauth2 (~> 1.1.0)
+    omniauth-linkedin (0.0.8)
+      omniauth-oauth (~> 1.0)
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
@@ -199,6 +201,7 @@ DEPENDENCIES
   nested_form
   omniauth
   omniauth-facebook
+  omniauth-linkedin
   omniauth-twitter
   paperclip (~> 3.0)
   rails (= 3.1.0)

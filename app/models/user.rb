@@ -50,6 +50,24 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.from_omniauth_linkedin(auth)
+    puts "$"*80
+    puts auth.info
+    puts "$"*80
+    puts auth.extra
+    puts "$"*80
+    puts auth.extra.raw_info
+    puts "$"*80
+    user = User.where(:provider => auth.provider, :uid => auth.uid).first
+    unless user
+      user = User.create(first_name:auth.info.name,
+        provider:auth.provider, uid:auth.uid,
+        email: auth.info.email,
+        password:Devise.friendly_token[0,20] )
+    end
+    user
+  end
+
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
