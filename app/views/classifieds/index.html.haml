@@ -9,8 +9,7 @@
   = s.radio_button :kind_eq, Classified::KINDS[1]
   = s.label :kind, Classified::KINDS[1], :class => 'inline-label'  
   %br
-  = s.text_field :user_first_name_contains, placeholder: (t 'const.fname')
-  = s.text_field :user_last_name_contains, placeholder: (t 'const.lname')
+  = s.text_field :user_name_contains, placeholder: (t 'const.name')
   %br  
   %table
     %tr

@@ -21,7 +21,7 @@
         %td= classified.sub_category.name
         %td= classified.description
         %td= format_price classified
-        %td= "#{classified.user.first_name} #{classified.user.last_name}"
+        %td= classified.user.name
         %td= l classified.created_at
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")),   |

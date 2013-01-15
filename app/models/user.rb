@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :classifieds, dependent: :destroy
   
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :first_name, :last_name, :country_id, :phone,:email, :password,
+  attr_accessible :name, :country_id, :phone,:email, :password,
 		:password_confirmation, :remember_me, :sign_in_count, :updated_at, :created_at,
     :current_sign_in_at, :current_sign_in_ip, :last_sign_in_at, :last_sign_in_ip,
     :avatar,:provider, :uid
@@ -30,9 +30,8 @@ class User < ActiveRecord::Base
   def self.from_omniauth_facebook(auth)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
-      user = User.create(first_name:auth.extra.raw_info.first_name,
-        last_name:auth.extra.raw_info.last_name,
-        provider:auth.provider, uid:auth.uid,
+      user = User.create(provider:auth.provider, uid:auth.uid,
+        name:"#{auth.extra.raw_info.first_name} #{auth.extra.raw_info.last_name}",        
         email: auth.info.email,
         password:Devise.friendly_token[0,20] )
     end
@@ -42,7 +41,7 @@ class User < ActiveRecord::Base
   def self.from_omniauth_twitter(auth)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
-      user = User.create(first_name:auth.info.name,
+      user = User.create(name:auth.info.name,
         provider:auth.provider, uid:auth.uid,
         email: "#{auth.provider}#{auth.uid}@888.com",
         password:Devise.friendly_token[0,20] )
@@ -51,16 +50,9 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth_linkedin(auth)
-    puts "$"*80
-    puts auth.info
-    puts "$"*80
-    puts auth.extra
-    puts "$"*80
-    puts auth.extra.raw_info
-    puts "$"*80
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
-      user = User.create(first_name:auth.info.name,
+      user = User.create(name:auth.info.name,
         provider:auth.provider, uid:auth.uid,
         email: auth.info.email,
         password:Devise.friendly_token[0,20] )

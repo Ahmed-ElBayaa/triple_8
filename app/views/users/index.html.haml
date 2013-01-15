@@ -5,8 +5,7 @@
   %thead
     %tr
       %th= model_class.human_attribute_name(:id)
-      %th= model_class.human_attribute_name(:first_name)
-      %th= model_class.human_attribute_name(:last_name)
+      %th= model_class.human_attribute_name(:name)
       %th= model_class.human_attribute_name(:country)
       %th= model_class.human_attribute_name(:email)
       %th= model_class.human_attribute_name(:phone)
@@ -18,8 +17,7 @@
     - @users.each do |user|
       %tr
         %td= link_to user.id, user_path(user)
-        %td= user.first_name
-        %td= user.last_name
+        %td= user.name
         %td= user.country.try :name
         %td= user.email
         %td= user.phone

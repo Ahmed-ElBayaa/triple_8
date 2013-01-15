@@ -21,16 +21,14 @@ qar = Currency.create(name:"QAR", ratio: "0.325", country_id: qatar.id)
 egp = Currency.create(name:"Egyptian pound", ratio: "0.103", country_id: egypt.id)
 rial = Currency.create(name:"Rial", ratio: "0.325", country_id: ksa.id)
 
-admin = User.new(first_name: 'Mr', last_name: 'Admin',
- phone: '01117761191', country_id: qatar.id,
-  email: 'admin1@888.com')
+admin = User.new(name: 'Admin', phone: '01117761191',
+ country_id: qatar.id, email: 'admin1@888.com')
 admin.type = 'Admin'
 admin.password = 'admin1'
 admin.save
 
-member = User.new(first_name: 'Mr', last_name: 'Member',
- phone: '01005647892', country_id: egypt.id,
-  email: 'member1@888.com')
+member = User.new(name: 'Member', phone: '01005647892',
+ country_id: egypt.id, email: 'member1@888.com')
 member.password = 'member1'
 member.save
 

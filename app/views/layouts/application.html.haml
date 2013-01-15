@@ -57,7 +57,7 @@
         .span2
           .well.sidebar-nav
             %ul.nav.nav-list
-              %li.nav-header= current_user.nil? ? "guest" : "#{current_user.first_name} #{current_user.last_name}"
+              %li.nav-header= current_user.nil? ? "guest" : current_user.name
               - if current_user
                 %li= link_to t("const.edit_account"), edit_user_registration_path
                 %li= link_to t("const.sign_out"), destroy_user_session_path,     |
