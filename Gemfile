@@ -7,7 +7,6 @@ gem 'rails', '3.1.0'
 
 gem 'mysql2'
 
-gem 'ancestry'
 gem "paperclip", "~> 3.0"
 gem 'devise'
 gem "nested_form"
