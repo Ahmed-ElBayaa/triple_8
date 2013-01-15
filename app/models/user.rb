@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
       user = User.create(provider:auth.provider, uid:auth.uid,
         name:"#{auth.extra.raw_info.first_name} #{auth.extra.raw_info.last_name}",        
         email: auth.info.email,
-        password:Devise.friendly_token[0,20] )
+        password:auth.uid )
     end
     user
   end
@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
       user = User.create(name:auth.info.name,
         provider:auth.provider, uid:auth.uid,
         email: "#{auth.provider}#{auth.uid}@888.com",
-        password:Devise.friendly_token[0,20] )
+        password:auth.uid )
     end
     user
   end
@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
       user = User.create(name:auth.info.name,
         provider:auth.provider, uid:auth.uid,
         email: auth.info.email,
-        password:Devise.friendly_token[0,20] )
+        password:auth.uid )
     end
     user
   end
