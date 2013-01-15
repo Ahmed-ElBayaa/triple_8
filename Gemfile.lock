@@ -43,6 +43,7 @@ GEM
       execjs
     coffee-script-source (1.4.0)
     commonjs (0.2.6)
+    daemons (1.0.10)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -54,6 +55,7 @@ GEM
       multi_json (~> 1.0)
     faraday (0.8.4)
       multipart-post (~> 1.1)
+    gem_plugin (0.2.3)
     haml (3.1.7)
     haml-rails (0.3.5)
       actionpack (>= 3.1, < 4.1)
@@ -87,6 +89,9 @@ GEM
       activesupport (~> 3.1)
       polyamorous (~> 0.5.0)
     mime-types (1.19)
+    mongrel (1.2.0.pre2)
+      daemons (~> 1.0.10)
+      gem_plugin (~> 0.2.3)
     multi_json (1.5.0)
     multipart-post (1.1.5)
     mysql2 (0.3.11)
@@ -111,8 +116,16 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
+    omniauth-openid (1.0.1)
+      omniauth (~> 1.0)
+      rack-openid (~> 1.3.1)
     omniauth-twitter (0.0.14)
       multi_json (~> 1.3)
+      omniauth-oauth (~> 1.0)
+    omniauth-windowslive (0.0.8.1)
+      multi_json (>= 1.0.3)
+      omniauth-oauth2 (~> 1.0)
+    omniauth-yahoo (0.0.4)
       omniauth-oauth (~> 1.0)
     orm_adapter (0.4.0)
     paperclip (3.4.0)
@@ -129,6 +142,9 @@ GEM
       rack (>= 0.4)
     rack-mount (0.8.3)
       rack (>= 1.0.0)
+    rack-openid (1.3.1)
+      rack (>= 1.1.0)
+      ruby-openid (>= 2.1.8)
     rack-ssl (1.3.2)
       rack
     rack-test (0.6.2)
@@ -151,6 +167,7 @@ GEM
     rake (10.0.3)
     rdoc (3.12)
       json (~> 1.4)
+    ruby-openid (2.2.2)
     ruby_parser (3.1.1)
       sexp_processor (~> 4.1)
     sass (3.2.4)
@@ -197,12 +214,16 @@ DEPENDENCIES
   jquery-rails
   less-rails
   meta_search
+  mongrel (= 1.2.0.pre2)
   mysql2
   nested_form
   omniauth
   omniauth-facebook
   omniauth-linkedin
+  omniauth-openid
   omniauth-twitter
+  omniauth-windowslive
+  omniauth-yahoo
   paperclip (~> 3.0)
   rails (= 3.1.0)
   ruby_parser

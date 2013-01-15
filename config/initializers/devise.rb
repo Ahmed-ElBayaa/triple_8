@@ -11,6 +11,18 @@ Devise.setup do |config|
   require "omniauth-linkedin"
   config.omniauth :linkedin, 'puj7f913c3sn', '7IgcFQN1EtsjjTSD'
 
+  require "omniauth-windowslive"
+  config.omniauth :windowslive, '00000000400EAA69', 'cYGBYD3bNktmVTc6omKB4mWQmUxKFx9b'
+
+  require 'openid/store/filesystem'
+  Rails.application.config.middleware.use OmniAuth::Builder do
+    provider :open_id, store: OpenID::Store::Filesystem.new('/tmp'),
+     name:'google', identifier: 'https://www.google.com/accounts/o8/id',
+     :require => 'omniauth-openid'
+  end
+  require "omniauth-yahoo"
+  config.omniauth :yahoo, 'dj0yJmk9VFlZUUFjR0VOYkdsJmQ9WVdrOVJXRk1ZVzgwTm1zbWNHbzlOVGt4TkRJeU16WXkmcz1jb25zdW1lcnNlY3JldCZ4PWJi', 'b5d7951543fcc82fb9d12d80793b57831ea2fa56'
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
