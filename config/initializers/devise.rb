@@ -12,7 +12,7 @@ Devise.setup do |config|
   config.omniauth :linkedin, 'puj7f913c3sn', '7IgcFQN1EtsjjTSD'
 
   require "omniauth-windowslive"
-  config.omniauth :windowslive, '00000000400EAA69', 'cYGBYD3bNktmVTc6omKB4mWQmUxKFx9b'
+  config.omniauth :windowslive, '00000000400EAA69', 'cYGBYD3bNktmVTc6omKB4mWQmUxKFx9b', :scope => 'wl.basic'
 
   require 'openid/store/filesystem'
   config.omniauth :open_id, :store => OpenID::Store::Filesystem.new('/tmp'),

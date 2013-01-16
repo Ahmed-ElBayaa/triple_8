@@ -60,8 +60,8 @@ class User < ActiveRecord::Base
     user
   end
 
-  def self.from_omniauth_windowslive(auth)
-    self.from_omniauth_linkedin(auth)
+  def self.from_omniauth_windowslive(auth)    
+    self.from_omniauth_twitter(auth)
   end
 
   def self.from_omniauth_google(auth)
