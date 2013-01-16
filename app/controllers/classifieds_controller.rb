@@ -1,4 +1,5 @@
 class ClassifiedsController < ApplicationController
+  skip_before_filter :authenticate_user!, only: [:show]
   before_filter :index_for_admin_or_normal, only: [:index]
 
   # GET /classifieds
@@ -29,11 +30,9 @@ class ClassifiedsController < ApplicationController
   # GET /classifieds/1.json
   def show
     @classified = Classified.find_by_identifier(params[:id])
-    if must_be_owned?
-      respond_to do |format|
-        format.html # show.html.erb
-        format.json { render json: @classified }
-      end
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @classified }
     end  
   end
 

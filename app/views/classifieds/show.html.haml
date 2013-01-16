@@ -1,4 +1,10 @@
 - model_class = Classified
+
+- content_for :pre_head do
+  %meta{property: "og:title", content: @classified.title}
+  %meta{property: "og:description", content: @classified.description}
+  %meta{property: "og:image", content: "#{request.protocol}#{request.host_with_port}#{@classified.attachments.first.try(:file).try(:url, :medium)}"}
+  
 .page-header
   %h1= t '.title', :default => model_class.model_name.human
 %dl.dl-horizontal
@@ -43,7 +49,7 @@
       \:
   %dd= @classified.tags
   - @classified.attachments.each do |photo|
-    %dt= link_to 'See attachment', photo.file.url(:original), target: "_blank"
+    %dt= link_to 'See attachment', photo.file.url(:medium), target: "_blank"
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), |
     classifieds_path, :class => 'btn'                        |

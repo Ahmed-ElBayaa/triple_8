@@ -22,6 +22,7 @@ gem 'omniauth-windowslive'
 gem 'omniauth-openid'
 gem 'omniauth-yahoo'
 gem 'mongrel', '1.2.0.pre2'
+gem 'koala'
 
 # Gems used only for assets and not required
 # in production environments by default.

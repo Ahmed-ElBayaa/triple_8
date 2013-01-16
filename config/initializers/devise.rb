@@ -3,27 +3,24 @@
 Devise.setup do |config|
 
   require "omniauth-facebook"
-  config.omniauth :facebook, "143397259149672", "f089c402fa34cbda361a17efe9397029"
+  config.omniauth :facebook, "143397259149672",
+   "f089c402fa34cbda361a17efe9397029", scope: "email,publish_stream"
 
   require "omniauth-twitter"
-  config.omniauth :twitter, 'vgP8SQwKzUoOQMLi4PLwMA', 'K4hrPom1fRY1a7RdXUqNxfJI4AraFpmrbf6LD4Oy4'
+  config.omniauth :twitter, 'vgP8SQwKzUoOQMLi4PLwMA',
+   'K4hrPom1fRY1a7RdXUqNxfJI4AraFpmrbf6LD4Oy4'
 
   require "omniauth-linkedin"
   config.omniauth :linkedin, 'puj7f913c3sn', '7IgcFQN1EtsjjTSD'
 
   require "omniauth-windowslive"
-  config.omniauth :windowslive, '00000000400EAA69', 'cYGBYD3bNktmVTc6omKB4mWQmUxKFx9b', :scope => 'wl.basic'
+  config.omniauth :windowslive, '00000000400EAA69',
+   'cYGBYD3bNktmVTc6omKB4mWQmUxKFx9b', scope: 'wl.basic'
 
   require 'openid/store/filesystem'
-  config.omniauth :open_id, :store => OpenID::Store::Filesystem.new('/tmp'),
-   :name => 'google', :require => 'omniauth-openid',
-   :identifier => 'https://www.google.com/accounts/o8/id'
-
-  # Rails.application.config.middleware.use OmniAuth::Builder do
-  #   provider :open_id, store: OpenID::Store::Filesystem.new('/tmp'),
-  #    name:'google', identifier: 'https://www.google.com/accounts/o8/id',
-  #    :require => 'omniauth-openid'
-  # end
+  config.omniauth :open_id, store: OpenID::Store::Filesystem.new('/tmp'),
+   name: 'google', :require => 'omniauth-openid',
+   identifier: 'https://www.google.com/accounts/o8/id'
 
   require "omniauth-yahoo"
   config.omniauth :yahoo, 'dj0yJmk9VHZlVzhWMVd2MDlIJmQ9WVdrOVFXMTJOMDVTTjJNbWNHbzlNVFUxTWpJNU5qazJNZy0tJnM9Y29uc3VtZXJzZWNyZXQmeD1jZA--',

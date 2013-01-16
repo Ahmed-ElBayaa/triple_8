@@ -36,6 +36,7 @@
       %th= model_class.human_attribute_name(:kind)
       %th= sortable(Classified, model_class.human_attribute_name(:price))
       %th= sortable(Classified, model_class.human_attribute_name(:created_at))
+      %th= model_class.human_attribute_name(:Share)
   %tbody
     - @classifieds.each do |classified|
       %tr
@@ -48,5 +49,6 @@
         %td= classified.kind
         %td= format_price classified
         %td= l classified.created_at.to_date
+        %td= link_to image_tag(''), "http://www.facebook.com/sharer.php?u=#{classified_url classified}"
 = will_paginate(@classifieds)
         

@@ -32,26 +32,31 @@ class User < ActiveRecord::Base
 
     user = Authentication.where(:provider => auth.provider,
      :uid => auth.uid).first.try :user
+    
     unless user
       email = auth.info.email || "#{auth.provider}#{auth.uid}@888.com"
       user = User.find_by_email(email)
-      if user
-        user.authentications.create(provider:auth.provider, uid:auth.uid)
-      else
+      unless user
         user = User.create(name:auth.info.name,
-          email: email, password:email )
-        user.authentications.create(provider:auth.provider, uid:auth.uid)
+         email: email, password: email)
       end
+      user.authentications.create(provider:auth.provider, uid:auth.uid)
     end
+
+    authentication = Authentication.find_by_provider_and_uid(
+      auth.provider, auth.uid)
+    authentication.oauth_token = auth.credentials.token
+    authentication.save
     user
   end
 
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      end
-    end
+  def facebook
+    oauth_token = Authentication.find_by_provider_and_user_id(
+      'facebook', self.id).try :oauth_token
+    @facebook ||= Koala::Facebook::API.new(oauth_token)
+    rescue Koala::Facebook::APIError => e
+      logger.info e.to_s
+      nil
   end
     
 end
