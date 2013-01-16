@@ -7,8 +7,7 @@ Triple8::Application.routes.draw do
     end
     
     devise_for :users, :controllers => { 
-      omniauth_callbacks: "users/omniauth_callbacks" 
-      post '/users/auth/google/callback' => 'users/omniauth_callbacks#google'
+      omniauth_callbacks: "users/omniauth_callbacks"
     }
 
     resources :classifieds do

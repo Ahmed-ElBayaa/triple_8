@@ -15,13 +15,19 @@ Devise.setup do |config|
   config.omniauth :windowslive, '00000000400EAA69', 'cYGBYD3bNktmVTc6omKB4mWQmUxKFx9b'
 
   require 'openid/store/filesystem'
-  Rails.application.config.middleware.use OmniAuth::Builder do
-    provider :open_id, store: OpenID::Store::Filesystem.new('/tmp'),
-     name:'google', identifier: 'https://www.google.com/accounts/o8/id',
-     :require => 'omniauth-openid'
-  end
+  config.omniauth :open_id, :store => OpenID::Store::Filesystem.new('/tmp'),
+   :name => 'google', :require => 'omniauth-openid',
+   :identifier => 'https://www.google.com/accounts/o8/id'
+
+  # Rails.application.config.middleware.use OmniAuth::Builder do
+  #   provider :open_id, store: OpenID::Store::Filesystem.new('/tmp'),
+  #    name:'google', identifier: 'https://www.google.com/accounts/o8/id',
+  #    :require => 'omniauth-openid'
+  # end
+
   require "omniauth-yahoo"
-  config.omniauth :yahoo, 'dj0yJmk9VFlZUUFjR0VOYkdsJmQ9WVdrOVJXRk1ZVzgwTm1zbWNHbzlOVGt4TkRJeU16WXkmcz1jb25zdW1lcnNlY3JldCZ4PWJi', 'b5d7951543fcc82fb9d12d80793b57831ea2fa56'
+  config.omniauth :yahoo, 'dj0yJmk9VHZlVzhWMVd2MDlIJmQ9WVdrOVFXMTJOMDVTTjJNbWNHbzlNVFUxTWpJNU5qazJNZy0tJnM9Y29uc3VtZXJzZWNyZXQmeD1jZA--',
+    'caebfa3d15b9db9286b9f7d2413f354113a18240'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,

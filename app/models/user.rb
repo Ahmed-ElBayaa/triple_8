@@ -65,11 +65,11 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth_google(auth)
-    self.from_omniauth_google(auth)
+    self.from_omniauth_linkedin(auth)
   end
 
   def self.from_omniauth_yahoo(auth)
-    self.from_omniauth_yahoo(auth)
+    self.from_omniauth_linkedin(auth)
   end
 
   def self.new_with_session(params, session)

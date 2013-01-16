@@ -1,5 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
+  skip_before_filter :verify_authenticity_token, :only => [:google]
+
 	def passthru
 
 	  render :file => "#{Rails.root}/public/404.html",
@@ -21,9 +23,23 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
  #    end
  #  end
 
+
+  # def google
+  #   @user = User.find_for_open_id(request.env["omniauth.auth"])
+
+  #   if @user.persisted?
+  #     flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Google"
+  #     sign_in_and_redirect @user, :event => :authentication
+  #   else
+  #     session["devise.google_data"] = request.env["omniauth.auth"]
+  #     redirect_to new_user_registration_url
+  #   end
+  # end
+
   def all
     auth = request.env["omniauth.auth"]
     method_name = "from_omniauth_#{auth.provider}"
+    
     user = User.send(method_name, auth)
     if user.persisted?
       flash.notice = I18n.t('const.signed_in_successfully')
