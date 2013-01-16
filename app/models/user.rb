@@ -15,61 +15,35 @@ class User < ActiveRecord::Base
 
 
   has_many :classifieds, dependent: :destroy
+  has_many :authentications, dependent: :destroy
   
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :country_id, :phone,:email, :password,
 		:password_confirmation, :remember_me, :sign_in_count, :updated_at, :created_at,
     :current_sign_in_at, :current_sign_in_ip, :last_sign_in_at, :last_sign_in_ip,
-    :avatar,:provider, :uid
+    :avatar
 
 
   def admin?
     self.type == "Admin"
   end
 
-  def self.from_omniauth_facebook(auth)
-    user = User.where(:provider => auth.provider, :uid => auth.uid).first
+  def self.from_omniauth_provider(auth)
+
+    user = Authentication.where(:provider => auth.provider,
+     :uid => auth.uid).first.try :user
     unless user
-      user = User.create(provider:auth.provider, uid:auth.uid,
-        name:"#{auth.extra.raw_info.first_name} #{auth.extra.raw_info.last_name}",        
-        email: auth.info.email,
-        password:auth.uid )
+      email = auth.info.email || "#{auth.provider}#{auth.uid}@888.com"
+      user = User.find_by_email(email)
+      if user
+        user.authentications.create(provider:auth.provider, uid:auth.uid)
+      else
+        user = User.create(name:auth.info.name,
+          email: email, password:email )
+        user.authentications.create(provider:auth.provider, uid:auth.uid)
+      end
     end
     user
-  end
-
-  def self.from_omniauth_twitter(auth)
-    user = User.where(:provider => auth.provider, :uid => auth.uid).first
-    unless user
-      user = User.create(name:auth.info.name,
-        provider:auth.provider, uid:auth.uid,
-        email: "#{auth.provider}#{auth.uid}@888.com",
-        password:auth.uid )
-    end
-    user
-  end
-
-  def self.from_omniauth_linkedin(auth)
-    user = User.where(:provider => auth.provider, :uid => auth.uid).first
-    unless user
-      user = User.create(name:auth.info.name,
-        provider:auth.provider, uid:auth.uid,
-        email: auth.info.email,
-        password:auth.uid )
-    end
-    user
-  end
-
-  def self.from_omniauth_windowslive(auth)    
-    self.from_omniauth_twitter(auth)
-  end
-
-  def self.from_omniauth_google(auth)
-    self.from_omniauth_linkedin(auth)
-  end
-
-  def self.from_omniauth_yahoo(auth)
-    self.from_omniauth_linkedin(auth)
   end
 
   def self.new_with_session(params, session)

@@ -37,10 +37,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
 
   def all
-    auth = request.env["omniauth.auth"]
-    method_name = "from_omniauth_#{auth.provider}"
-    
-    user = User.send(method_name, auth)
+    user = User.from_omniauth_provider(request.env["omniauth.auth"])
     if user.persisted?
       flash.notice = I18n.t('const.signed_in_successfully')
       sign_in_and_redirect user
