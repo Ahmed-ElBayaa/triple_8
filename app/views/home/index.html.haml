@@ -40,7 +40,7 @@
   %tbody
     - @classifieds.each do |classified|
       %tr
-        %td= image_tag classified.attachments.first.try(:file).try(:url,:thumb)
+        %td= link_to image_tag(classified.attachments.first.try(:file).try(:url,:thumb)), classified_path(classified)
         %td= classified.title
         %td
           = classified.main_category.name
@@ -49,6 +49,10 @@
         %td= classified.kind
         %td= format_price classified
         %td= l classified.created_at.to_date
-        %td= link_to image_tag(''), "http://www.facebook.com/sharer.php?u=#{classified_url classified}"
+        %td
+          = link_to image_tag(''), "http://facebook.com/sharer.php?u=#{classified_url classified}", target: '_blank'
+          = link_to image_tag(''), "https://twitter.com/share?url=#{classified_url classified}&text=#{classified.title}", target: '_blank'
+          = link_to image_tag(''), "http://linkedin.com/shareArticle?url=#{classified_url classified}", target: '_blank'
+
 = will_paginate(@classifieds)
         
