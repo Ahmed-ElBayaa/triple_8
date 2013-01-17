@@ -23,6 +23,9 @@ Triple8::Application.routes.draw do
 
     resources :users, except: [:new, :create]
     
+    get 'authentications/edit' => 'authentications#edit', as: 'edit_auth'
+    put 'authentications/update' => 'authentications#update', as: 'update_auth'
+    
     root to: 'home#index', as: 'home'
   end
 

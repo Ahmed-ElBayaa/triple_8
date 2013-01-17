@@ -1,4 +1,5 @@
 = form_for @currency, :html => { :class => 'form-horizontal' } do |f|
+  = f.error_messages
   .control-group
     = f.label :name, :class => 'control-label'
     .controls

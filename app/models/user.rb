@@ -34,11 +34,13 @@ class User < ActiveRecord::Base
      :uid => auth.uid).first.try :user
     
     unless user
-      email = auth.info.email || "#{auth.provider}#{auth.uid}@888.com"
+      email = auth.info.email
       user = User.find_by_email(email)
       unless user
-        user = User.create(name:auth.info.name,
-         email: email, password: email)
+        user = User.new(name:auth.info.name, email: email, password: email)
+        # if failed to save the new user then redirect to edit page
+        # to correct invalid data 
+        return nil unless user.save
       end
       user.authentications.create(provider:auth.provider, uid:auth.uid)
     end

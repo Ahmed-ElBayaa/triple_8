@@ -9,13 +9,13 @@
 User.delete_all
 Category.delete_all
 Classified.delete_all
-Country.delete_all
+# Country.delete_all
 Currency.delete_all
 Attachment.delete_all
 
-qatar = Country.create(name: "Qatar", short_name: "Qt");
-egypt = Country.create(name: "Egypt", short_name: "eg");
-ksa = Country.create(name: "kingdom of saudia arabia", short_name: "KSA");
+qatar = Country.find_or_create_by_name_and_short_name(name: "Qatar", short_name: "Qt");
+egypt = Country.find_or_create_by_name_and_short_name(name: "Egypt", short_name: "eg");
+ksa = Country.find_or_create_by_name_and_short_name(name: "kingdom of saudia arabia", short_name: "KSA");
 
 qar = Currency.create(name:"QAR", ratio: "0.325", country_id: qatar.id)
 egp = Currency.create(name:"Egyptian pound", ratio: "0.103", country_id: egypt.id)

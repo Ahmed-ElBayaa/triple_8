@@ -1,0 +1,10 @@
+- if @user
+  %ul
+    - @user.errors.full_messages.each do |msg|
+      %li= msg
+
+= form_tag update_auth_path, method: :put do
+  =label_tag :Email
+  =email_field_tag :email
+  .form-actions
+    = submit_tag 'Submit', :class => 'btn btn-primary'

@@ -1,5 +1,6 @@
 class ClassifiedsController < ApplicationController
-  skip_before_filter :authenticate_user!, only: [:show]
+  skip_before_filter :authenticate_user!, only: [:show,
+   :change_sub_categories]
   before_filter :index_for_admin_or_normal, only: [:index]
 
   # GET /classifieds
@@ -135,7 +136,6 @@ class ClassifiedsController < ApplicationController
     @sub_categories = main_category.nil? ? [] : main_category.children
     @sub_categories_id = params[:sub_categories_id]
     @name = params[:name]
-
   end
 
   private
