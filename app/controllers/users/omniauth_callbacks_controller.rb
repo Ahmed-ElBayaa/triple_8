@@ -10,21 +10,17 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def all
     user = User.from_omniauth_provider(request.env["omniauth.auth"])
     if user
-      if user.persisted?
-        flash.notice = I18n.t('const.signed_in_successfully')
-        sign_in_and_redirect user
-      else
-        session["devise.user_attributes"] = user.attributes
-        redirect_to new_user_registration_url
-      end
+      flash.notice = I18n.t('const.signed_in_successfully')
+      sign_in_and_redirect user      
     else
       auth = request.env["omniauth.auth"]
-      required_auth = {}
-      required_auth[:provider] = auth.provider
-      required_auth[:uid] = auth.uid
-      required_auth[:name] = auth.info.name     
-      required_auth[:oauth_token] = auth.credentials.token
-      session[:auth] = required_auth
+      session[:auth] = {}
+      session[:auth][:provider] = auth.provider
+      session[:auth][:uid] = auth.uid      
+      session[:auth][:oauth_token] = auth.credentials.token
+      session[:user] = {}
+      session[:user][:name] = auth.info.name     
+      session[:user][:email]= auth.info.email
       redirect_to edit_auth_path
     end    
   end

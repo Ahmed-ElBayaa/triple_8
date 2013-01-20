@@ -37,12 +37,13 @@ class User < ActiveRecord::Base
       email = auth.info.email
       user = User.find_by_email(email)
       unless user
-        user = User.new(name:auth.info.name, email: email, password: email)
+        user = User.new(name:auth.info.name, email: email)
+        user.authentications.build(provider:auth.provider, uid:auth.uid)
         # if failed to save the new user then redirect to edit page
         # to correct invalid data 
         return nil unless user.save
       end
-      user.authentications.create(provider:auth.provider, uid:auth.uid)
+      
     end
 
     authentication = Authentication.find_by_provider_and_uid(
@@ -50,6 +51,18 @@ class User < ActiveRecord::Base
     authentication.oauth_token = auth.credentials.token
     authentication.save
     user
+  end
+
+  def password_required?
+    authentications.empty? && super
+  end
+
+  def update_with_password(params, *options)
+    if encrypted_password.blank?
+      update_attributes(params, *options)
+    else
+      super
+    end
   end
 
   def facebook
