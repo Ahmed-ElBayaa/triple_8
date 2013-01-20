@@ -1,0 +1,18 @@
+FACEBOOK APPLICATION
+* https://developers.facebook.com/apps
+* create new app
+* fill in required data (do not forget to choose namespace e.g eight_eight_eight it is used with automatic share)
+* in setting click open graph settings
+* People can "share" a "classified"
+* from the open graph Dashboard edit the action share and check Explicitly Shared 
+* hit get started
+* some save and next hits
+* Data to Display => Classified
+
+TWITTER APPLICATION
+* http://dev.twitter.com/apps/new
+* fill in required data
+* set access level to read and write
+
+
+

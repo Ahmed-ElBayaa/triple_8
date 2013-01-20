@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -29,7 +30,6 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth_provider(auth)
-
     user = Authentication.where(:provider => auth.provider,
      :uid => auth.uid).first.try :user
     
@@ -49,6 +49,7 @@ class User < ActiveRecord::Base
     authentication = Authentication.find_by_provider_and_uid(
       auth.provider, auth.uid)
     authentication.oauth_token = auth.credentials.token
+    authentication.oauth_secret = auth.credentials.secret
     authentication.save
     user
   end
@@ -72,6 +73,15 @@ class User < ActiveRecord::Base
     rescue Koala::Facebook::APIError => e
       logger.info e.to_s
       nil
+  end
+
+  def twitter
+    auth = Authentication.find_by_provider_and_user_id(
+      'twitter', self.id)
+    token = auth.try :oauth_token
+    secret = auth.try :oauth_secret
+    @twitter ||= Twitter::Client.new(oauth_token: token,
+      oauth_token_secret: secret )
   end
     
 end

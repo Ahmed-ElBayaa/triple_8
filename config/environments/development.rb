@@ -28,5 +28,9 @@ Triple8::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = false
   
+  config.fb_namespace = "eight_eight_eight"
+
+  config.fb_action = "share"
+
   Paperclip.options[:command_path] = "/usr/bin/" 
 end

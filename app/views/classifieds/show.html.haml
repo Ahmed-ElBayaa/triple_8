@@ -1,8 +1,9 @@
 - model_class = Classified
-
+- @head_attributes = { prefix:"og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# eight_eight_eight: http://ogp.me/ns/fb/eight_eight_eight#" }
 - content_for :pre_head do
   %meta{property: "og:title", content: @classified.title}
-  %meta{property: "og:description", content: @classified.description}
+  %meta{property: "og:description", content: @classified.description}   
+  %meta{property: "og:type", content: "#{Triple8::Application.config.fb_namespace}:classified"}
   %meta{property: "og:image", content: "#{request.protocol}#{request.host_with_port}#{@classified.attachments.first.try(:file).try(:url, :medium)}"}
   
 .page-header

@@ -71,6 +71,15 @@ class ClassifiedsController < ApplicationController
 
     respond_to do |format|
       if @classified.save
+        Thread.new { 
+        current_user.facebook.try(:put_object,"me",
+         "#{Triple8::Application.config.fb_namespace}:#{Triple8::Application.config.fb_action}",
+         classified: classified_url(@classified),"fb:explicitly_shared" => true) }
+        
+        tweet = "I have created a new classified '#{@classified.title}' 
+         #{classified_url(@classified)}"
+        current_user.twitter.try(:update, tweet.truncate(140))
+
         format.html { 
           redirect_to @classified,
             notice: I18n.t('application.messages.successfully_created',

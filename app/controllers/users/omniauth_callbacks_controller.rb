@@ -18,6 +18,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session[:auth][:provider] = auth.provider
       session[:auth][:uid] = auth.uid      
       session[:auth][:oauth_token] = auth.credentials.token
+      session[:auth][:oauth_secret] = auth.credentials.secret
+
       session[:user] = {}
       session[:user][:name] = auth.info.name     
       session[:user][:email]= auth.info.email
