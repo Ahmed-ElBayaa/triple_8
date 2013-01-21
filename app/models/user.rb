@@ -68,9 +68,8 @@ class User < ActiveRecord::Base
 
   def facebook
     unless @facebook
-      token = Authentication.find_by_provider_and_user_id(
-        'facebook', self.id).try :oauth_token
-      @facebook = Koala::Facebook::API.new(token) if token
+      auth = Authentication.find_by_provider_and_user_id('facebook', self.id)
+      @facebook = Koala::Facebook::API.new(auth.oauth_token) if auth
     end
     @facebook
   end
@@ -94,5 +93,19 @@ class User < ActiveRecord::Base
     end
     @linkedin
   end
+  
+  def share url, title
+
+    Thread.new { 
+      self.facebook.try(:put_object,"me",
+       "#{Triple8::Application.config.fb_namespace}:#{Triple8::Application.config.fb_action}",
+       classified: url,"fb:explicitly_shared" => true) 
+    }
     
+    tweet = "I have posted a new classified '#{title}' #{url}"
+    self.twitter.try(:update, tweet.truncate(140))
+
+    self.linkedin.try(:add_share, content: {title: title, 'submitted-url'=> url})
+    
+  end  
 end

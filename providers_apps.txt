@@ -15,11 +15,17 @@ TWITTER APPLICATION
 * set access level to read and write
 
 LINKEDIN APPLICATION
-* http://developer.linkedin.com/
-* support/ API keys
+* http://developer.linkedin.com/  => support => API keys
 * Add new application
 * fill in required data
 
+GOOGLE APPLICATION
+ source: http://www.w3schools.com/googleAPI/google_maps_api_key.asp
+* https://code.google.com/apis/console/
+* Create project
+* Turn on Google Maps API v3 
+* Then click "API Access" in the menu to the left. It will ask you to "Create an OAuth 2.0 client id.
+* 
 
 
 
