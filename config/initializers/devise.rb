@@ -9,14 +9,18 @@ Devise.setup do |config|
   require "omniauth-twitter"
   config.omniauth :twitter, 'zD6yrJaad0OZ6LvTsdOqow',
    'P8t4esfGeGEjaI9cTQjaJjVzb3YMgIC7X4IogHTPOQ'
-
   Twitter.configure do |config|
-  config.consumer_key = 'zD6yrJaad0OZ6LvTsdOqow'
-  config.consumer_secret = 'P8t4esfGeGEjaI9cTQjaJjVzb3YMgIC7X4IogHTPOQ'
-end
+    config.consumer_key = 'zD6yrJaad0OZ6LvTsdOqow'
+    config.consumer_secret = 'P8t4esfGeGEjaI9cTQjaJjVzb3YMgIC7X4IogHTPOQ'
+  end
 
-  require "omniauth-linkedin"
-  config.omniauth :linkedin, 'puj7f913c3sn', '7IgcFQN1EtsjjTSD'
+  require "omniauth-linkedin"  
+  config.omniauth :linkedin, 'puj7f913c3sn', '7IgcFQN1EtsjjTSD',
+   scope: 'r_basicprofile r_emailaddress rw_nus'
+  LinkedIn.configure do |config|
+    config.token = "puj7f913c3sn"
+    config.secret = "7IgcFQN1EtsjjTSD"
+  end
 
   require "omniauth-windowslive"
   config.omniauth :windowslive, '00000000400EAA69',

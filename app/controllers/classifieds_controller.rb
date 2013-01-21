@@ -80,6 +80,9 @@ class ClassifiedsController < ApplicationController
          #{classified_url(@classified)}"
         current_user.twitter.try(:update, tweet.truncate(140))
 
+        current_user.linkedin.try(:add_share, content: {title: "#{@classified.title}",
+         'submitted-url'=> "#{classified_url(@classified)}"})
+        
         format.html { 
           redirect_to @classified,
             notice: I18n.t('application.messages.successfully_created',

@@ -67,21 +67,32 @@ class User < ActiveRecord::Base
   end
 
   def facebook
-    oauth_token = Authentication.find_by_provider_and_user_id(
-      'facebook', self.id).try :oauth_token
-    @facebook ||= Koala::Facebook::API.new(oauth_token)
-    rescue Koala::Facebook::APIError => e
-      logger.info e.to_s
-      nil
+    unless @facebook
+      token = Authentication.find_by_provider_and_user_id(
+        'facebook', self.id).try :oauth_token
+      @facebook = Koala::Facebook::API.new(token) if token
+    end
+    @facebook
   end
 
   def twitter
-    auth = Authentication.find_by_provider_and_user_id(
-      'twitter', self.id)
-    token = auth.try :oauth_token
-    secret = auth.try :oauth_secret
-    @twitter ||= Twitter::Client.new(oauth_token: token,
-      oauth_token_secret: secret )
+    unless @twitter
+      auth = Authentication.find_by_provider_and_user_id('twitter', self.id)      
+      @twitter = Twitter::Client.new(oauth_token: auth.oauth_token,
+        oauth_token_secret: auth.oauth_secret ) if auth      
+    end
+    @twitter
+  end
+
+  def linkedin
+    unless @linkedin
+      auth = Authentication.find_by_provider_and_user_id('linkedin', self.id)
+      if auth
+        @linkedin = LinkedIn::Client.new
+        @linkedin.authorize_from_access(auth.oauth_token, auth.oauth_secret)
+      end
+    end
+    @linkedin
   end
     
 end

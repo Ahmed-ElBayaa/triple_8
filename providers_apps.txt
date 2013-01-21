@@ -14,5 +14,12 @@ TWITTER APPLICATION
 * fill in required data
 * set access level to read and write
 
+LINKEDIN APPLICATION
+* http://developer.linkedin.com/
+* support/ API keys
+* Add new application
+* fill in required data
+
+
 
 
