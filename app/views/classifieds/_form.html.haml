@@ -1,6 +1,21 @@
-= form_for @classified, :html => { :class => 'form-horizontal', multipart: true } do |f|
-  - @sub_categories ||= []
+- @sub_categories ||= []  
+- content_for :pre_head do
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDpqZNzU0SeaUhvgT6IA0uw0YJ2RqxkVDM&sensor=false">
+  </script>
+
+%div#googleMap
+:javascript
+  $(function(){
+    initializeMap(#{@classified.latitude}, #{@classified.longitude});
+  });  
+
+= form_for @classified, :html => { :class => 'form-horizontal test', multipart: true } do |f|
+      
   = f.error_messages
+
+  = f.hidden_field :latitude
+  = f.hidden_field :longitude
+
   .control-group
     = f.label :kind, :class => 'control-label'
     .controls
@@ -42,10 +57,10 @@
     .controls
       = f.text_field :email, :class => 'text_field'
   .control-group
-    = f.label :location_id, :class => 'control-label'
+    = f.label :country_id, :class => 'control-label'
     .controls
-      = select_field(f, @classified, :location_id, locations, "id",    |
-        "name", 'Select location', 'select')
+      = select_field(f, @classified, :country_id, locations, "id",    |
+        "name", 'Select country', 'select')
   .control-group
     = f.label :tags, :class => 'control-label'
     .controls

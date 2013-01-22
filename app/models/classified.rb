@@ -1,6 +1,4 @@
 class Classified < ActiveRecord::Base
-
-	# default_scope order:'created_at DESC'
 	
 	KINDS = [ I18n.t('models.classified.wanted'),
 			 I18n.t('models.classified.for_sale') ]
@@ -11,7 +9,7 @@ class Classified < ActiveRecord::Base
 
 	belongs_to :main_category, class_name: 'Category'
 	belongs_to :sub_category, class_name: 'Category'
-	belongs_to :country, foreign_key: 'location_id'
+	belongs_to :country
 	belongs_to :currency
 	belongs_to :user
 
@@ -21,9 +19,9 @@ class Classified < ActiveRecord::Base
 	
 	before_save :set_identifier
 
-	validates :title, :kind, :user_id, :country, :main_category_id,
-				:sub_category_id, :price, :currency_id, presence: true
-	validates :title, uniqueness: :true
+	validates :title, :kind, :user_id, :longitude, :latitude, :country_id,
+	  :main_category_id, :sub_category_id, :price, :currency_id, presence: true
+
 	validates :kind, inclusion: KINDS
 	validates :price, numericality: {greater_than_or_equal_to: 0.01}
 	validate :categories_validations

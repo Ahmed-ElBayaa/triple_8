@@ -44,6 +44,8 @@ class ClassifiedsController < ApplicationController
     @classified.phone = current_user.phone
     @classified.email = current_user.email
     @classified.country = current_user.country
+    @classified.latitude = request.location.latitude
+    @classified.longitude = request.location.longitude
     3.times {@classified.attachments.build}
 
     respond_to do |format|

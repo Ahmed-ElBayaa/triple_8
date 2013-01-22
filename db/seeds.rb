@@ -40,19 +40,19 @@ samsung = Category.create(name: 'samsung', parent_id: phones.id)
 blackberry = Category.create(name: 'BlackBerry', parent_id: phones.id)
 
 c1=Classified.new(title: 'samsung phone needed', kind:'Wanted', 
-	location_id: qatar.id, price: 1025.32,
+	country_id: qatar.id, price: 1025.32,
 	currency_id: qar.id, main_category_id: phones.id,
 	sub_category_id: samsung.id)
 c2=Classified.new(title: 'blackberry phone needed', kind:'Wanted', 
-	location_id: egypt.id, price: 1025.32,
+	country_id: egypt.id, price: 1025.32,
 	currency_id: egp.id, main_category_id: phones.id,
 	sub_category_id: blackberry.id)
 c3=Classified.new(title: 'BMW car', kind:'For Sale', 
-	location_id: ksa.id, price: 120000,
+	country_id: ksa.id, price: 120000,
 	currency_id: rial.id, main_category_id: cars.id,
 	sub_category_id: bmw.id)
 c4=Classified.new(title: 'TOYOTA car needed', kind:'Wanted', 
-	location_id: egypt.id, price: 85000,
+	country_id: egypt.id, price: 85000,
 	currency_id: egp.id, main_category_id: cars.id,
 	sub_category_id: toyota.id)
 
