@@ -31,7 +31,11 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
-    @user.type = params[:user][:type]
+    if params[:user][:type] == "0"
+      @user.type = '' 
+    else
+      @user.type = 'Admin'
+    end
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to user_path(@user), 
@@ -56,4 +60,3 @@ class UsersController < ApplicationController
     end
   end
 end
-

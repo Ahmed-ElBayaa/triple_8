@@ -1,5 +1,14 @@
 module ApplicationHelper
 
+  def alterative_language
+  	current_language = params[:locale]
+  	puts "$"*80
+  	puts current_language
+  	puts "$"*80
+  	i = current_language == LANGUAGES[0][1] ? 1 : 0 
+  	LANGUAGES[i]
+  end
+  
 	def select_field(builder, object, attribute, collection, value, name,
 			 prompt= '', klass= 'select',include_blank=false)
 	  if include_blank

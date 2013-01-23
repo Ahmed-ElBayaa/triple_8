@@ -10,10 +10,6 @@
     .controls
       = f.email_field :email, :class => 'email_field'
   .control-group
-    = f.label :type, :class => 'control-label'
-    .controls
-      = f.text_field :type, :class => 'text_field'
-  .control-group
     = f.label :phone, :class => 'control-label'
     .controls
       = f.text_field :phone, :class => 'text_field'
@@ -55,6 +51,10 @@
     .controls
       = image_tag @user.avatar.try(:url, :thumb)
       = f.file_field :avatar, :class => 'file_field'
+  .control-group    
+    .controls
+      = f.check_box :type, checked: @user.type == 'Admin'
+      set as admin
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), |

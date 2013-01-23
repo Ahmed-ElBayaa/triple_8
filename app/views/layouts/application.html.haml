@@ -46,9 +46,12 @@
                   %li= link_to t("const.countries"), countries_path
                   %li= link_to t("const.currencies"), currencies_path
                   %li= link_to t("const.users"), users_path
-                %li= link_to t("const.my_classifieds"), owned_classifieds_path
+                %li= link_to t("const.my_classifieds"), owned_classifieds_path                
               - if notice
-                %li= link_to notice           
+                %li= link_to notice
+            %ul.locale
+              - other_language = alterative_language
+              %li= link_to other_language[0], url_for(locale: other_language[1])
               
               
           / /.nav-collapse
