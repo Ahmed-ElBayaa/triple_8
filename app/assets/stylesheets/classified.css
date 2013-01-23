@@ -3,3 +3,11 @@
 	height: 320px;
 	float: right;
 }
+
+input[disabled] {
+	opacity: 0.8
+}
+
+input[disabled] + i{
+	opacity: 0.8
+}

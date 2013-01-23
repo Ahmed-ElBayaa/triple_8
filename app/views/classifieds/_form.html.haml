@@ -70,6 +70,24 @@
       = b.label :photo, :class => 'control-label'
       .controls
         = b.file_field :file, :class => 'file_field'
+  - unless @classified.persisted?
+    %label
+      =check_box_tag 'facebook_share', "1", false,                |
+        disabled: current_user.can_share_on?(:facebook)? false : true
+      %i share on facebook
+
+    %label
+      =check_box_tag 'twitter_share', "1", false,                |
+        disabled: current_user.can_share_on?(:twitter)? false : true
+      %i share on twitter
+
+    %label
+      =check_box_tag 'linkedin_share', "1", false,                |
+        disabled: current_user.can_share_on?(:linkedin)? false : true
+      %i share on linkedin
+
+    %label connect to more networks to spread the word
+
   .form-actions
     = f.submit nil, :class => 'btn btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), |

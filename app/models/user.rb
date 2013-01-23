@@ -94,18 +94,25 @@ class User < ActiveRecord::Base
     @linkedin
   end
   
-  def share url, title
-
+  def facebook_share url, title
     Thread.new { 
       self.facebook.try(:put_object,"me",
        "#{Triple8::Application.config.fb_namespace}:#{Triple8::Application.config.fb_action}",
        classified: url,"fb:explicitly_shared" => true) 
     }
-    
+  end
+
+  def twitter_share url, title
     tweet = "I have posted a new classified '#{title}' #{url}"
     self.twitter.try(:update, tweet.truncate(140))
+  end
 
-    self.linkedin.try(:add_share, content: {title: title, 'submitted-url'=> url})
-    
-  end  
+  def linkedin_share url, title
+    self.linkedin.try(:add_share, content: {title: title, 'submitted-url'=> url})    
+  end
+
+  def can_share_on? provider
+    self.authentications.find_by_provider provider
+  end
+
 end

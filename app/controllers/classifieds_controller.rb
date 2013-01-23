@@ -72,9 +72,16 @@ class ClassifiedsController < ApplicationController
     @classified.user_id = current_user.id
 
     respond_to do |format|
-      if @classified.save
+      if @classified.save        
         
-        current_user.share(classified_url(@classified), @classified.title)
+        current_user.facebook_share(classified_url(@classified),
+         @classified.title) if(params[:facebook_share])
+      
+        current_user.twitter_share(classified_url(@classified),
+         @classified.title) if(params[:twitter_share])
+      
+        current_user.linkedin_share(classified_url(@classified),
+         @classified.title) if(params[:linkedin_share])
 
         format.html { 
           redirect_to @classified,
