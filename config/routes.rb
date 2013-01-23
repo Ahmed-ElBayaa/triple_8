@@ -12,6 +12,7 @@ Triple8::Application.routes.draw do
 
     resources :classifieds do
       get :change_sub_categories, on: :collection
+      get :delete_selected, on: :collection
       get :owned, on: :collection 
     end 
 

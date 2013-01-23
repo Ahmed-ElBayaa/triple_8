@@ -15,7 +15,7 @@
     %strong= t('const.refine_search')
     %br
     = select_field(s, @search, :main_category_id_eq, main_categories,   |
-      'id', 'name','main category', 'select', true)
+      'id', 'name',t('const.main_category'), 'select', true)
     = render('classifieds/sub_category_select', sub_categories: sub_categories(@search.main_category_id_eq), name: 'search[sub_category_id_eq]', selected_category: @search.sub_category_id_eq, element_id: 'search_sub_category_id_eq')
     %br
     = s.text_field :price_gte, placeholder: (t 'const.min_price')

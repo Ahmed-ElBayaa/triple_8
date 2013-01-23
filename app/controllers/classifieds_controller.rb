@@ -62,7 +62,7 @@ class ClassifiedsController < ApplicationController
       @classified.complete_attachments_number
       main_category = Category.find_by_id(@classified.main_category_id)
       @sub_categories = main_category.nil? ? [] : main_category.children    
-    end    
+    end 
   end
 
   # POST /classifieds
@@ -150,6 +150,31 @@ class ClassifiedsController < ApplicationController
     @name = params[:name]
   end
 
+  def delete_selected
+    ids = params[:ids].split(',')
+    classifieds = Classified.find_all_by_identifier ids
+    classifieds.each do |classified|
+      classified.destroy
+    end
+
+    redirect_to classifieds_url
+
+    # respond_to do |format|
+    #   format.html { redirect_to classifieds_url }
+    #   format.json { head :ok }
+    # end
+
+    # if current_user.type == 'Admin'
+    #   @search = Classified.search(params[:search])
+    #   @classifieds = @search.paginate( per_page: 10, page: params[:page],
+    #         order: "#{sort_column(Classified)} #{sort_direction}")
+    # else
+    #   @search = current_user.classifieds.search(params[:search])
+    #   @classifieds = @search.paginate( per_page: 10, page: params[:page],
+    #         order: "#{sort_column(Classified)} #{sort_direction}")
+    # end
+  end
+
   private
 
   def must_be_owned?
@@ -164,5 +189,4 @@ class ClassifiedsController < ApplicationController
   def index_for_admin_or_normal
     redirect_to(owned_classifieds_path) unless current_user.type == 'Admin'    
   end
-
 end

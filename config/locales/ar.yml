@@ -80,6 +80,7 @@ ar:
     posted_before: أُنشئ قبل
     tags: tags
     posted_on_or_after: أنشئ بعد
+    name: الأسم
     fname: الأسم الأول
     lname: الأسم الأخير
     home: الرئيسية
@@ -98,3 +99,5 @@ ar:
     sign_in_fb: دخول بحساب فيس بوك
     refine_search: بحث متقدم
     currencies: العملات
+    edit_selected: تعديل المختار
+    delete_selected: حذف المختار
