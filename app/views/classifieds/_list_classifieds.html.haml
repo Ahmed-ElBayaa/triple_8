@@ -9,9 +9,9 @@
         %th= model_class.human_attribute_name(:main_category)
         %th= model_class.human_attribute_name(:sub_category)
         %th= model_class.human_attribute_name(:description)
-        %th= sortable(Classified, model_class.human_attribute_name(:price))
+        %th= sortable(Classified, 'price', model_class.human_attribute_name(:price))
         %th= model_class.human_attribute_name(:creator)
-        %th= sortable(Classified, model_class.human_attribute_name(:created_at))
+        %th= sortable(Classified, 'created_at', model_class.human_attribute_name(:created_at))
         %th= model_class.human_attribute_name(:delete)
         %th= t '.actions', :default => t("helpers.actions")
     %tbody

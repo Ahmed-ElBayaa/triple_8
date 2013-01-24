@@ -14,8 +14,8 @@ Triple8::Application.routes.draw do
       get :change_sub_categories, on: :collection
       get :delete_selected, on: :collection
       get :owned, on: :collection 
-    end 
-
+    end     
+    
     resources :countries
 
     resources :categories
@@ -23,14 +23,12 @@ Triple8::Application.routes.draw do
     resources :currencies
 
     resources :users, except: [:new, :create]
-    
+
     get 'authentications/edit' => 'authentications#edit', as: 'edit_auth'
     put 'authentications/update' => 'authentications#update', as: 'update_auth'
     
     root to: 'home#index', as: 'home'
-  end
-
-  
+  end  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -34,8 +34,8 @@
       %th= model_class.human_attribute_name(:title)
       %th= model_class.human_attribute_name(:category)
       %th= model_class.human_attribute_name(:kind)
-      %th= sortable(Classified, model_class.human_attribute_name(:price))
-      %th= sortable(Classified, model_class.human_attribute_name(:created_at))
+      %th= sortable(Classified, 'price', model_class.human_attribute_name(:price))
+      %th= sortable(Classified, 'created_at', model_class.human_attribute_name(:created_at))
       %th= model_class.human_attribute_name(:Share)
   %tbody
     - @classifieds.each do |classified|
