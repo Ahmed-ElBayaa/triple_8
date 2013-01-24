@@ -30,6 +30,8 @@ Triple8::Application.routes.draw do
     root to: 'home#index', as: 'home'
   end  
 
+  mount TranslationCenter::Engine => "/translation_center"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

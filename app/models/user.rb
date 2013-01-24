@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
 
+  acts_as_translator
+  
   has_attached_file :avatar, :styles => { :medium => "100x100>", :thumb => "30x30>" }
 
   validates_attachment_content_type :avatar,  content_type: /image/
@@ -113,6 +115,10 @@ class User < ActiveRecord::Base
 
   def can_share_on? provider
     self.authentications.find_by_provider provider
+  end
+
+  def can_admin_translations?
+    self.type == 'Admin'
   end
 
 end

@@ -1,111 +1,105 @@
-# Sample localization file for Arabic. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
-ar:
-  hello: "Hello world"
-  New: جديد
-  date:
-    formats:
-      default: "%Y-%m-%d"
-  time:
-    formats:
-      default: "%a, %d %b %Y %H:%M:%S %z"
-  activerecord:
-    errors:
-      messages:
-        blank: 'ﻻ يمكن ترك هذا الحقل فارغ'
-        not_a_number: "يجب أن يحتوى هذا الحقل على أرقام فقط"
-        less_than: "أقل من"
-      template:
-        body: 'هناك أخطاء فى الحقول الآتية'
-        header:
-          one: "هناك خطأ منع هذا ال%{model} من الحفظ"
-          other: "%{count} أخطاء منعت هذا ال%{model} من الحفظ"
-    models:
-      classified: "إعلان"
-    attributes:
-      classified:
-        kind: "نوع الإعلان"
-        title: "العنوان"
-        price: "السعر: "
-        main_category_id: "التصنيف الرئيسى"
-        sub_category_id: "التصنيف الفرعى"
-        main_category: "التصنيف الرئيسى"
-        sub_category: "التصنيف الفرعى"
-        description: "الوصف"
-        creator: "صاحب الإعلان"
+--- 
+ar: 
+  activerecord: 
+    attributes: 
+      classified: 
         created_at: "أعلن فى"
-        location: "المكان"
+        creator: "صاحب الإعلان"
+        delete: مسح
+        description: الوصف
+        edit: تعديل
+        email: "البريد الإلكترونى"
+        id: مُعرًف
+        image: صورة
+        kind: "نوع الإعلان"
+        location: المكان
+        main_category: "التصنيف الرئيسى"
+        main_category_id: "التصنيف الرئيسى"
         phone: "رقم الهاتف"
         phone_number: "رقم الهاتف"
-        email: "البريد الإلكترونى"
-        image: "صورة"
-        edit: تعديل
-        id: مُعرًف
-        delete: مسح
-  helpers:
-    submit:
+        price: "السعر: "
+        sub_category: "التصنيف الفرعى"
+        sub_category_id: "التصنيف الفرعى"
+        title: العنوان
+    errors: 
+      messages: 
+        blank: "ﻻ يمكن ترك هذا الحقل فارغ"
+        less_than: "أقل من"
+        not_a_number: "يجب أن يحتوى هذا الحقل على أرقام فقط"
+      template: 
+        body: "هناك أخطاء فى الحقول الآتية"
+        header: 
+          one: "هناك خطأ منع هذا ال%{model} من الحفظ"
+          other: "%{count} أخطاء منعت هذا ال%{model} من الحفظ"
+    models: 
+      classified: إعلان
+  application: 
+    messages: 
+      insufficient_privilage: "ليس لديك الصلاحية الكافية للدخول على هذه الصفحة"
+      sign_in: "من فضلك قم بتسجيل الدخول"
+  const: 
+    categories: المصنفات
+    choose_main_category: "أختر التصنيف الرئيسى"
+    choose_sub_category: "أختر التصنيف الفرعى"
+    classifieds: الإعلانات
+    countries: البلاد
+    currencies: العملات
+    delete_selected: "حذف المختار"
+    description: الوصف
+    edit_account: "تعديل بيانات"
+    edit_selected: "تعديل المختار"
+    fname: "الأسم الأول"
+    ? "for sale"
+    : للبيع
+    home: الرئيسية
+    kind: النوع
+    lname: "الأسم الأخير"
+    location: الموقع
+    main_category: "التصنيف الرئيسى"
+    max_price: "أعلى سعر"
+    min_price: "أقل سعر"
+    my_classifieds: إعلاناتى
+    name: الأسم
+    posted_after: "أُنشئ بعد"
+    posted_before: "أُنشئ قبل"
+    posted_on_or_after: "أنشئ بعد"
+    refine_search: "بحث متقدم"
+    search: بحث
+    sign_in: "تسجيل الدخول"
+    sign_in_fb: "دخول بحساب فيس بوك"
+    sign_out: خروج
+    sign_up: "حساب جديد"
+    sub_category: "التصنيف الفرعى"
+    tags: tags
+    title: العنوان
+    users: المستخدمين
+    wanted: مطلوب
+  date: 
+    formats: 
+      default: "%Y-%m-%d"
+  helpers: 
+    actions: قرارات
+    links: 
+      confirm: تأكيد؟؟
+    submit: 
       create: "إنشاء %{model}"
       update: "تحديث %{model}"
-    actions: قرارات
-    links:
-      confirm: 'تأكيد؟؟'
-  models:
-    classified:
-      wanted: "مطلوب"
-      for_sale: "للبيع"
-      errors:
+  models: 
+    classified: 
+      errors: 
         invalid_main_category: "التصنيف الرئيسى خاطئ"
         invalid_sub_category: "التصنيف الفرعى خاطئ"
         max_attachments_no_exceeds: "يسمح بتحمل %{MAX_ATTACHMENTS_NO} صور فقط"
-
-  number:
-    human:
-      storage_units:
-        units:
-          byte:
+      for_sale: للبيع
+      wanted: مطلوب
+  number: 
+    human: 
+      storage_units: 
+        format: "%n %u"
+        units: 
+          byte: 
             one: Byte
             other: Bytes
-        format: "%n %u"
-
-  application:
-    messages:
-      sign_in: "من فضلك قم بتسجيل الدخول"
-      insufficient_privilage: "ليس لديك الصلاحية الكافية للدخول على هذه الصفحة"
-
-  const:
-    title: العنوان
-    kind: النوع
-    description: الوصف
-    main_category: التصنيف الرئيسى
-    sub_category: التصنيف الفرعى
-    location: الموقع
-    min_price: أقل سعر
-    max_price: أعلى سعر
-    posted_after: أُنشئ بعد
-    posted_before: أُنشئ قبل
-    tags: tags
-    posted_on_or_after: أنشئ بعد
-    name: الأسم
-    fname: الأسم الأول
-    lname: الأسم الأخير
-    home: الرئيسية
-    categories: المصنفات
-    classifieds: الإعلانات
-    my_classifieds: إعلاناتى
-    countries: البلاد
-    users: المستخدمين
-    edit_account: تعديل بيانات
-    sign_in: تسجيل الدخول
-    sign_out: خروج
-    sign_up: حساب جديد
-    search: بحث
-    choose_main_category: أختر التصنيف الرئيسى
-    choose_sub_category: أختر التصنيف الفرعى
-    sign_in_fb: دخول بحساب فيس بوك
-    refine_search: بحث متقدم
-    currencies: العملات
-    edit_selected: تعديل المختار
-    delete_selected: حذف المختار
-    wanted: مطلوب
-    for sale: للبيع
+  time: 
+    formats: 
+      default: "%a, %d %b %Y %H:%M:%S %z"

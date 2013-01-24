@@ -26,6 +26,7 @@ gem 'koala'
 gem 'twitter'
 gem 'linkedin'
 gem 'geocoder'
+gem 'translation_center'
 
 # Gems used only for assets and not required
 # in production environments by default.
