@@ -1,7 +1,6 @@
 class Classified < ActiveRecord::Base
 	
-	KINDS = [ I18n.t('models.classified.wanted'),
-			 I18n.t('models.classified.for_sale') ]
+	KINDS = [ 'Wanted', 'For Sale']
 	MAX_ATTACHMENTS_NO = 3
 
 	has_many :attachments, dependent: :destroy

@@ -19,7 +19,7 @@
         %tr
           %td= radio_button_tag 'edit', false, false, :'data-url'=> edit_classified_path(classified)
           %td= link_to classified.id, classified_path(classified)
-          %td= classified.kind
+          %td= t "const.#{classified.kind.downcase}"
           %td= classified.title
           %td= classified.main_category.name
           %td= classified.sub_category.name

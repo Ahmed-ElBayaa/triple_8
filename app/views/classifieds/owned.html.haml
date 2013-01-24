@@ -9,9 +9,9 @@
     = s.text_field :title_contains, placeholder: (t 'const.title')
     %br    
     = s.radio_button :kind_eq, Classified::KINDS[0], checked: true
-    = s.label :kind, Classified::KINDS[0], :class => 'inline-label'
+    = s.label :wanted, t("const.#{Classified::KINDS[0].downcase}"), class: 'inline-label'
     = s.radio_button :kind_eq, Classified::KINDS[1]
-    = s.label :kind, Classified::KINDS[1], :class => 'inline-label'
+    = s.label :for_sale, t("const.#{Classified::KINDS[1].downcase}"), class: 'inline-label'
     %br
     = s.text_field :country_name_contains, placeholder: (t 'const.location')
     %br    

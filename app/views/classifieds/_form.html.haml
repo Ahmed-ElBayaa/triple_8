@@ -1,4 +1,5 @@
 - @sub_categories ||= []  
+
 - content_for :pre_head do
   <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDpqZNzU0SeaUhvgT6IA0uw0YJ2RqxkVDM&sensor=false">
   </script>
@@ -20,14 +21,14 @@
     = f.label :kind, :class => 'control-label'
     .controls
       = f.radio_button :kind, Classified::KINDS[0], checked: true
-      = f.label :kind, Classified::KINDS[0], :class => 'inline-label'
+      = f.label :wanted, t("const.#{Classified::KINDS[0].downcase}"), :class => 'inline-label'
       = f.radio_button :kind, Classified::KINDS[1]
-      = f.label :kind, Classified::KINDS[1], :class => 'inline-label'
+      = f.label :for_sale, t("const.#{Classified::KINDS[1].downcase}"), :class => 'inline-label'
   .control-group
     = f.label :main_category_id, :class => 'control-label'
     .controls
       = select_field(f, @classified, :main_category_id, main_categories, "id",    |
-        "name", 'main category', 'select')
+        "name", t('const.main_category'), 'select')
   .control-group
     = f.label :sub_category_id, :class => 'control-label'
     .controls
