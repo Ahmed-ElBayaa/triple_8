@@ -156,23 +156,7 @@ class ClassifiedsController < ApplicationController
     classifieds.each do |classified|
       classified.destroy
     end
-
-    redirect_to classifieds_url
-
-    # respond_to do |format|
-    #   format.html { redirect_to classifieds_url }
-    #   format.json { head :ok }
-    # end
-
-    # if current_user.type == 'Admin'
-    #   @search = Classified.search(params[:search])
-    #   @classifieds = @search.paginate( per_page: 10, page: params[:page],
-    #         order: "#{sort_column(Classified)} #{sort_direction}")
-    # else
-    #   @search = current_user.classifieds.search(params[:search])
-    #   @classifieds = @search.paginate( per_page: 10, page: params[:page],
-    #         order: "#{sort_column(Classified)} #{sort_direction}")
-    # end
+    redirect_to classifieds_url(locale: params[:locale])
   end
 
   private

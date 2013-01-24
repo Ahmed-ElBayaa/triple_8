@@ -15,7 +15,7 @@
     %br
     = s.text_field :country_name_contains, placeholder: (t 'const.location')
     %br    
-    %strong Refine Search
+    %strong= t 'const.refine_search'
     %br
     = select_field(s, @search, :main_category_id_eq, main_categories,   |
       'id', 'name',t('const.main_category'), 'select', true)

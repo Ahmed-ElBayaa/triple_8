@@ -1,4 +1,4 @@
-# Sample localization file for English. Add more files in this directory for other locales.
+# Sample localization file for Arabic. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 ar:
@@ -26,7 +26,7 @@ ar:
     attributes:
       classified:
         kind: "نوع الإعلان"
-        title: "العنوان: "
+        title: "العنوان"
         price: "السعر: "
         main_category_id: "التصنيف الرئيسى"
         sub_category_id: "التصنيف الفرعى"
@@ -40,10 +40,16 @@ ar:
         phone_number: "رقم الهاتف"
         email: "البريد الإلكترونى"
         image: "صورة"
+        edit: تعديل
+        id: مُعرًف
+        delete: مسح
   helpers:
     submit:
       create: "إنشاء %{model}"
       update: "تحديث %{model}"
+    actions: قرارات
+    links:
+      confirm: 'تأكيد؟؟'
   models:
     classified:
       wanted: "مطلوب"

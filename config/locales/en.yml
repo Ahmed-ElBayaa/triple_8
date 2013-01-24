@@ -19,6 +19,14 @@ en:
       successfully_created: "%{model} was successfully created."
       successfully_updated: "%{model} was successfully updated."
 
+  helpers:
+    submit:
+      create: Create
+      update: Update
+    actions: Actions
+    links:
+      confirm: Are you sure?
+
   const:
     title: title
     kind: kind
